@@ -20,7 +20,7 @@ export const HeaderButton = ({ icon, itemsQuantity, ...otherProps }: Props) => {
 
   return (
     <div className="header__icon">
-       {
+      {
         itemsQuantity 
         && itemsQuantity > 0
         && (
@@ -35,11 +35,8 @@ export const HeaderButton = ({ icon, itemsQuantity, ...otherProps }: Props) => {
         className="header__button" 
         {...otherProps}
       >
-      
-          { getIcon(icon) }
-          
+        {getIcon(icon)}
       </button>
-     
     </div>
   );
 };

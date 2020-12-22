@@ -1,5 +1,6 @@
 import React from "react";
 import { CountButton, MainButton, SizeButton, HeaderButton } from "./components/ui/buttons";
+import { InputSearch } from "./components/ui/inputs";
 
 function App() {
   return (
@@ -19,6 +20,10 @@ function App() {
         <HeaderButton icon="search"></HeaderButton>
         <HeaderButton icon="shoppingCart"></HeaderButton>
         <HeaderButton icon="shoppingCart" itemsQuantity={2}></HeaderButton>
+        <InputSearch></InputSearch>
+        <div style={{width:"290px", padding:"10px"}}>
+          <InputSearch></InputSearch>
+        </div>
       </div>
     </div>
   );

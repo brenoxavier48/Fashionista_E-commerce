@@ -1,0 +1,23 @@
+.product-size {
+  @include button-base;
+
+  width: 32px;
+  height: 32px;
+  background-color: #f8f8f8;
+  color: #212429;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 700;
+
+  &.product-size--disabled {
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    color: rgba(33, 36, 41, 0.1);
+  }
+
+  &.product-size--selected {
+    background-color: #212429;
+    color: #f8f8f8;
+  }
+  
+}

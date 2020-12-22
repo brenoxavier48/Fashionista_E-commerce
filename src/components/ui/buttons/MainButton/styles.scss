@@ -1,0 +1,8 @@
+.mainButton {
+  @include button-base;
+
+  width: 240px;
+  height: 34px;
+  background-color: #212429;
+  color: #d4d5d7;
+}

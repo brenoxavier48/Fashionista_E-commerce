@@ -10,17 +10,17 @@ $BREAKPOINT-MOBILE-LAND: "only screen and (min-width: 480px)";
 /*|---------------|MIXINS|---------------*/
 
 @mixin flex-centred {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @mixin button-base {
-    @include flex-centred;
+  @include flex-centred;
 
-    margin: 5px;
+  margin: 5px;
 
-    &:hover {
-        cursor: pointer;
-    }
+  &:hover {
+    cursor: pointer;
+  }
 }

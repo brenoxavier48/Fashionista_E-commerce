@@ -3,4 +3,9 @@
     height: 28px;
     background-color: white;
     border: 1px solid black;
+
+    &:hover {
+        color: white;
+        background-color: black;
+    }
 }

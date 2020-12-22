@@ -1,6 +1,7 @@
 .header__icon {
   width: 32px;
   height: 32px;
+  position: relative;
 
   .header__button {
     @include button-base;
@@ -15,8 +16,8 @@
     position: absolute;
     text-align: center;
     z-index: 100;
-    // top: 2px;
-    // right: 0;
+    top: -2px;
+    right: 0;
     width: 16px;
     height: 16px;
     border-radius: 50%;

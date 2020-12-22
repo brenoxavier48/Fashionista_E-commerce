@@ -19,24 +19,27 @@ export const HeaderButton = ({ icon, itemsQuantity, ...otherProps }: Props) => {
   }
 
   return (
-    <button 
-      className="header__button" 
-      {...otherProps}
-    >
-      <div>
-        { getIcon(icon) }
-        {
-          itemsQuantity 
-          && itemsQuantity > 0
-          && (
-            <sup className="header__shoppingCart__count">
-              <span className="header__shoppingCart__count__value">
-                {itemsQuantity}
-              </span>
-            </sup>
-          )
-        }
-      </div>
-    </button>
+    <div className="header__icon">
+       {
+        itemsQuantity 
+        && itemsQuantity > 0
+        && (
+          <sup className="header__shoppingCart__count">
+            <span className="header__shoppingCart__count__value">
+              {itemsQuantity}
+            </span>
+          </sup>
+        )
+      }
+      <button 
+        className="header__button" 
+        {...otherProps}
+      >
+        
+          { getIcon(icon) }
+          
+      </button>
+     
+    </div>
   );
 };

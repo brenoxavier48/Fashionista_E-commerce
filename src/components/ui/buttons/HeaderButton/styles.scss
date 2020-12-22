@@ -1,20 +1,32 @@
-.header__button {
-  @include button-base;
-
+.header__icon {
   width: 32px;
   height: 32px;
-  background-color: #f8f8f8;
-  color: #565656;
-  border: 0;
-  font-size: 18px;
 
+  .header__button {
+    @include button-base;
+    position: absolute;
+    background-color: #f8f8f8;
+    color: #565656;
+    border: 0;
+    font-size: 18px;
+  }
+  
   .header__shoppingCart__count {
-    width: 23px;
-    height: 4px;
+    // @include flex-centred;
+    position: absolute;
+    text-align: center;
+    z-index: 100;
+    // top: 2px;
+    right: 0;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
     background-color: #bc4f58;
-    display: relative;
-    top: 0;
-    right: 0;
+    color: #ffffff;
+
+    .header__shoppingCart__count__value {
+      font-size: 10px;
+    }
   }
 }
+

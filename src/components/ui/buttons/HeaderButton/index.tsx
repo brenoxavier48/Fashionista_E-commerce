@@ -35,7 +35,7 @@ export const HeaderButton = ({ icon, itemsQuantity, ...otherProps }: Props) => {
         className="header__button" 
         {...otherProps}
       >
-        
+      
           { getIcon(icon) }
           
       </button>

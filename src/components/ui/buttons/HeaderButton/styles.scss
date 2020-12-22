@@ -12,20 +12,20 @@
   }
   
   .header__shoppingCart__count {
-    // @include flex-centred;
     position: absolute;
     text-align: center;
     z-index: 100;
     // top: 2px;
-    right: 0;
-    width: 14px;
-    height: 14px;
+    // right: 0;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
     background-color: #bc4f58;
     color: #ffffff;
 
     .header__shoppingCart__count__value {
       font-size: 10px;
+      font-weight: 700;
     }
   }
 }

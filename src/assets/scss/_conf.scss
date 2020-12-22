@@ -6,3 +6,21 @@ $BREAKPOINT-DESK: "only screen and (min-width: 1280px)";
 $BREAKPOINT-TABLET-LAND: "only screen and (min-width: 975px)";
 $BREAKPOINT-TABLET: "only screen and (min-width: 600px)";
 $BREAKPOINT-MOBILE-LAND: "only screen and (min-width: 480px)";
+
+/*|---------------|MIXINS|---------------*/
+
+@mixin flex-centred {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin button-base {
+    @include flex-centred;
+
+    margin: 5px;
+
+    &:hover {
+        cursor: pointer;
+    }
+}

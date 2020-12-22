@@ -4,7 +4,11 @@ import { CountButton } from './components/ui/buttons'
 function App() {
   return (
     <div className="App">
-      <CountButton></CountButton>
+      <div>
+
+      <CountButton ></CountButton>
+      <CountButton decrease></CountButton>
+      </div>
     </div>
   );
 }

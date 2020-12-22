@@ -1,5 +1,5 @@
 import React from "react";
-import { CountButton, MainButton, SizeButton } from "./components/ui/buttons";
+import { CountButton, MainButton, SizeButton, HeaderButton } from "./components/ui/buttons";
 
 function App() {
   return (
@@ -16,7 +16,9 @@ function App() {
         <SizeButton size="M" available></SizeButton>
         <SizeButton size="G" available></SizeButton>
         <SizeButton size="G" available={false}></SizeButton>
-
+        <HeaderButton icon="search"></HeaderButton>
+        <HeaderButton icon="shoppingCart"></HeaderButton>
+        <HeaderButton icon="shoppingCart" itemsQuantity={2}></HeaderButton>
       </div>
     </div>
   );

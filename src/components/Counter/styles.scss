@@ -1,0 +1,11 @@
+.counter__container {
+  @include flex-centred;
+  justify-content: space-around;
+  width: 110px;
+
+  .counter__container__value {
+    font-size: 20px;
+    font-weight: 500;
+  }
+  
+}

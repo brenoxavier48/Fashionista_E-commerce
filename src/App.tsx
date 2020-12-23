@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState, MouseEvent } from "react";
 import { CountButton, MainButton, SizeButton, HeaderButton } from "./components/ui/buttons";
 import { InputSearch } from "./components/ui/inputs";
+import Counter from './components/Counter'
 
 function App() {
+  const [ value, setValue ] = useState<number>(0)
   return (
     <div className="App">
       <div>
@@ -19,11 +21,20 @@ function App() {
         <SizeButton size="G" available={false}></SizeButton>
         <HeaderButton icon="search"></HeaderButton>
         <HeaderButton icon="shoppingCart"></HeaderButton>
-        <HeaderButton icon="shoppingCart" itemsQuantity={2}></HeaderButton>
+        <HeaderButton icon="shoppingCart" itemsQuantity={233}></HeaderButton>
         <InputSearch></InputSearch>
         <div style={{width:"290px", padding:"10px"}}>
           <InputSearch></InputSearch>
         </div>
+        <Counter
+          value={value}
+          decrease={(event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
+            setValue(currentValue => currentValue - 1)
+          }}
+          increase={(event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
+            setValue(currentValue => currentValue + 1)
+          }}
+        ></Counter>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { Product } from '../../Domain/ProductModel'
+import { Product } from '../../domain/ProductModel'
 import { ProductsState } from './protocols'
 import { Actions } from '../protocols'
 

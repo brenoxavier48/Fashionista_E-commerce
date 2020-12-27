@@ -4,11 +4,17 @@ import { Actions } from '../protocols'
 
 const initialState: ProductsState = {
   current: {},
-  list: []
+  catalog: []
 }
 
 const ProductsReducer = (state = initialState, action: Actions) => {
   switch (action.type) {
+    case 'ADD_CATALOG':
+      return {
+        ...state,
+        catalog: action.payload
+      }
+      
     default:
       return state
   }

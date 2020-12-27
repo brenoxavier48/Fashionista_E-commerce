@@ -1,1 +1,1 @@
-export {}
+export const selectAllProducts = (store: any) => store.catalog

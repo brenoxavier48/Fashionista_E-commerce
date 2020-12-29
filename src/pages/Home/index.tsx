@@ -19,6 +19,8 @@ const Home = () => {
 
   const handleClickShoppingCart = () => setDrawer( current => makeDrawerObject(!current.isOpen, 'shoppingCart') )
 
+  const handleCloseClick = () => setDrawer( current => makeDrawerObject(!current.isOpen, '') )
+
   return (
     <div className="home-container">
       <Header
@@ -26,7 +28,14 @@ const Home = () => {
         handleClickShoppingCart={handleClickShoppingCart}
       ></Header>
 
-      <Drawer rules={drawer}></Drawer>
+      {
+        drawer.isOpen && 
+        <Drawer 
+          rules={drawer}
+          handleCloseClick={handleCloseClick}
+        ></Drawer>
+      }
+      
     </div>
   )
 }

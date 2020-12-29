@@ -8,13 +8,15 @@ export type DrawerRules = {
 }
 
 type Props = {
-  rules: DrawerRules
+  rules: DrawerRules;
+  handleCloseClick: () => void
 }
 
-const Drawer = ({ rules }: Props) => {
+const Drawer = ({ rules, handleCloseClick }: Props) => {
   return (
     <div className="drawer-container">
-
+      <button onClick={handleCloseClick}>{rules.type} OUT</button>
+      
     </div>
   )
 }

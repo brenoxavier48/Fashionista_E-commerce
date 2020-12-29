@@ -1,9 +1,24 @@
 import React from 'react'
+import { HeaderButton } from '../ui/buttons'
 
-const Header = () => {
+type Props = {
+  handleClickSearch: () => void,
+  handleClickShoppingCart: () => void
+}
+
+const Header = ({ handleClickSearch, handleClickShoppingCart }: Props) => {
   return (
     <div className="header-container">
-      
+      <div className="header-container__buttons">
+        <HeaderButton
+          icon="search"
+          onClick={handleClickSearch}
+        ></HeaderButton>
+        <HeaderButton
+          icon="shoppingCart"
+          onClick={handleClickShoppingCart}
+        ></HeaderButton>
+      </div>
     </div>
   )
 }

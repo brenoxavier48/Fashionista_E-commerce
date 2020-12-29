@@ -17,7 +17,7 @@ export class ProductService {
       method: 'get'
     })
 
-    const { statusCode, body }= await this.HttpClientInstance.request(options)
+    const { statusCode, body } = await this.HttpClientInstance.request(options)
 
     return statusCode === 200 ? body : []
   }

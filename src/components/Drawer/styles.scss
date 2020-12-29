@@ -1,0 +1,13 @@
+.drawer-container {
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  position: fixed;
+  top: 0;
+  right: 0;
+
+  @media #{$BREAKPOINT-DESK} {
+    width: 30%;
+  }
+
+}

@@ -27,15 +27,10 @@ const Home = () => {
         handleClickSearch={handleClickSearch}
         handleClickShoppingCart={handleClickShoppingCart}
       ></Header>
-
-      {
-        drawer.isOpen && 
-        <Drawer 
-          rules={drawer}
-          handleCloseClick={handleCloseClick}
-        ></Drawer>
-      }
-      
+      <Drawer 
+        rules={drawer}
+        handleCloseClick={handleCloseClick}
+      ></Drawer>
     </div>
   )
 }

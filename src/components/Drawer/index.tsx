@@ -14,10 +14,13 @@ type Props = {
 
 const Drawer = ({ rules, handleCloseClick }: Props) => {
   return (
-    <div className="drawer-container">
-      <button onClick={handleCloseClick}>{rules.type} OUT</button>
-      
-    </div>
+    <>
+      <div className={`drawer-overlay ${rules.isOpen ? 'drawer-overlay--open' : ''}`} onClick={handleCloseClick}></div>
+      <aside className={`drawer-container ${rules.isOpen ? 'drawer-container--open' : ''}`}>
+        <button onClick={handleCloseClick}>{rules.type} OUT</button>
+        
+      </aside>
+    </>
   )
 }
 

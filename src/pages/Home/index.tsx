@@ -1,12 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { selectAllProducts } from '../../store/Products/products.selectors'
+import { ProductService } from '../../services/Product'
 import Header from '../../components/Header'
 import Drawer, { DrawerRules, DrawerType } from '../../components/Drawer'
+import ProductCard from '../../components/ProductCard'
 
 
 
 const Home = () => {
+
+  const [ value, setValue ] = useState<number>(0)
+
+  useEffect( () => {
+    const productService = new ProductService()
+
+    productService.getCatolog().then((response) => {
+      console.log(response)
+    })
+    
+  },[])
 
   const [ drawer, setDrawer ] = useState<DrawerRules>({
     isOpen: false,
@@ -31,6 +44,9 @@ const Home = () => {
         rules={drawer}
         handleCloseClick={handleCloseClick}
       ></Drawer>
+      {
+        
+      }
     </div>
   )
 }

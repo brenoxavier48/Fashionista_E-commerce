@@ -6,16 +6,7 @@ import Home from './pages/Home'
 import { ProductService } from './services/Product'
 
 function App() {
-  const [ value, setValue ] = useState<number>(0)
-
-  useEffect( () => {
-    const productService = new ProductService()
-
-    productService.getCatolog().then((response) => {
-      console.log(response)
-    })
-    
-  },[])
+  
   return (
     <div className="App">
       <Home/>

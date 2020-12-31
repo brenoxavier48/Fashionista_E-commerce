@@ -1,1 +1,1 @@
-export const selectAllProducts = (store: any) => store.catalog
+export const selectAllProducts = (store: any) => store.Products.catalog

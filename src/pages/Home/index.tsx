@@ -5,7 +5,7 @@ import { addCatalog } from '../../store/Products/products.actions'
 import { ProductService } from '../../services/Product'
 import Header from '../../components/Header'
 import Drawer, { DrawerRules, DrawerType } from '../../components/Drawer'
-import ProductCard from '../../components/ProductCard'
+import ProductsCatalog from '../../components/ProductsCatalog'
 
 
 
@@ -44,6 +44,7 @@ const Home = () => {
         rules={drawer}
         handleCloseClick={handleCloseClick}
       ></Drawer>
+      <ProductsCatalog></ProductsCatalog>
     </div>
   )
 }

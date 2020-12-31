@@ -7,6 +7,7 @@ import Home from './pages/Home'
 import { ProductService } from './services/Product'
 import { Product } from './domain/ProductModel'
 
+
 function App() {
 
   const [ value, setValue ] = useState<Product[] | any>([])
@@ -24,12 +25,6 @@ function App() {
   return (
     <div className="App">
       <Home/>
-      <div>
-      <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
-      </div>
-      {
-        value.length > 0 && <><ProductCard product={value[0]}></ProductCard><ProductCard product={value[4]}></ProductCard><ProductCard product={value[14]}></ProductCard></>
-      }
       
     </div>
   );

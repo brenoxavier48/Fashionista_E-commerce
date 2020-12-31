@@ -21,8 +21,8 @@ const Home = () => {
   useEffect( () => {
     const productService = new ProductService()
 
-    productService.getCatolog().then((response) => {
-      dispatch(addCatalog(response))
+    productService.getCatolog().then((products) => {
+      dispatch(addCatalog(products))
     })
   },[])
 

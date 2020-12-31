@@ -10,17 +10,6 @@ import ProductCard from '../../components/ProductCard'
 
 const Home = () => {
 
-  const [ value, setValue ] = useState<number>(0)
-
-  useEffect( () => {
-    const productService = new ProductService()
-
-    productService.getCatolog().then((response) => {
-      console.log(response)
-    })
-    
-  },[])
-
   const [ drawer, setDrawer ] = useState<DrawerRules>({
     isOpen: false,
     type: ''
@@ -32,7 +21,7 @@ const Home = () => {
 
   const handleClickShoppingCart = () => setDrawer( current => makeDrawerObject(!current.isOpen, 'shoppingCart') )
 
-  const handleCloseClick = () => setDrawer( current => makeDrawerObject(!current.isOpen, '') )
+  const handleCloseClick = () => setDrawer( current => makeDrawerObject(false, '') )
 
   return (
     <div className="home-container">
@@ -44,9 +33,6 @@ const Home = () => {
         rules={drawer}
         handleCloseClick={handleCloseClick}
       ></Drawer>
-      {
-        
-      }
     </div>
   )
 }

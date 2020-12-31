@@ -8,11 +8,29 @@ type Props = {
 const ProductCard = ({ product }: Props) => {
   return (
     <article className="product-card-container">
-      <img 
-        className="product-card-container__img"
-        src={product.image}
-        alt={product.name}
-      ></img>
+      {
+        product.discount_percentage 
+        && (
+          <span 
+            className="product-card-container__discount"
+          >
+            {`-${product.discount_percentage}`}
+          </span>
+        )
+      }
+      {
+        product.image 
+        ? (
+          <img 
+            className="product-card-container__img"
+            src={product.image}
+            alt={product.name}
+          ></img>
+        )
+        : (
+          <div className="product-card-container__img"></div>
+        )
+      }
       <div className="product-card-container__info">
         <p className="product-card-container__info__name">
           {product.name}

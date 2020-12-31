@@ -2,12 +2,16 @@ import React from 'react'
 import { Product } from '../../domain/ProductModel'
 
 type Props = {
-  product: Product
+  product: Product,
+  handleClick?: () => void
 }
 
-const ProductCard = ({ product }: Props) => {
+const ProductCard = ({ product, handleClick }: Props) => {
   return (
-    <article className="product-card-container">
+    <article 
+      className="product-card-container"
+      onClick={handleClick}
+    >
       {
         product.discount_percentage 
         && (

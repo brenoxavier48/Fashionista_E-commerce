@@ -9,7 +9,7 @@
   transform: translateX(100%);
   transition: 0.6s;
 
-  &.drawer-container--open {
+  &--open {
     transform: translateX(0);
   }
 
@@ -32,7 +32,7 @@
   z-index: 2;
   cursor: pointer;
 
-  &.drawer-overlay--open {
+  &--open {
     display: inherit;
   }
 }

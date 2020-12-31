@@ -21,7 +21,14 @@ const ProductCatalog = () => {
             </div>
             <div className="products-catalog__container__products">
               {
-                products.map( product => <ProductCard product={product}></ProductCard> )
+                products.map( product => (
+                  <ProductCard 
+                    product={product}
+                    handleClick={() => {
+                      
+                    }}
+                  ></ProductCard>
+                ))
               }
             </div>
           </>

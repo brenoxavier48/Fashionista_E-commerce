@@ -3,7 +3,7 @@ import { Product } from '../../domain/ProductModel'
 
 type Props = {
   product: Product,
-  handleClick?: () => void
+  handleClick: () => void
 }
 
 const ProductCard = ({ product, handleClick }: Props) => {

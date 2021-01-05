@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, ReactChild } from 'react'
 import { useDispatch } from 'react-redux'
 import { addCatalog } from '../../store/Products/products.actions'
 
@@ -7,9 +7,11 @@ import Header from '../../components/Header'
 import Drawer, { DrawerRules, DrawerType } from '../../components/Drawer'
 import ProductsCatalog from '../../components/ProductsCatalog'
 
+type Props = {
+  children: ReactChild
+}
 
-
-const Home = () => {
+const AppContainer = ({ children }: Props) => {
 
   const dispatch = useDispatch()
 
@@ -35,7 +37,7 @@ const Home = () => {
   const handleCloseClick = () => setDrawer( current => makeDrawerObject(false, '') )
 
   return (
-    <div className="home-container">
+    <div className="app-container">
       <Header
         handleClickSearch={handleClickSearch}
         handleClickShoppingCart={handleClickShoppingCart}
@@ -44,9 +46,9 @@ const Home = () => {
         rules={drawer}
         handleCloseClick={handleCloseClick}
       ></Drawer>
-      <ProductsCatalog></ProductsCatalog>
+      { children }
     </div>
   )
 }
 
-export default Home
+export default AppContainer

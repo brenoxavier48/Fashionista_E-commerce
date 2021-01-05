@@ -12,4 +12,21 @@
 body {
   font-family: "Roboto", sans-serif;
   background-color: #f9f9f9;
+  overflow: hidden;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+@media #{$BREAKPOINT-DESK} {
+  ::-webkit-scrollbar {
+    display: inherit;
+    width: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #b2b2b2;
+    border-radius: 4px;
+  }
 }

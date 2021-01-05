@@ -24,7 +24,7 @@ const Home = () => {
     productService.getCatolog().then((products) => {
       dispatch(addCatalog(products))
     })
-  },[])
+  }, [])
 
   const makeDrawerObject = (isOpen: boolean, type: DrawerType): DrawerRules => Object.assign({ isOpen, type })
 

@@ -3,7 +3,7 @@ import { ProductsState } from './protocols'
 import { Actions } from '../protocols'
 
 const initialState: ProductsState = {
-  current: {},
+  currentProduct: {},
   catalog: []
 }
 
@@ -13,6 +13,12 @@ const ProductsReducer = (state = initialState, action: Actions) => {
       return {
         ...state,
         catalog: action.payload
+      }
+
+    case 'ADD_CURRENT_PRODUCT':
+      return {
+        ...state,
+        currentProduct: action.payload
       }
       
     default:

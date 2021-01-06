@@ -1,6 +1,6 @@
 .mainButton {
   @include button-base;
-
+  margin: 0;
   width: 100%;
   height: 34px;
   background-color: #212429;

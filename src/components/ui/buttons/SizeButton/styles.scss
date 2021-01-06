@@ -1,6 +1,7 @@
 .product-size {
   @include button-base;
-
+  margin-left: 0;
+  margin-right: 7px;
   width: 32px;
   height: 32px;
   background-color: #f8f8f8;

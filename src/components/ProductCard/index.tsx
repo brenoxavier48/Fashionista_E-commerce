@@ -1,5 +1,6 @@
 import React from 'react'
 import { Product } from '../../domain/ProductModel'
+import ProductImage from '../ProductImage'
 
 type Props = {
   product: Product,
@@ -22,19 +23,11 @@ const ProductCard = ({ product, handleClick }: Props) => {
           </span>
         )
       }
-      {
-        product.image 
-        ? (
-          <img 
-            className="product-card-container__img"
-            src={product.image}
-            alt={product.name}
-          ></img>
-        )
-        : (
-          <div className="product-card-container__img"></div>
-        )
-      }
+      <ProductImage
+        className="product-card-container__img"
+        src={product.image}
+        alt={product.name}
+      ></ProductImage>
       <div className="product-card-container__info">
         <p className="product-card-container__info__name">
           {product.name}

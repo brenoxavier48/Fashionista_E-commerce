@@ -4,7 +4,7 @@
   padding: 5px 5px; 
   overflow: visible;
   overflow-x: hidden;
-  height: 609px;
+  height: calc(100% - 58px);
   display: flex;
   flex-direction: column;
 
@@ -18,7 +18,6 @@
 
   &__details {
     width: 100%;
-    // margin: 5px;
     padding: 9px;
 
     &__product-name {
@@ -58,5 +57,28 @@
         flex-direction: row;
       }
     }
+  }
+
+  @mixin reponsive-properties-shared {
+    flex-direction: row;
+    height: 100%;
+    &__img {
+      @include flex-centred;
+      width: 600px;
+      height: 800px;
+    }
+  
+    &__details {
+      width: 300px;
+    }
+  }
+
+  @media #{$BREAKPOINT-TABLET} {
+    @include reponsive-properties-shared;
+  }
+
+  @media #{$BREAKPOINT-DESK} {
+    @include reponsive-properties-shared;
+    padding: 15px 120px;
   }
 }

@@ -4,13 +4,59 @@
   padding: 5px 5px; 
   overflow: visible;
   overflow-x: hidden;
-  height: auto;
+  height: 609px;
+  display: flex;
+  flex-direction: column;
 
   &__img {
     @include flex-centred;
     width: 100%;
-    height: 85%;
+    height: 65%;
     background-color: #ffffff;
     z-index: -1;
+  }
+
+  &__details {
+    width: 100%;
+    // margin: 5px;
+    padding: 9px;
+
+    &__product-name {
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    &__product-price {
+      display: flex;
+      padding: 4px 0;
+
+      &__price {
+        font-size: 15px;
+        font-weight: 900;
+        margin-right: 4px;
+      }
+
+      &__installments {
+        font-size: 12px;
+        font-weight: 100;
+        margin-left: 4px;
+        color: #b4b4b4;
+      }
+    }
+
+    &__sizes {
+      margin: 10px 0;
+
+      & p {
+        font-size: 13px;
+        font-weight: 100;
+        color: #b4b4b4;
+      }
+
+      & div {
+        display: flex;
+        flex-direction: row;
+      }
+    }
   }
 }

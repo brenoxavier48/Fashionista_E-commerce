@@ -29,18 +29,22 @@ const SingleProductView = () => {
         </div>
         <div className="product-page__container__details__sizes">
           <p>Escolha o tamanho</p>
-          {
-            product.sizes.map(({size, available}) => (
-              <SizeButton
-                size={size}
-                available={available}
-              ></SizeButton>
-            ))
-          }
+          <div>
+            {
+              product.sizes.map(({size, available}) => (
+                <SizeButton
+                  size={size}
+                  available={available}
+                ></SizeButton>
+              ))
+            }
+          </div>
         </div>
-        <MainButton
-          label="Adicionar à Sacola"
-        />
+        <div className="product-page__container__details__button">
+          <MainButton
+            label="Adicionar à Sacola"
+          />
+        </div>
       </div>
     </div>
   )

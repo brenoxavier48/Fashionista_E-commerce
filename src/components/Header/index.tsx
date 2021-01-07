@@ -1,5 +1,5 @@
 import React from 'react'
-import { HeaderButton } from '../ui/buttons'
+import { IconButton } from '../ui/buttons'
 
 type Props = {
   handleClickSearch: () => void,
@@ -10,14 +10,14 @@ const Header = ({ handleClickSearch, handleClickShoppingCart }: Props) => {
   return (
     <div className="header-container">
       <div className="header-container__buttons">
-        <HeaderButton
+        <IconButton
           icon="search"
           onClick={handleClickSearch}
-        ></HeaderButton>
-        <HeaderButton
+        ></IconButton>
+        <IconButton
           icon="shoppingCart"
           onClick={handleClickShoppingCart}
-        ></HeaderButton>
+        ></IconButton>
       </div>
     </div>
   )

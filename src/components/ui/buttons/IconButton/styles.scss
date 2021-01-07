@@ -1,9 +1,9 @@
-.header__icon {
+.icon-button {
   width: 32px;
   height: 32px;
   position: relative;
 
-  .header__button {
+  .icon-button__button {
     @include button-base;
     position: absolute;
     background-color: transparent;
@@ -12,7 +12,7 @@
     font-size: 18px;
   }
   
-  .header__shoppingCart__count {
+  .icon-button__shoppingCart__count {
     position: absolute;
     text-align: center;
     z-index: 100;
@@ -25,7 +25,7 @@
     color: #ffffff;
     overflow: hidden;
 
-    .header__shoppingCart__count__value {
+    .icon-button__shoppingCart__count__value {
       font-size: 10px;
       font-weight: 700;
     }

@@ -6,7 +6,7 @@ type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
   itemsQuantity?: number
 };
 
-export const HeaderButton = ({ icon, itemsQuantity, ...otherProps }: Props) => {
+export const IconButton = ({ icon, itemsQuantity, ...otherProps }: Props) => {
 
   const getIcon = (icon: string) => {
     switch (icon) {
@@ -19,20 +19,20 @@ export const HeaderButton = ({ icon, itemsQuantity, ...otherProps }: Props) => {
   }
 
   return (
-    <div className="header__icon">
+    <div className="icon-button">
       {
         itemsQuantity 
         && itemsQuantity > 0
         && (
-          <sup className="header__shoppingCart__count">
-            <span className="header__shoppingCart__count__value">
+          <sup className="icon-button__shoppingCart__count">
+            <span className="icon-button__shoppingCart__count__value">
               {itemsQuantity}
             </span>
           </sup>
         )
       }
       <button 
-        className="header__button" 
+        className="icon-button__button" 
         {...otherProps}
       >
         {getIcon(icon)}

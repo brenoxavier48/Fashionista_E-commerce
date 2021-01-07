@@ -29,6 +29,7 @@ const ProductCatalog = () => {
               {
                 products.map( product => (
                   <ProductCard 
+                    key={product.code_color}
                     product={product}
                     handleClick={() => {
                       dispatch(addCurrentProduct(product))

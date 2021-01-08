@@ -6,6 +6,7 @@ export type CartState = {
 
 export type ProductCart = {
   name: string,
+  quantity: number,
   actual_price: string,
   installments: string,
   image: string

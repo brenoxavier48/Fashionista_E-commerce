@@ -1,5 +1,5 @@
 import { Action } from 'redux'
 
-export interface Actions extends Action {
+export type Actions = Action & {
   payload?: any
 }

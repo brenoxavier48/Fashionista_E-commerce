@@ -1,5 +1,6 @@
 import { Actions } from '../protocols'
-import { CartState } from './protocols'
+import { CartState, ProductCart } from './protocols'
+import { getTotalPrice } from './utils'
 
 const initialState: CartState = {
   itemsQuantity: 0,
@@ -7,8 +8,19 @@ const initialState: CartState = {
   items: []
 }
 
-export default (state, action: Actions) => {
+export default (state = initialState, action: Actions): CartState => {
   switch (action.type) {
+    case 'ADD_PRODUCT_CART':
+      const products: ProductCart[] = action.payload
+      const itemsQuantity = state.itemsQuantity + products.length
+      const totalPrice = state.totalPrice + getTotalPrice(products)
+      const items = state.items.push(...products)
+      return Object.assign({
+        itemsQuantity,
+        totalPrice,
+        items
+      })
+
     default:
       return { ...state }
   }

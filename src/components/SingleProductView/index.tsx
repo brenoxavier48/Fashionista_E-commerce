@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Product } from '../../domain/ProductModel'
 import { selectCurrentProduct } from '../../store/Products/products.selectors'
@@ -7,6 +7,13 @@ import { SizeButton, MainButton } from '../ui/buttons'
 
 const SingleProductView = () => {
   const product: Product = useSelector(selectCurrentProduct)
+  const [ itemsSelected, setItemsSelected ] = useState<boolean[]> ([
+    false,
+    false,
+    false,
+    false,
+    false
+  ])
   
   return (
     <div className="product-page__container">
@@ -31,10 +38,17 @@ const SingleProductView = () => {
           <p>Escolha o tamanho</p>
           <div>
             {
-              product.sizes.map(({size, available}) => (
+              product.sizes.map(({size, available, sku}, index) => (
                 <SizeButton
+                  key={sku}
                   size={size}
                   available={available}
+                  selected={itemsSelected[index]}
+                  onClick={() => {setItemsSelected(current => {
+                    const newState = [...current]
+                    newState[index] = !current[index]
+                    return newState
+                  })}}
                 ></SizeButton>
               ))
             }

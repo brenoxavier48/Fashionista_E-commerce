@@ -1,6 +1,6 @@
 import { Product } from '../../domain/ProductModel'
 
-export interface ProductsState {
+export type ProductsState = {
   currentProduct: Product | {}
   catalog: Product[]
 }

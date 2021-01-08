@@ -14,7 +14,7 @@ export const SizeButton = ({ size, available, selected, ...otherProps }: Props) 
         ${available ? '' : 'product-size--disabled'}
         ${available && selected ? 'product-size--selected' : ''}
       `} 
-      disabled={available}
+      disabled={!available}
       {...otherProps}
     >
       {size}

@@ -7,13 +7,9 @@ import { SizeButton, MainButton } from '../ui/buttons'
 
 const SingleProductView = () => {
   const product: Product = useSelector(selectCurrentProduct)
-  const [ itemsSelected, setItemsSelected ] = useState<boolean[]> ([
-    false,
-    false,
-    false,
-    false,
-    false
-  ])
+  const [ itemsSelected, setItemsSelected ] = useState<boolean[]>(
+    new Array(product.sizes.length).fill(false)
+  )
   
   return (
     <div className="product-page__container">

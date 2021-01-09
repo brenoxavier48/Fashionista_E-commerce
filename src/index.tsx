@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import { store } from './store'
 import reportWebVitals from './reportWebVitals';
 import Routes from './main/Routes';
-import AppContainer from './pages/AppContainer'
+import AppContainer from './presentation/pages/AppContainer'
 import "./assets/scss/Main.scss"
 
 ReactDOM.render(

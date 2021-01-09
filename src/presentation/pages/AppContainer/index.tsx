@@ -1,8 +1,8 @@
 import React, { useState, useEffect, ReactChild } from 'react'
 import { useDispatch } from 'react-redux'
-import { addCatalog } from '../../store/Products/products.actions'
-import { HttpClientInstance } from '../../infra/HttpClient'
-import { ProductService } from '../../services/Product'
+import { addCatalog } from '../../../store/Products/products.actions'
+import { HttpClientInstance } from '../../../infra/HttpClient'
+import { ProductService } from '../../../services/Product'
 import Header from '../../components/Header'
 import Drawer, { DrawerRules, DrawerType } from '../../components/Drawer'
 

@@ -1,7 +1,7 @@
 import react from 'react'
 import { Route, BrowserRouter } from 'react-router-dom'
-import ProductsCatalog from '../../components/ProductsCatalog'
-import SingleProductView from '../../components/SingleProductView'
+import ProductsCatalog from '../../presentation/components/ProductsCatalog'
+import SingleProductView from '../../presentation/components/SingleProductView'
 
 const Routes = () => (
   <BrowserRouter>

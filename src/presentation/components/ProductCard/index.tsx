@@ -1,5 +1,5 @@
 import React from 'react'
-import { Product } from '../../domain/ProductModel'
+import { Product } from '../../../domain/ProductModel'
 import ProductImage from '../ProductImage'
 
 type Props = {

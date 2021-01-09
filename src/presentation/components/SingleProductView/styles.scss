@@ -50,6 +50,12 @@
         font-size: 13px;
         font-weight: 100;
         color: #b4b4b4;
+
+        &.--alert {
+          color: #ad2525;
+          animation: shake .2s;
+          animation-iteration-count: 2;
+        }
       }
 
       & div {
@@ -82,3 +88,4 @@
     padding: 15px 120px;
   }
 }
+

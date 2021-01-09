@@ -16,6 +16,7 @@ const SingleProductView = () => {
   const [ itemsSelected, setItemsSelected ] = useState<boolean[]>(
     new Array(product.sizes.length).fill(false)
   )
+  const [ alertUser, setAlertUser ] = useState<boolean>(false) 
   
   const makeCartProducts = (): ProductCart[] => {
     let products: ProductCart[] = [] 
@@ -42,8 +43,13 @@ const SingleProductView = () => {
   }
 
   const handleClick = () => {
-    dispatchProductsToCart()
-    history.push('/')
+    const isSomeOptionSelected = itemsSelected.some(element => element === true)
+    if (isSomeOptionSelected) {
+      dispatchProductsToCart()
+      history.push('/')
+    } else {
+      setAlertUser(true)
+    }
   }
 
   return (
@@ -66,7 +72,7 @@ const SingleProductView = () => {
           </p>
         </div>
         <div className="product-page__container__details__sizes">
-          <p>Escolha o tamanho</p>
+          <p className={`${ alertUser ? '--alert' : ''}`}>Escolha o tamanho</p>
           <div>
             {
               product.sizes.map(({size, available, sku}, index) => (

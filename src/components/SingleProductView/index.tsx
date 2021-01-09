@@ -11,6 +11,7 @@ import { SizeButton, MainButton } from '../ui/buttons'
 const SingleProductView = () => {
   const history = useHistory()
   const dispatch = useDispatch()
+  
   const product: Product = useSelector(selectCurrentProduct)
   const [ itemsSelected, setItemsSelected ] = useState<boolean[]>(
     new Array(product.sizes.length).fill(false)
@@ -35,13 +36,13 @@ const SingleProductView = () => {
     return products
   } 
 
-  const dispatchToCart = (): void => {
+  const dispatchProductsToCart = (): void => {
     const products: ProductCart[] = makeCartProducts()
     dispatch(addProductCart(products))
   }
-  
+
   const handleClick = () => {
-    dispatchToCart()
+    dispatchProductsToCart()
     history.push('/')
   }
 

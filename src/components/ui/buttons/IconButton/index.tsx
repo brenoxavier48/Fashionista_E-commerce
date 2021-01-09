@@ -21,15 +21,15 @@ export const IconButton = ({ icon, itemsQuantity, ...otherProps }: Props) => {
   return (
     <div className="icon-button">
       {
-        itemsQuantity 
-        && itemsQuantity > 0
-        && (
+        ( itemsQuantity && itemsQuantity > 0 )
+        ? (
           <sup className="icon-button__shoppingCart__count">
             <span className="icon-button__shoppingCart__count__value">
               {itemsQuantity}
             </span>
           </sup>
         )
+        : null
       }
       <button 
         className="icon-button__button" 

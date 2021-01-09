@@ -1,5 +1,7 @@
 import React from 'react'
 import { IconButton } from '../ui/buttons'
+import { useSelector } from 'react-redux'
+import { selectQuantityProductsCart } from '../../store/Cart/cart.selectors'
 
 type Props = {
   handleClickSearch: () => void,
@@ -7,6 +9,8 @@ type Props = {
 }
 
 const Header = ({ handleClickSearch, handleClickShoppingCart }: Props) => {
+  const itemsQuantity = useSelector(selectQuantityProductsCart)
+
   return (
     <div className="header-container">
       <div className="header-container__buttons">
@@ -17,6 +21,7 @@ const Header = ({ handleClickSearch, handleClickShoppingCart }: Props) => {
         <IconButton
           icon="shoppingCart"
           onClick={handleClickShoppingCart}
+          itemsQuantity={itemsQuantity}
         ></IconButton>
       </div>
     </div>

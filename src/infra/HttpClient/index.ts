@@ -3,7 +3,6 @@ import { HttpClient, HttpRequest, HttpResponse } from './protocols'
 export class HttpClientInstance implements HttpClient {
 
   public async request(options: HttpRequest): Promise<HttpResponse> {
-    
     const { url, method, body, headers } = options
     let response: Response
     let data: any

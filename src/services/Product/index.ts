@@ -1,4 +1,3 @@
-import { HttpClientInstance } from '../../infra/HttpClient'
 import { HttpClient } from '../../infra/HttpClient/protocols'
 import { Product } from '../../domain/ProductModel'
 
@@ -6,9 +5,9 @@ export class ProductService {
   private baseURL: string
   private HttpClientInstance: HttpClient
 
-  constructor() {
-    this.HttpClientInstance = new HttpClientInstance()
-    this.baseURL = 'https://5f074b869c5c250016306cbf.mockapi.io/api/v1'
+  constructor(httpClientInstance: HttpClient, baseURL: string) {
+    this.HttpClientInstance = httpClientInstance
+    this.baseURL = baseURL
   }
 
   public async getCatolog(): Promise<Product[]> {

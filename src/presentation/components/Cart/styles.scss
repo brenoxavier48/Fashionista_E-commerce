@@ -1,0 +1,26 @@
+.cart-container {
+  position: relative;
+  top: 57px;
+  overflow: visible;
+  overflow-x: hidden;
+  height: calc( 100vh - 58px );
+  background-color: #f9f9f9;
+
+  &__products {
+    padding: 10px 10px 0; 
+  }
+
+  &__total-price {
+    @include flex-centred;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 56px;
+    background-color: #212429;
+  
+    & p {
+      color: #d4d5d7;
+      font-size: 14px;
+    }
+  }
+}

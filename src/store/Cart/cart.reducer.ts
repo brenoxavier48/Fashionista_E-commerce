@@ -14,7 +14,6 @@ export default (state = initialState, action: Actions): CartState => {
       const products: ProductCart[] = action.payload
       const itemsQuantity = state.itemsQuantity + products.length
       const totalPrice = state.totalPrice + getTotalPrice(products)
-      console.log(products)
       const items = [...state.items, ...products]
       return Object.assign({
         itemsQuantity,

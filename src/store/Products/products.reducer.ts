@@ -1,5 +1,5 @@
 import { Product } from '../../domain/ProductModel'
-import { ProductsState } from './protocols'
+import { ProductsState, ProductPayload } from './protocols'
 import { Actions } from '../protocols'
 
 const initialState: ProductsState = {
@@ -7,7 +7,7 @@ const initialState: ProductsState = {
   catalog: []
 }
 
-const ProductsReducer = (state = initialState, action: Actions) => {
+const ProductsReducer = (state = initialState, action: Actions<ProductPayload>) => {
   switch (action.type) {
     case 'ADD_CATALOG':
       return {

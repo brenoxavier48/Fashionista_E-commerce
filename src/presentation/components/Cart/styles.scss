@@ -1,13 +1,13 @@
 .cart-container {
   position: relative;
-  top: 57px;
-  overflow: visible;
-  overflow-x: hidden;
-  height: calc( 100vh - 124px );
+  height: calc( 100vh - 56px );
   background-color: #f9f9f9;
 
   &__products {
-    padding: 10px 10px 0; 
+    padding: 10px 10px 10px; 
+    overflow: visible;
+    overflow-x: hidden;
+    height: calc( 100% - 56px );
   }
 
   &__total-price {

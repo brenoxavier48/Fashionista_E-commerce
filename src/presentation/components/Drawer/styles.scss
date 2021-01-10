@@ -13,6 +13,11 @@
     transform: translateX(0);
   }
 
+  &__header {
+    width: 100%;
+    height: 56px;
+  }
+
   @media #{$BREAKPOINT-DESK} {
     width: 30%;
   }

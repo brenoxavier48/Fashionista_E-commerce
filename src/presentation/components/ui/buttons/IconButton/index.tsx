@@ -1,8 +1,8 @@
 import React, { ButtonHTMLAttributes } from "react";
-import { FaSearch, FaShoppingCart } from 'react-icons/fa'
+import { FaSearch, FaShoppingCart, FaArrowLeft } from 'react-icons/fa'
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
-  icon: "search" | "shoppingCart",
+  icon: "search" | "shoppingCart" | "back",
   itemsQuantity?: number
 };
 
@@ -15,6 +15,9 @@ export const IconButton = ({ icon, itemsQuantity, ...otherProps }: Props) => {
 
       case 'shoppingCart':
         return <FaShoppingCart/>
+
+      case 'back':
+        return <FaArrowLeft/>
     }
   }
 

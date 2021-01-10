@@ -1,4 +1,5 @@
 import React from 'react'
+import { IconButton } from '../ui/buttons'
 import Cart from '../Cart'
 
 export type DrawerType = "" | "search" | "shoppingCart" 
@@ -29,7 +30,9 @@ const Drawer = ({ rules, handleCloseClick }: Props) => {
     <>
       <div className={`drawer-overlay ${rules.isOpen ? 'drawer-overlay--open' : ''}`} onClick={handleCloseClick}></div>
       <aside className={`drawer-container ${rules.isOpen ? 'drawer-container--open' : ''}`}>
-        <button onClick={handleCloseClick}>{rules.type} OUT</button>
+        <div className="drawer-container__header">
+          <IconButton icon="back" onClick={handleCloseClick}/>
+        </div>
         {
           getComponent(rules.type)
         }

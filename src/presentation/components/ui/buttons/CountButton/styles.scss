@@ -1,6 +1,6 @@
 .count__button {
   @include button-base;
-
+  margin: 5px 0;
   width: 24px;
   height: 24px;
   background-color:#f9f9f9;

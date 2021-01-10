@@ -1,4 +1,6 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+import { selectQuantityProductsCart } from '../../../store/Cart/cart.selectors'
 import { IconButton } from '../ui/buttons'
 import Cart from '../Cart'
 
@@ -15,14 +17,21 @@ type Props = {
 }
 
 const Drawer = ({ rules, handleCloseClick }: Props) => {
-
+  const itemsQuantity: number = useSelector(selectQuantityProductsCart)
+  
   const getComponent = (type: DrawerType) => {
     switch (type) {
       case 'search':
-        return <></>
+        return {
+          label: "Buscar Pedido",
+          component: <></>
+        }
 
       case 'shoppingCart':
-        return <Cart></Cart>
+        return {
+          label: `Sacola (${itemsQuantity})`,
+          component: <Cart></Cart>
+        }
     }
   }
   
@@ -32,9 +41,10 @@ const Drawer = ({ rules, handleCloseClick }: Props) => {
       <aside className={`drawer-container ${rules.isOpen ? 'drawer-container--open' : ''}`}>
         <div className="drawer-container__header">
           <IconButton icon="back" onClick={handleCloseClick}/>
+          <p>{getComponent(rules.type)?.label}</p>
         </div>
         {
-          getComponent(rules.type)
+          getComponent(rules.type)?.component
         }
       </aside>
     </>

@@ -14,8 +14,22 @@
   }
 
   &__header {
+    @include flex-centred;
     width: 100%;
-    height: 56px;
+    height: 50px;
+    position: relative;
+    padding: 10px 5px;
+
+    & button {
+      position: absolute;
+    }
+    
+    & p {
+      width: 100%;
+      text-align: center;
+      font-weight: 700;
+      font-size: 15px;
+    }
   }
 
   @media #{$BREAKPOINT-DESK} {

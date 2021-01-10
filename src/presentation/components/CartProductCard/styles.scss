@@ -11,10 +11,16 @@
     height: 100%;
 
     &__img {
+      @include flex-centred;
+      font-size: 12px;
+      text-align: center;
       height: 82%;
+      margin-bottom: 5px;
+      
     }
 
-    & p {
+    & span {
+      margin-left: 2px;
       font-size: 12px;
       color: #ce8481;
 

@@ -11,6 +11,14 @@ type Props = {
 
 const CartProductCard = ({ product }: Props) => {
 
+  const heandleIncrease = () => {
+    
+  }
+
+  const heandleDecrease = () => {
+
+  }
+
   return (
     <article className="cart-product-container">
       <div className="cart-product-container__image">
@@ -19,7 +27,7 @@ const CartProductCard = ({ product }: Props) => {
           src={product.image}
           alt={product.name}
         />
-        <p>Remover item</p>
+        <span>Remover item</span>
       </div>
       <div className="cart-product-container__info">
         <p className="cart-product-container__info__name">

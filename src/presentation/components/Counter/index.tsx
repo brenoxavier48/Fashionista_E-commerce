@@ -13,7 +13,7 @@ const Counter = ({value, decrease, increase}: Props) => {
       <CountButton 
         decrease 
         onClick={decrease}
-        disabled={value <= 0}
+        disabled={value <= 1}
       />
       <p className="counter__container__value">{value}</p>
       <CountButton onClick={increase}/>

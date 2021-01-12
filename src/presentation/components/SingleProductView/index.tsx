@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { Product } from '../../../domain/ProductModel'
 import { ProductCart } from '../../../store/Cart/protocols'
 import { selectCurrentProduct } from '../../../store/Products/products.selectors'
-import { addProductCart } from '../../../store/Cart/cart.actions'
+import { addProductsCart } from '../../../store/Cart/cart.actions'
 import ProductImage from '../ProductImage'
 import { SizeButton, MainButton } from '../ui/buttons'
 
@@ -39,7 +39,7 @@ const SingleProductView = () => {
 
   const dispatchProductsToCart = (): void => {
     const products: ProductCart[] = makeCartProducts()
-    dispatch(addProductCart(products))
+    dispatch(addProductsCart(products))
   }
 
   const handleClick = () => {

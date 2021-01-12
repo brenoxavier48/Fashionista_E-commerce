@@ -1,7 +1,6 @@
-import ProductCard from '../../presentation/components/ProductCard'
 import { Actions } from '../protocols'
 import { CartState, ProductCart, CartPayload } from './protocols'
-import { getTotalPrice, moneyNotationToNumber } from './utils'
+import { getTotalPriceAndQuantity } from './utils'
 
 const initialState: CartState = {
   itemsQuantity: 0,
@@ -11,9 +10,9 @@ const initialState: CartState = {
 
 const ADD_PRODUCTS_CART = (state: CartState, action: Actions<CartPayload>): CartState => {
   const products: ProductCart[] = action.payload
-  const itemsQuantity = state.itemsQuantity + products.length
-  const totalPrice = state.totalPrice + getTotalPrice(products)
   const items = [...state.items, ...products]
+  const { itemsQuantity, totalPrice } = getTotalPriceAndQuantity(items)
+  
   return Object.assign({
     itemsQuantity,
     totalPrice,
@@ -22,15 +21,31 @@ const ADD_PRODUCTS_CART = (state: CartState, action: Actions<CartPayload>): Cart
 }
 
 const UPDATE_QUANTITY_PRODUCT_CART = (state: CartState, action: Actions<CartPayload>): CartState => {
-
   const currentState = { ...state }
   const { sku, quantity } = action.payload
   const position: number = currentState.items.findIndex( (product) => product.sku === sku )
-  currentState.itemsQuantity += quantity
   currentState.items[position].quantity += quantity
-  currentState.totalPrice = getTotalPrice(currentState.items)
+  const { itemsQuantity, totalPrice } = getTotalPriceAndQuantity(currentState.items)
 
-  return currentState
+  return Object.assign({
+    ...currentState,
+    itemsQuantity,
+    totalPrice
+  })
+
+}
+
+const REMOVE_PRODUCT_CART_PAYLOAD  = (state: CartState, action: Actions<CartPayload>): CartState => {
+  const currentState = { ...state }
+  const { sku } = action.payload
+  const actualState = currentState.items.filter( (product) => product.sku === sku )
+  const { itemsQuantity, totalPrice } = getTotalPriceAndQuantity(currentState.items)
+
+  return Object.assign({
+    ...actualState,
+    itemsQuantity,
+    totalPrice
+  })
 }
 
 export default (state = initialState, action: Actions<CartPayload>): CartState => {
@@ -40,6 +55,9 @@ export default (state = initialState, action: Actions<CartPayload>): CartState =
 
     case 'UPDATE_QUANTITY_PRODUCT_CART':
       return UPDATE_QUANTITY_PRODUCT_CART(state, action)
+
+    case 'REMOVE_PRODUCT_CART_PAYLOAD':
+      return REMOVE_PRODUCT_CART_PAYLOAD(state, action)
 
     default:
       return { ...state }

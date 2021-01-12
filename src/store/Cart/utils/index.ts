@@ -1,16 +1,25 @@
 import { ProductCart } from '../protocols'
 
+type TotalPriceAndQuantity = { 
+  itemsQuantity: number,
+  totalPrice: number
+}
+
 export const moneyNotationToNumber = (money: string): number => Number(
   money
     .replace(/([a-z]+)\$/gi, '')
     .replace(',','.')
 )
 
-export const getTotalPrice = (products: ProductCart[]): number => {
-  const totalPrice: number = products.reduce((current: number, product: ProductCart) => {
-    const priceNumber = moneyNotationToNumber(product.actual_price) * product.quantity
-    return current + priceNumber
-  }, 0)
+export const getTotalPriceAndQuantity = (products: ProductCart[]): TotalPriceAndQuantity => {
+  const obj: TotalPriceAndQuantity = products.reduce((current: TotalPriceAndQuantity, product: ProductCart) => {
+    current.itemsQuantity += product.quantity
+    current.totalPrice += moneyNotationToNumber(product.actual_price) * product.quantity
+    return current
+  }, { 
+    itemsQuantity: 0, 
+    totalPrice: 0 
+  })
 
-  return totalPrice
+  return obj
 }

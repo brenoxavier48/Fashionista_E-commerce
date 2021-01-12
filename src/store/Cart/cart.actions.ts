@@ -1,5 +1,5 @@
 import { Actions } from '../protocols'
-import { ProductCart, ADD_PRODUCTS_CART_PAYLOAD, UPDATE_QUANTITY_PRODUCT_CART_PAYLOAD } from './protocols'
+import { ADD_PRODUCTS_CART_PAYLOAD, UPDATE_QUANTITY_PRODUCT_CART_PAYLOAD, REMOVE_PRODUCT_CART_PAYLOAD } from './protocols'
 
 export const addProductsCart = (products: ADD_PRODUCTS_CART_PAYLOAD): Actions<ADD_PRODUCTS_CART_PAYLOAD> => {
   return {
@@ -12,5 +12,12 @@ export const updateQuantityProductCart = (updateObject: UPDATE_QUANTITY_PRODUCT_
   return {
     type: 'UPDATE_QUANTITY_PRODUCT_CART',
     payload: updateObject
+  }
+}
+
+export const removeProductCart = (sku: string): Actions<REMOVE_PRODUCT_CART_PAYLOAD> => {
+  return {
+    type: 'REMOVE_PRODUCT_CART_PAYLOAD',
+    payload: { sku }
   }
 }

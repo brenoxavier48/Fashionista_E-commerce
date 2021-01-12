@@ -16,7 +16,10 @@ export type ProductCart = {
 
 export type ADD_PRODUCTS_CART_PAYLOAD = ProductCart[]
 
-export type UPDATE_QUANTITY_PRODUCT_CART_PAYLOAD = ProductCart
+export type UPDATE_QUANTITY_PRODUCT_CART_PAYLOAD = {
+  sku: string,
+  quantity: 1 | -1
+}
 
 export type CartPayload =  (
   ADD_PRODUCTS_CART_PAYLOAD & 

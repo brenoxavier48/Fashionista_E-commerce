@@ -1,7 +1,8 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectAllProductsCart, selectTotalPriceProductsCart } from '../../../store/Cart/cart.selectors'
-import { ProductCart } from '../../../store/Cart/protocols'
+import { updateQuantityProductCart } from '../../../store/Cart/cart.actions'
+import { ProductCart, UPDATE_QUANTITY_PRODUCT_CART_PAYLOAD } from '../../../store/Cart/protocols'
 import ProductImage from '../ProductImage'
 import Counter from '../Counter'
 
@@ -11,12 +12,21 @@ type Props = {
 
 const CartProductCard = ({ product }: Props) => {
 
+  const dispatch = useDispatch()
+
+  const makeUpdateObject = (quantity: 1 | -1): UPDATE_QUANTITY_PRODUCT_CART_PAYLOAD => ({
+    sku: product.sku,
+    quantity
+  })
+
   const heandleIncrease = () => {
-    
+    const updateObject = makeUpdateObject(1)
+    dispatch(updateQuantityProductCart(updateObject))
   }
 
   const heandleDecrease = () => {
-
+    const updateObject = makeUpdateObject(-1)
+    dispatch(updateQuantityProductCart(updateObject))
   }
 
   return (
@@ -38,8 +48,8 @@ const CartProductCard = ({ product }: Props) => {
         </p>
         <Counter
           value={product.quantity}
-          increase={() => {}}
-          decrease={() => {}}
+          increase={heandleIncrease}
+          decrease={heandleDecrease}
         />
       </div>
       <div className="cart-product-container__price-info">

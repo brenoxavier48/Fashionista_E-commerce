@@ -12,14 +12,24 @@ export const moneyNotationToNumber = (money: string): number => Number(
 )
 
 export const getTotalPriceAndQuantity = (products: ProductCart[]): TotalPriceAndQuantity => {
-  const obj: TotalPriceAndQuantity = products.reduce((current: TotalPriceAndQuantity, product: ProductCart) => {
-    current.itemsQuantity += product.quantity
-    current.totalPrice += moneyNotationToNumber(product.actual_price) * product.quantity
-    return current
-  }, { 
+
+  const result: TotalPriceAndQuantity = { 
     itemsQuantity: 0, 
     totalPrice: 0 
-  })
+  }
 
-  return obj
+  if (products.length > 0) {
+    const { itemsQuantity, totalPrice } = products.reduce((current: TotalPriceAndQuantity, product: ProductCart) => {
+      current.itemsQuantity += product.quantity
+      current.totalPrice += moneyNotationToNumber(product.actual_price) * product.quantity
+      return current
+    }, { 
+      itemsQuantity: 0, 
+      totalPrice: 0 
+    })
+    result.itemsQuantity = itemsQuantity
+    result.totalPrice = totalPrice
+  }
+
+  return result
 }

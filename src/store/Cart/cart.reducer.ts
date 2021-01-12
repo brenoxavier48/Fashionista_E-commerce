@@ -38,13 +38,18 @@ const UPDATE_QUANTITY_PRODUCT_CART = (state: CartState, action: Actions<CartPayl
 const REMOVE_PRODUCT_CART_PAYLOAD  = (state: CartState, action: Actions<CartPayload>): CartState => {
   const currentState = { ...state }
   const { sku } = action.payload
-  const actualState = currentState.items.filter( (product) => product.sku === sku )
-  const { itemsQuantity, totalPrice } = getTotalPriceAndQuantity(currentState.items)
+  const items = currentState.items.filter( (product) => product.sku !== sku )
+  const { itemsQuantity, totalPrice } = getTotalPriceAndQuantity(items)
+  console.log(Object.assign({
+    itemsQuantity,
+    totalPrice,
+    items
+  }))
 
   return Object.assign({
-    ...actualState,
     itemsQuantity,
-    totalPrice
+    totalPrice,
+    items
   })
 }
 

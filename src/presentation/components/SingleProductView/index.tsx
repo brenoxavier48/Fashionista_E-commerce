@@ -11,8 +11,9 @@ import { SizeButton, MainButton } from '../ui/buttons'
 const SingleProductView = () => {
   const history = useHistory()
   const dispatch = useDispatch()
-  
+
   const product: Product = useSelector(selectCurrentProduct)
+
   const [ itemsSelected, setItemsSelected ] = useState<boolean[]>(
     new Array(product.sizes.length).fill(false)
   )
@@ -42,7 +43,7 @@ const SingleProductView = () => {
     dispatch(addProductsCart(products))
   }
 
-  const handleClick = () => {
+  const handleClickMainButton = () => {
     const isSomeOptionSelected = itemsSelected.some(element => element === true)
     if (isSomeOptionSelected) {
       dispatchProductsToCart()
@@ -50,6 +51,15 @@ const SingleProductView = () => {
     } else {
       setAlertUser(true)
     }
+  }
+
+  const handleClickSizeButtons = (index: number) => {
+    setAlertUser(false)
+    setItemsSelected(current => {
+      const newState = [...current]
+      newState[index] = !current[index]
+      return newState
+    })
   }
 
   return (
@@ -81,11 +91,7 @@ const SingleProductView = () => {
                   size={size}
                   available={available}
                   selected={itemsSelected[index]}
-                  onClick={() => {setItemsSelected(current => {
-                    const newState = [...current]
-                    newState[index] = !current[index]
-                    return newState
-                  })}}
+                  onClick={() => handleClickSizeButtons(index)}
                 ></SizeButton>
               ))
             }
@@ -94,7 +100,7 @@ const SingleProductView = () => {
         <div className="product-page__container__details__button">
           <MainButton
             label="Adicionar à Sacola"
-            onClick={handleClick}
+            onClick={handleClickMainButton}
           />
         </div>
       </div>

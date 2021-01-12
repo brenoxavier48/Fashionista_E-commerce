@@ -40,11 +40,6 @@ const REMOVE_PRODUCT_CART_PAYLOAD  = (state: CartState, action: Actions<CartPayl
   const { sku } = action.payload
   const items = currentState.items.filter( (product) => product.sku !== sku )
   const { itemsQuantity, totalPrice } = getTotalPriceAndQuantity(items)
-  console.log(Object.assign({
-    itemsQuantity,
-    totalPrice,
-    items
-  }))
 
   return Object.assign({
     itemsQuantity,

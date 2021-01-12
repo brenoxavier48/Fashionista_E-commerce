@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectAllProductsCart, selectTotalPriceProductsCart } from '../../../store/Cart/cart.selectors'
 import { updateQuantityProductCart, removeProductCart } from '../../../store/Cart/cart.actions'
@@ -7,14 +7,16 @@ import ProductImage from '../ProductImage'
 import Counter from '../Counter'
 
 type Props = {
-  product: ProductCart
+  product: ProductCart,
+  timeToAppear?: number
 }
 
-const CartProductCard = ({ product }: Props) => {
+const CartProductCard = ({ product, timeToAppear }: Props) => {
 
   const dispatch = useDispatch()
   
   const [ isRemoved, setIsRemoved ] = useState<boolean>(false)
+  const [ isRendered, setIsRendered ] = useState<boolean>(false)
 
   const makeUpdateObject = (quantity: 1 | -1): UPDATE_QUANTITY_PRODUCT_CART_PAYLOAD => ({
     sku: product.sku,
@@ -36,11 +38,24 @@ const CartProductCard = ({ product }: Props) => {
 
     setTimeout(() => {
       dispatch(removeProductCart(product.sku))
-    }, 400)
+    }, 300)
   }
 
+  useEffect(() => {
+    if (typeof timeToAppear === 'number') {
+      setTimeout(() => {
+        setIsRendered(true)
+      }, (200 + ((50 + (15 * timeToAppear)) * timeToAppear)))
+    }
+  }, [])
+
   return (
-    <article className={`cart-product-container ${ isRemoved ? 'cart-product-container--removed' : 'cart-product-container--not-remove' }`}>
+    <article 
+      className={`cart-product-container 
+        ${ isRemoved ? 'cart-product-container--removed' : '' }
+        ${ isRendered ? 'cart-product-container--rendered' : '' }`
+      }
+    >
       <div className="cart-product-container__image">
         <ProductImage
           className="cart-product-container__image__img"

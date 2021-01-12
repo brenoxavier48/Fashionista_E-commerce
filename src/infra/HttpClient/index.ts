@@ -24,6 +24,5 @@ export class HttpClientInstance implements HttpClient {
       statusCode: response.status,
       body: data
     }
-
   }
 }

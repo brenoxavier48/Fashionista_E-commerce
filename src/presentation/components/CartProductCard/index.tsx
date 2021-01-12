@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectAllProductsCart, selectTotalPriceProductsCart } from '../../../store/Cart/cart.selectors'
-import { updateQuantityProductCart } from '../../../store/Cart/cart.actions'
+import { updateQuantityProductCart, removeProductCart } from '../../../store/Cart/cart.actions'
 import { ProductCart, UPDATE_QUANTITY_PRODUCT_CART_PAYLOAD } from '../../../store/Cart/protocols'
 import ProductImage from '../ProductImage'
 import Counter from '../Counter'
@@ -13,6 +13,8 @@ type Props = {
 const CartProductCard = ({ product }: Props) => {
 
   const dispatch = useDispatch()
+  
+  const [ isRemoved, setIsRemoved ] = useState<boolean>(false)
 
   const makeUpdateObject = (quantity: 1 | -1): UPDATE_QUANTITY_PRODUCT_CART_PAYLOAD => ({
     sku: product.sku,
@@ -29,15 +31,25 @@ const CartProductCard = ({ product }: Props) => {
     dispatch(updateQuantityProductCart(updateObject))
   }
 
+  const handleRemoveItem = () => {
+    setIsRemoved(true)
+
+    setTimeout(() => {
+      dispatch(removeProductCart(product.sku))
+    }, 400)
+  }
+
   return (
-    <article className="cart-product-container">
+    <article className={`cart-product-container ${ isRemoved ? 'cart-product-container--removed' : 'cart-product-container--not-remove' }`}>
       <div className="cart-product-container__image">
         <ProductImage
           className="cart-product-container__image__img"
           src={product.image}
           alt={product.name}
         />
-        <span>Remover item</span>
+        <span
+          onClick={handleRemoveItem}
+        >Remover item</span>
       </div>
       <div className="cart-product-container__info">
         <p className="cart-product-container__info__name">

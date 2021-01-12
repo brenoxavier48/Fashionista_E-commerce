@@ -17,7 +17,7 @@ export class HttpClientInstance implements HttpClient {
     } catch (error) {
       console.error(error)
       response = error
-      data = await response.json()
+      data = error
     }
 
     return {

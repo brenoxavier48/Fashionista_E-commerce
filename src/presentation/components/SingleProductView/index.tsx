@@ -4,15 +4,19 @@ import { useHistory } from 'react-router-dom'
 import { Product } from '../../../domain/ProductModel'
 import { ProductCart } from '../../../store/Cart/protocols'
 import { selectCurrentProduct } from '../../../store/Products/products.selectors'
+import { selectAllProductsCart } from '../../../store/Cart/cart.selectors'
 import { addProductsCart } from '../../../store/Cart/cart.actions'
 import ProductImage from '../ProductImage'
 import { SizeButton, MainButton } from '../ui/buttons'
 
 const SingleProductView = () => {
+  
   const history = useHistory()
   const dispatch = useDispatch()
 
   const product: Product = useSelector(selectCurrentProduct)
+  const productsCart: ProductCart[] = useSelector(selectAllProductsCart)
+  const alreadyInCart = (sku: string): boolean => productsCart.some(product => product.sku === sku)
 
   const [ itemsSelected, setItemsSelected ] = useState<boolean[]>(
     new Array(product.sizes.length).fill(false)
@@ -89,7 +93,7 @@ const SingleProductView = () => {
                 <SizeButton
                   key={sku}
                   size={size}
-                  available={available}
+                  available={available && !alreadyInCart(sku)}
                   selected={itemsSelected[index]}
                   onClick={() => handleClickSizeButtons(index)}
                 ></SizeButton>

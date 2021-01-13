@@ -8,7 +8,8 @@
   transform: translate(100%);
 
   &--rendered {
-    transition: 0.5s;
+    animation: appear .4s;
+    animation-timing-function: ease-in;
     transform: translate(0);
   }
 

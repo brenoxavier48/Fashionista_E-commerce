@@ -5,6 +5,14 @@
   margin: 10px 5px;
   border: 0px solid rgba(0,0,0,0.08);
   transition: 0.6s;
+  transform: translate(100%);
+
+  &--rendered {
+    animation: appear .5s;
+    animation-timing-function: ease-out;
+    transform: translate(0);
+  }
+
 
   &__discount {
     position: absolute;
@@ -52,5 +60,12 @@
   @media #{$BREAKPOINT-TABLET} {
     width: 330px;
     height: 450px;
+    transform: translate(1000%);
+
+    &--rendered {
+      animation: appear .5s;
+      animation-timing-function: ease-out;
+      transform: translate(0);
+    }
   }
 }

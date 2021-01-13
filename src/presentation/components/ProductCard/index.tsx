@@ -1,16 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Product } from '../../../domain/ProductModel'
 import ProductImage from '../ProductImage'
 
 type Props = {
   product: Product,
-  handleClick: () => void
+  handleClick: () => void,
+  timeToAppear?: number
 }
 
-const ProductCard = ({ product, handleClick }: Props) => {
+const ProductCard = ({ product, handleClick, timeToAppear }: Props) => {
+
+  const [ isRendered, setIsRendered ] = useState<boolean>(false)
+
+  if (typeof timeToAppear === 'number') {
+    const result = ((5 * timeToAppear) * timeToAppear)
+    const timeOut = result  < 1200 ? result :  1200
+
+    setTimeout(() => {
+      setIsRendered(true)
+    }, timeOut)
+  }
+
   return (
     <article 
-      className="product-card-container"
+      className={`product-card-container
+        ${ isRendered ? 'product-card-container--rendered' : '' }`
+      }
       onClick={handleClick}
     >
       {

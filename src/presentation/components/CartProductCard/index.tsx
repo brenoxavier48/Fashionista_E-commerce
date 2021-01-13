@@ -41,19 +41,20 @@ const CartProductCard = ({ product, timeToAppear }: Props) => {
     }, 300)
   }
 
-  useEffect(() => {
-    if (typeof timeToAppear === 'number') {
-      setTimeout(() => {
-        setIsRendered(true)
-      }, (200 + ((50 + (15 * timeToAppear)) * timeToAppear)))
-    }
-  }, [])
+  if (typeof timeToAppear === 'number') {
+    const result = (200 + ((50 + (15 * timeToAppear)) * timeToAppear))
+    const timeOut = result  < 1200 ? result :  1200
+
+    setTimeout(() => {
+      setIsRendered(true)
+    }, timeOut)
+  }
 
   return (
     <article 
       className={`cart-product-container 
-        ${ isRemoved ? 'cart-product-container--removed' : '' }
-        ${ isRendered ? 'cart-product-container--rendered' : '' }`
+        ${ isRendered ? 'cart-product-container--rendered' : '' }
+        ${ isRemoved ? 'cart-product-container--removed' : '' }`
       }
     >
       <div className="cart-product-container__image">

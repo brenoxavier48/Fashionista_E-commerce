@@ -27,9 +27,10 @@ const ProductCatalog = () => {
             </div>
             <div className="products-catalog__container__products">
               {
-                products.map( product => (
+                products.map( (product, index) => (
                   <ProductCard 
                     key={product.code_color}
+                    timeToAppear={index}
                     product={product}
                     handleClick={() => {
                       dispatch(addCurrentProduct(product))

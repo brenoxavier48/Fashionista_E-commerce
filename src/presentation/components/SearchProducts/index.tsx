@@ -4,17 +4,26 @@ import { selectFilteredProducts } from '../../../store/Products/products.selecto
 import { addFilterProduct } from '../../../store/Products/products.actions'
 import { Product } from '../../../domain/ProductModel'
 import { InputSearch } from '../ui/inputs'
+import SearchProductCard from '../SearchProductCard'
 
 const CarSearchProductst = () => {
 
   const dispatch = useDispatch()
   const products: Product[] = useSelector(selectFilteredProducts)
+  const [ productsToRender, setProductsToRender] = useState<Product[]>([])
 
   const [ inputValue, setInputValue ] = useState('')
   
   useEffect(() => {
+    setProductsToRender([])
     dispatch(addFilterProduct(inputValue))
+    setProductsToRender([...products])
   }, [inputValue])
+
+  useEffect(() => {
+    setProductsToRender([])
+    setProductsToRender([...products])
+  }, [products])
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setInputValue(event.target.value)
@@ -28,8 +37,8 @@ const CarSearchProductst = () => {
       ></InputSearch>
       <section className="search-container__products">
         {
-          products.map((product, index) => <p>{product.name}</p>)
-          // products.map((product, index) => <searchProductCard timeToAppear={index} key={product.sku} product={product}/>)
+          productsToRender.length > 0 &&
+          productsToRender.map((product, index) => <SearchProductCard timeToAppear={index} key={product.code_color} product={product}/>)
         }
       </section>
     </div>

@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { selectQuantityProductsCart } from '../../../store/Cart/cart.selectors'
 import { IconButton } from '../ui/buttons'
 import Cart from '../Cart'
+import SearchProducts from '../SearchProducts'
 
 export type DrawerType = "" | "search" | "shoppingCart" 
 
@@ -24,13 +25,13 @@ const Drawer = ({ rules, handleCloseClick }: Props) => {
       case 'search':
         return {
           label: "Buscar Pedido",
-          component: <></>
+          component: <SearchProducts/>
         }
 
       case 'shoppingCart':
         return {
           label: `Sacola (${itemsQuantity})`,
-          component: <Cart></Cart>
+          component: <Cart/>
         }
     }
   }

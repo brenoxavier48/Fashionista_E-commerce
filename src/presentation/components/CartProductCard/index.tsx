@@ -4,8 +4,6 @@ import { updateQuantityProductCart, removeProductCart } from '../../../store/Car
 import { UPDATE_QUANTITY_PRODUCT_CART_PAYLOAD } from '../../../store/Cart/protocols'
 import { ProductCart } from '../../../domain/ProductModel'
 import DrawerProductCard from '../DrawerProductCard'
-import ProductImage from '../ProductImage'
-import Counter from '../Counter'
 
 type Props = {
   product: ProductCart,

@@ -1,0 +1,12 @@
+.search-container {
+  position: relative;
+  height: calc( 100vh - 50px );
+  background-color: #f9f9f9;
+
+  &__products {
+    padding: 10px 10px 10px; 
+    overflow: visible;
+    overflow-x: hidden;
+    height: calc( 100% - 56px );
+  }
+}

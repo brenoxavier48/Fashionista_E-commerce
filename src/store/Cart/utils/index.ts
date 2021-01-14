@@ -1,4 +1,4 @@
-import { ProductCart } from '../protocols'
+import { ProductCart } from '../../../domain/ProductModel'
 
 type TotalPriceAndQuantity = { 
   itemsQuantity: number,

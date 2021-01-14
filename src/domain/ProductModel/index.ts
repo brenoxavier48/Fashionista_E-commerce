@@ -18,3 +18,13 @@ export interface OptionSize {
   size: string
   sku: string
 }
+
+export type ProductCart = {
+  name: string,
+  quantity: number,
+  actual_price: string,
+  installments: string,
+  image: string
+  size: string,
+  sku: string
+}

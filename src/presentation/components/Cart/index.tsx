@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { selectAllProductsCart, selectTotalPriceProductsCart } from '../../../store/Cart/cart.selectors'
-import { ProductCart } from '../../../store/Cart/protocols'
+import { ProductCart } from '../../../domain/ProductModel'
 import CartProductCard from '../CartProductCard'
 
 const Cart = () => {

@@ -1,5 +1,5 @@
 import { Actions } from '../protocols'
-import { CartState, ProductCart, CartPayload } from './protocols'
+import { CartState, ADD_PRODUCTS_CART_PAYLOAD, CartPayload } from './protocols'
 import { getTotalPriceAndQuantity } from './utils'
 
 const initialState: CartState = {
@@ -9,7 +9,7 @@ const initialState: CartState = {
 }
 
 const ADD_PRODUCTS_CART = (state: CartState, action: Actions<CartPayload>): CartState => {
-  const products: ProductCart[] = action.payload
+  const products: ADD_PRODUCTS_CART_PAYLOAD = action.payload
   const items = [...state.items, ...products]
   const { itemsQuantity, totalPrice } = getTotalPriceAndQuantity(items)
   

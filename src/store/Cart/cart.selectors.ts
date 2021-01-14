@@ -1,5 +1,7 @@
-export const selectQuantityProductsCart = (store: any) => store.Cart.itemsQuantity
+import { State } from '../index'
 
-export const selectTotalPriceProductsCart = (store: any) => store.Cart.totalPrice
+export const selectQuantityProductsCart = (store: State) => store.Cart.itemsQuantity
 
-export const selectAllProductsCart = (store: any) => store.Cart.items
+export const selectTotalPriceProductsCart = (store: State) => store.Cart.totalPrice
+
+export const selectAllProductsCart = (store: State) => store.Cart.items

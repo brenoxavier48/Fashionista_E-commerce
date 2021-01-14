@@ -1,8 +1,15 @@
-import { combineReducers, createStore, compose } from 'redux'
+import { combineReducers, createStore, compose, $CombinedState } from 'redux'
 import ProductsReducer from './Products/products.reducer'
+import { ProductsState } from './Products/protocols'
 import CartReducer from './Cart/cart.reducer'
+import { CartState } from './Cart/protocols'
 
-const reducers = combineReducers({
+export type State = Readonly<{
+  Products: ProductsState,
+  Cart: CartState
+}>
+
+const reducers = combineReducers<State>({
   Products: ProductsReducer,
   Cart: CartReducer
 })
@@ -10,3 +17,5 @@ const reducers = combineReducers({
 const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export const store = createStore(reducers, composeEnhancers())
+
+export type STORE_TYPE = typeof reducers

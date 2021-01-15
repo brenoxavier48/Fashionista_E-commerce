@@ -28,7 +28,7 @@ const AppContainer = ({ children }: Props) => {
     productService.getCatolog().then((products) => {
       dispatch(addCatalog(products))
     })
-  }, [])
+  }, [dispatch])
 
   const makeDrawerObject = (isOpen: boolean, type: DrawerType): DrawerRules => Object.assign({ isOpen, type })
 

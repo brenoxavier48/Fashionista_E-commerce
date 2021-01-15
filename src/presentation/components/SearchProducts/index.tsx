@@ -1,6 +1,5 @@
 import React, { useState, useEffect, ChangeEvent } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { withRouter } from 'react-router-dom'
 import { selectFilteredProducts } from '../../../store/Products/products.selectors'
 import { addFilterProduct } from '../../../store/Products/products.actions'
 import { Product } from '../../../domain/ProductModel'
@@ -11,20 +10,12 @@ const CarSearchProductst = () => {
 
   const dispatch = useDispatch()
   const products: Product[] = useSelector(selectFilteredProducts)
-  const [ productsToRender, setProductsToRender] = useState<Product[]>([])
 
   const [ inputValue, setInputValue ] = useState('')
   
   useEffect(() => {
-    setProductsToRender([])
     dispatch(addFilterProduct(inputValue))
-    setProductsToRender([...products])
-  }, [inputValue])
-
-  useEffect(() => {
-    setProductsToRender([])
-    setProductsToRender([...products])
-  }, [products])
+  }, [inputValue, dispatch])
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setInputValue(event.target.value)
@@ -38,8 +29,8 @@ const CarSearchProductst = () => {
       ></InputSearch>
       <section className="search-container__products">
         {
-          productsToRender.length > 0 &&
-          productsToRender.map((product, index) => <SearchProductCard timeToAppear={index} key={product.code_color} product={product}/>)
+          products.length > 0 &&
+          products.map((product, index) => <SearchProductCard timeToAppear={index} key={product.code_color} product={product}/>)
         }
       </section>
     </div>

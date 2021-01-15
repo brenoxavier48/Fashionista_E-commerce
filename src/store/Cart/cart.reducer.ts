@@ -48,7 +48,7 @@ const REMOVE_PRODUCT_CART_PAYLOAD  = (state: CartState, action: Actions<CartPayl
   })
 }
 
-export default (state = initialState, action: Actions<CartPayload>): CartState => {
+const CartReducer = (state = initialState, action: Actions<CartPayload>): CartState => {
   switch (action.type) {
     case 'ADD_PRODUCTS_CART':
       return ADD_PRODUCTS_CART(state, action)
@@ -60,6 +60,8 @@ export default (state = initialState, action: Actions<CartPayload>): CartState =
       return REMOVE_PRODUCT_CART_PAYLOAD(state, action)
 
     default:
-      return { ...state }
+      return state
   }
 }
+
+export default CartReducer

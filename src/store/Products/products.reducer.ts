@@ -20,7 +20,7 @@ const initialState: ProductsState = {
   catalog: []
 }
 
-const ProductsReducer = (state = initialState, action: Actions<ProductPayload>) => {
+const ProductsReducer = (state = initialState, action: Actions<ProductPayload>): ProductsState => {
   switch (action.type) {
     case 'ADD_CATALOG':
       return {

@@ -6,5 +6,5 @@ export const processStringToFilter = (text: string): string => {
     text = text.replace(new RegExp('[ÓÒÔÕ]','gi'), 'o');
     text = text.replace(new RegExp('[ÚÙÛ]','gi'), 'u');
     text = text.replace(new RegExp('[Ç]','gi'), 'c');
-    return text;                 
+    return text.trim();                 
 }

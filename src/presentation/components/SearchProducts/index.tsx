@@ -28,9 +28,14 @@ const CarSearchProductst = () => {
         value={inputValue}
       ></InputSearch>
       <section className="search-container__products">
+        <p className="search-container__products__quantity">{`${products.length} items`}</p>
         {
           products.length > 0 &&
-          products.map((product, index) => <SearchProductCard timeToAppear={index} key={product.code_color} product={product}/>)
+          products.map((product, index) => (
+            <div key={product.code_color}  className="search-container__products__article">
+              <SearchProductCard timeToAppear={index} product={product}/>
+            </div>
+          ))
         }
       </section>
     </div>

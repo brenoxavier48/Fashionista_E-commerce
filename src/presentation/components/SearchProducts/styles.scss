@@ -8,5 +8,21 @@
     overflow: visible;
     overflow-x: hidden;
     height: calc( 100% - 56px );
+
+    &__quantity {
+      font-size: 14px;
+      font-weight: 100;
+      color: #b4b4b4;
+    }
+
+    &__article {
+      &:hover {
+        transition: 0.4s;
+        transform: scale(1.02, 1.02);
+        // border: 1px solid rgba(0,0,0,0.06);
+        // box-shadow: 0.5px 0.5px 9px 3px rgba(0,0,0,0.03);
+        cursor: pointer;
+      }
+    }
   }
 }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, ChangeEvent } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import { selectFilteredProducts } from '../../../store/Products/products.selectors'
 import { addFilterProduct } from '../../../store/Products/products.actions'
 import { Product } from '../../../domain/ProductModel'

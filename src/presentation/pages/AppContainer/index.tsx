@@ -39,8 +39,8 @@ const AppContainer = ({ children }: Props) => {
     const itemsQuantity: number = useSelector(selectQuantityProductsCart)
     return `Sacola (${itemsQuantity})`
   }
-  
-  const getComponent = (type: DrawerType) => {
+
+  const getComponentInfo = (type: DrawerType) => {
     switch (type) {
       case 'search':
         return {
@@ -63,7 +63,7 @@ const AppContainer = ({ children }: Props) => {
   }
 
   const makeDrawerObject = (isOpen: boolean, type: DrawerType): DrawerRules => {
-    const componentInfo = getComponent(type)
+    const componentInfo = getComponentInfo(type)
     return Object.assign({ isOpen, type }, componentInfo)
   }
 

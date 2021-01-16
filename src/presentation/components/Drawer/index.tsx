@@ -10,7 +10,7 @@ export type DrawerType = "" | "search" | "shoppingCart"
 export type DrawerRules = {
   isOpen: boolean;
   type: DrawerType;
-  label: string;
+  label: string | (() => string);
   component: JSX.Element
 }
 
@@ -26,11 +26,9 @@ const Drawer = ({ rules, handleCloseClick }: Props) => {
       <aside className={`drawer-container ${rules.isOpen ? 'drawer-container--open' : ''}`}>
         <div className="drawer-container__header">
           <IconButton icon="back" onClick={handleCloseClick}/>
-          <p>{rules.label}</p>
+          <p>{typeof rules.label === 'function' ? rules.label() : rules.label}</p>
         </div>
-        {
-          rules.component
-        }
+        { rules.component }
       </aside>
     </>
   )

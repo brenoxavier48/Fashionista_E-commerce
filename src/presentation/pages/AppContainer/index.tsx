@@ -18,8 +18,6 @@ const AppContainer = ({ children }: Props) => {
 
   const dispatch = useDispatch()
 
-  const itemsQuantity: number = useSelector(selectQuantityProductsCart)
-
   const [ drawer, setDrawer ] = useState<DrawerRules>({
     isOpen: false,
     type: '',
@@ -37,6 +35,11 @@ const AppContainer = ({ children }: Props) => {
     })
   }, [dispatch])
 
+  const MakeSacolaLabel = () => {
+    const itemsQuantity: number = useSelector(selectQuantityProductsCart)
+    return `Sacola (${itemsQuantity})`
+  }
+  
   const getComponent = (type: DrawerType) => {
     switch (type) {
       case 'search':
@@ -47,7 +50,7 @@ const AppContainer = ({ children }: Props) => {
 
       case 'shoppingCart':
         return {
-          label: `Sacola (${itemsQuantity})`,
+          label: MakeSacolaLabel,
           component: <Cart/>
         }
       
@@ -62,7 +65,6 @@ const AppContainer = ({ children }: Props) => {
   const makeDrawerObject = (isOpen: boolean, type: DrawerType): DrawerRules => {
     const componentInfo = getComponent(type)
     return Object.assign({ isOpen, type }, componentInfo)
-  
   }
 
   const handleClickSearch = () => setDrawer( current => makeDrawerObject(!current.isOpen, 'search') )

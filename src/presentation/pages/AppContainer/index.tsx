@@ -1,10 +1,14 @@
 import React, { useState, useEffect, ReactChild } from 'react'
 import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { selectQuantityProductsCart } from '../../../store/Cart/cart.selectors'
 import { addCatalog } from '../../../store/Products/products.actions'
 import { HttpClientInstance } from '../../../infra/HttpClient'
 import { ProductService } from '../../../services/Product'
 import Header from '../../components/Header'
 import Drawer, { DrawerRules, DrawerType } from '../../components/Drawer'
+import Cart from '../../components/Cart'
+import SearchProducts from '../../components/SearchProducts'
 
 type Props = {
   children: ReactChild
@@ -14,9 +18,13 @@ const AppContainer = ({ children }: Props) => {
 
   const dispatch = useDispatch()
 
+  const itemsQuantity: number = useSelector(selectQuantityProductsCart)
+
   const [ drawer, setDrawer ] = useState<DrawerRules>({
     isOpen: false,
-    type: ''
+    type: '',
+    label: '',
+    component: <></>
   })
 
   useEffect( () => {
@@ -24,13 +32,38 @@ const AppContainer = ({ children }: Props) => {
       new HttpClientInstance(), 
       'https://5f074b869c5c250016306cbf.mockapi.io/api/v1'
     )
-
     productService.getCatolog().then((products) => {
       dispatch(addCatalog(products))
     })
   }, [dispatch])
 
-  const makeDrawerObject = (isOpen: boolean, type: DrawerType): DrawerRules => Object.assign({ isOpen, type })
+  const getComponent = (type: DrawerType) => {
+    switch (type) {
+      case 'search':
+        return {
+          label: "Buscar Pedido",
+          component: <SearchProducts closeDrawer={handleCloseClick}/>
+        }
+
+      case 'shoppingCart':
+        return {
+          label: `Sacola (${itemsQuantity})`,
+          component: <Cart/>
+        }
+      
+      default:
+        return {
+          label: '',
+          component: <></>
+        }
+    }
+  }
+
+  const makeDrawerObject = (isOpen: boolean, type: DrawerType): DrawerRules => {
+    const componentInfo = getComponent(type)
+    return Object.assign({ isOpen, type }, componentInfo)
+  
+  }
 
   const handleClickSearch = () => setDrawer( current => makeDrawerObject(!current.isOpen, 'search') )
 

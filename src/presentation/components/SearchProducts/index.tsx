@@ -6,7 +6,11 @@ import { Product } from '../../../domain/ProductModel'
 import { InputSearch } from '../ui/inputs'
 import SearchProductCard from '../SearchProductCard'
 
-const CarSearchProductst = () => {
+type Props = {
+  closeDrawer?: () => void
+}
+
+const SearchProductst = ({ closeDrawer }: Props) => {
 
   const dispatch = useDispatch()
   const products: Product[] = useSelector(selectFilteredProducts)
@@ -32,8 +36,15 @@ const CarSearchProductst = () => {
         {
           products.length > 0 &&
           products.map((product, index) => (
-            <div key={product.code_color}  className="search-container__products__article">
-              <SearchProductCard timeToAppear={index} product={product}/>
+            <div 
+              key={product.code_color}  
+              className="search-container__products__article"
+            >
+              <SearchProductCard 
+                timeToAppear={index} 
+                product={product}
+                closeDrawer={closeDrawer || (() => {})}
+              />
             </div>
           ))
         }
@@ -42,4 +53,4 @@ const CarSearchProductst = () => {
   )
 }
 
-export default CarSearchProductst
+export default SearchProductst

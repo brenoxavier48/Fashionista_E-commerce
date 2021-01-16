@@ -7,16 +7,21 @@ import DrawerProductCard from '../DrawerProductCard'
 
 type Props = {
   product: Product,
-  timeToAppear?: number
+  timeToAppear?: number,
+  closeDrawer?: () => void
 }
 
-const SearchProductCard = ({ product, timeToAppear }: Props) => {
+const SearchProductCard = ({ 
+  product, 
+  timeToAppear, 
+  closeDrawer = () => {} }: Props) => {
 
   const history = useHistory()
   const dispatch = useDispatch()
 
   const handleClick = () => {
     dispatch(addCurrentProduct(product))
+    closeDrawer()
     history.push('/SingleProductView')
   }
 

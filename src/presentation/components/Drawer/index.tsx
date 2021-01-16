@@ -10,6 +10,8 @@ export type DrawerType = "" | "search" | "shoppingCart"
 export type DrawerRules = {
   isOpen: boolean;
   type: DrawerType;
+  label: string;
+  component: JSX.Element
 }
 
 type Props = {
@@ -18,34 +20,16 @@ type Props = {
 }
 
 const Drawer = ({ rules, handleCloseClick }: Props) => {
-  const itemsQuantity: number = useSelector(selectQuantityProductsCart)
-  
-  const getComponent = (type: DrawerType) => {
-    switch (type) {
-      case 'search':
-        return {
-          label: "Buscar Pedido",
-          component: <SearchProducts/>
-        }
-
-      case 'shoppingCart':
-        return {
-          label: `Sacola (${itemsQuantity})`,
-          component: <Cart/>
-        }
-    }
-  }
-  
   return (
     <>
       <div className={`drawer-overlay ${rules.isOpen ? 'drawer-overlay--open' : ''}`} onClick={handleCloseClick}></div>
       <aside className={`drawer-container ${rules.isOpen ? 'drawer-container--open' : ''}`}>
         <div className="drawer-container__header">
           <IconButton icon="back" onClick={handleCloseClick}/>
-          <p>{getComponent(rules.type)?.label}</p>
+          <p>{rules.label}</p>
         </div>
         {
-          getComponent(rules.type)?.component
+          rules.component
         }
       </aside>
     </>

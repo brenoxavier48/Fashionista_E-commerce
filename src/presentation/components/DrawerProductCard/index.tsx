@@ -74,6 +74,7 @@ const DrawerProductCard = ({
             </p>
             <Counter
               value={ quantity || 0 }
+              minValue={1}
               increase={ heandleIncrease || (() => {}) }
               decrease={ heandleDecrease || (() => {}) }
             />

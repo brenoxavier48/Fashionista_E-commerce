@@ -13,7 +13,13 @@ const Cart = () => {
     <div className='cart-container'>
       <section className="cart-container__products">
         {
-          products.map((product, index) => <CartProductCard timeToAppear={index} key={product.sku} product={product}/>)
+          products.map((product, index) => (
+            <CartProductCard 
+              timeToAppear={index} 
+              key={product.sku} 
+              product={product}
+            />
+          ))
         }
       </section>
       <div className="cart-container__total-price">

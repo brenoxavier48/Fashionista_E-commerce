@@ -12,7 +12,7 @@ const Header = ({ handleClickSearch, handleClickShoppingCart }: Props) => {
   const itemsQuantity: number = useSelector(selectQuantityProductsCart)
 
   return (
-    <div className="header-container">
+    <header className="header-container">
       <div className="header-container__buttons">
         <IconButton
           icon="search"
@@ -24,7 +24,7 @@ const Header = ({ handleClickSearch, handleClickShoppingCart }: Props) => {
           itemsQuantity={itemsQuantity}
         ></IconButton>
       </div>
-    </div>
+    </header>
   )
 }
 

@@ -18,6 +18,10 @@ export class ProductService {
 
     const { statusCode, body } = await this.HttpClientInstance.request(options)
 
-    return statusCode === 200 ? body : []
+    return (
+      statusCode === 200 
+      ? body 
+      : []
+    )
   }
 }

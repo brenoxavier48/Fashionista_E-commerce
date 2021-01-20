@@ -49,7 +49,7 @@ const DrawerProductCard = ({
         ${ isRendered ? 'drawer-product-container--rendered' : '' }
         ${ isRemoved ? 'drawer-product-container--removed' : '' }`
       }
-      onClick={handleClick}
+      onClick={ handleClick || (() => {}) }
     >
       <div className="drawer-product-container__image">
         <ProductImage

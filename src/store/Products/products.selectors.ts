@@ -1,12 +1,12 @@
 import { RootState } from '../index'
-import { processStringToFilter } from './utils'
+import { removeAccents } from '../../infra/utils'
 
 export const selectAllProducts = (store: RootState) => store.Products.catalog
 
 export const selectCurrentProduct = (store: RootState) => store.Products.currentProduct
 
 export const selectFilteredProducts = (store: RootState) => store.Products.catalog.filter(element => {
-  const filter = processStringToFilter(store.Products.filter)
-  const name = processStringToFilter(element.name)
+  const filter = removeAccents(store.Products.filter).toLowerCase().trim()
+  const name = removeAccents(element.name).toLowerCase().trim()
   return filter !== '' && name.includes(filter)
 })

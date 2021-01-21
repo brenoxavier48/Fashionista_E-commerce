@@ -13,7 +13,7 @@ import {
 import { getTotalPriceAndQuantity } from './helpers'
 import cartReducer from './cart.reducer'
 
-const makeProductCart = (sku: string, quantity = 1, price = 1): ProductCart => ({
+const makeSingleProduct = (sku: string, quantity = 1, price = 1): ProductCart => ({
   name: `test-${sku}`,
   quantity,
   actual_price: `R$ ${price},00`,
@@ -26,7 +26,7 @@ const makeProductCart = (sku: string, quantity = 1, price = 1): ProductCart => (
 const makeProducts = (quantity: number, quantityOfEachProduct = 1, priceOfEachProduct = 1): ProductCart[] => {
   let items: ProductCart[] = []
   for (let i = 0; i < quantity; i++) {
-    items.push(makeProductCart(String(i), quantityOfEachProduct, priceOfEachProduct))
+    items.push(makeSingleProduct(String(i), quantityOfEachProduct, priceOfEachProduct))
   }
   return items
 }
@@ -49,21 +49,12 @@ describe('Cart helpers test cases', () => {
       expect(totalPrice).toBe(0)
     })
 
-    test('Should return the right quantity', () => {
-      const QUANTITY_OF_EACH_ITEM_01 = 1
-      const items01 = makeProducts(5, QUANTITY_OF_EACH_ITEM_01)
-      const TOTAL_QUANTITY_01 = items01.length * QUANTITY_OF_EACH_ITEM_01
-
-      const { itemsQuantity: itemsQuantity01 } = getTotalPriceAndQuantity(items01)
-      
-      const QUANTITY_OF_EACH_ITEM_02 = 3
-      const items02 = makeProducts(5, QUANTITY_OF_EACH_ITEM_02)
-      const TOTAL_QUANTITY_02 = items02.length * QUANTITY_OF_EACH_ITEM_02
-      
-      const { itemsQuantity: itemsQuantity02 } = getTotalPriceAndQuantity(items02)
-      
-      expect(itemsQuantity01).toBe(TOTAL_QUANTITY_01)
-      expect(itemsQuantity02).toBe(TOTAL_QUANTITY_02)
+    test('Should return the right quantity when each item has the same quantity', () => {
+      const QUANTITY_OF_EACH_ITEM = 3
+      const items = makeProducts(5, QUANTITY_OF_EACH_ITEM)
+      const TOTAL_QUANTITY = items.length * QUANTITY_OF_EACH_ITEM
+      const { itemsQuantity } = getTotalPriceAndQuantity(items)
+      expect(itemsQuantity).toBe(TOTAL_QUANTITY)
     })
   })
 })

@@ -10,10 +10,10 @@ import {
   removeProductCart,
   updateQuantityProductCart 
 } from './cart.actions'
-import { getTotalPriceAndQuantity, moneyNotationToNumber } from './utils'
+import { getTotalPriceAndQuantity } from './helpers'
 import cartReducer from './cart.reducer'
 
-const makeProductCartMock = (sku: string): ProductCart => ({
+const makeProductCart = (sku: string): ProductCart => ({
   name: `test-${sku}`,
   quantity: 1,
   actual_price: 'R$ 1,00',
@@ -23,11 +23,16 @@ const makeProductCartMock = (sku: string): ProductCart => ({
   sku
 })
 
-const makeInitialStateMock = (initialQuantity: number): CartState => {
-  let items: ProductCart[]
-  for (let i = 0; i < initialQuantity; i++) {
-    items.push(makeProductCartMock(String(i)))
+const makeProducts = (quantity: number): ProductCart[] => {
+  let items: ProductCart[] = []
+  for (let i = 0; i < quantity; i++) {
+    items.push(makeProductCart(String(i)))
   }
+  return items
+}
+
+const makeInitialState = (initialQuantity: number): CartState => {
+  let items = makeProducts(initialQuantity)
   const { itemsQuantity, totalPrice } = getTotalPriceAndQuantity(items)
   return ({
     itemsQuantity,
@@ -36,6 +41,16 @@ const makeInitialStateMock = (initialQuantity: number): CartState => {
   })
 }
 
-describe('Cart reducer test cases', () => {
+describe('Helpers test cases', () => {
+  describe('getTotalPriceAndQuantity test cases', () => {
+    test('Should return 0 for totalPrice and itemsQuantity if an empty array is passed', () => {
+      const { itemsQuantity, totalPrice } = getTotalPriceAndQuantity([])
+      expect(itemsQuantity).toBe(0)
+      expect(itemsQuantity).toBe(0)
+    })
+  })
+})
 
+describe('Cart reducer test cases', () => {
+  // test('Should')
 })

@@ -56,6 +56,22 @@ describe('Cart helpers test cases', () => {
       const { itemsQuantity } = getTotalPriceAndQuantity(items)
       expect(itemsQuantity).toBe(TOTAL_QUANTITY)
     })
+
+    test('Should return the right quantity when each item does not have the same quantity', () => {
+      const QUANTITY_OF_EACH_ITEM = 1
+      const items = makeProducts(5, QUANTITY_OF_EACH_ITEM)
+
+      const QUANTITY_OF_ADDITIONAL_ITEM = 7
+      const addtionalItem = makeSingleProduct('test', QUANTITY_OF_ADDITIONAL_ITEM)
+
+      items.push(addtionalItem)
+
+      const TOTAL_QUANTITY = (5 * QUANTITY_OF_EACH_ITEM) + QUANTITY_OF_ADDITIONAL_ITEM
+      
+      const { itemsQuantity: itemsQuantity } = getTotalPriceAndQuantity(items)
+      
+      expect(itemsQuantity).toBe(TOTAL_QUANTITY)
+    })
   })
 })
 

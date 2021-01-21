@@ -68,7 +68,7 @@ describe('Cart helpers test cases', () => {
 
       const TOTAL_QUANTITY = (5 * QUANTITY_OF_EACH_ITEM) + QUANTITY_OF_ADDITIONAL_ITEM
       
-      const { itemsQuantity: itemsQuantity } = getTotalPriceAndQuantity(items)
+      const { itemsQuantity } = getTotalPriceAndQuantity(items)
       
       expect(itemsQuantity).toBe(TOTAL_QUANTITY)
     })
@@ -76,8 +76,24 @@ describe('Cart helpers test cases', () => {
     test('Should return the right price when each item has the same price and quantity', () => {
       const PRICE_OF_EACH_ITEM = 3
       const items = mockProducts(5, 1, PRICE_OF_EACH_ITEM)
-      const TOTAL_PRICE = items.length * PRICE_OF_EACH_ITEM
+      const TOTAL_PRICE = items.length * 1 * PRICE_OF_EACH_ITEM
       const { totalPrice } = getTotalPriceAndQuantity(items)
+      expect(totalPrice).toBe(TOTAL_PRICE)
+    })
+
+    test('Should return the right price when each item does not have the same price and quantity', () => {
+      const PRICE_OF_EACH_ITEM = 1
+      const items = mockProducts(5, 2, PRICE_OF_EACH_ITEM)
+
+      const PRICE_OF_ADDITIONAL_ITEM = 7
+      const addtionalItem = mockSingleProduct('test', 1, PRICE_OF_ADDITIONAL_ITEM)
+
+      items.push(addtionalItem)
+
+      const TOTAL_PRICE = (5 * 2 * PRICE_OF_EACH_ITEM) + PRICE_OF_ADDITIONAL_ITEM
+      
+      const { totalPrice } = getTotalPriceAndQuantity(items)
+      
       expect(totalPrice).toBe(TOTAL_PRICE)
     })
   })

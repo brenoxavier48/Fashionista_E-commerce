@@ -1,5 +1,13 @@
 import { Actions } from '../protocols'
-import { CartState, ADD_PRODUCTS_CART_PAYLOAD, CartPayload } from './protocols'
+import { 
+  CartState, 
+  ADD_PRODUCTS_CART,
+  AddProductsCartAction, 
+  UPDATE_QUANTITY_PRODUCT_CART,
+  UpdateQuantityProductCartAction, 
+  REMOVE_PRODUCT_CART,
+  RemoveProductCartAction,
+  CartAction } from './protocols'
 import { getTotalPriceAndQuantity } from './helpers'
 
 const initialState: CartState = {
@@ -8,8 +16,8 @@ const initialState: CartState = {
   items: []
 }
 
-const ADD_PRODUCTS_CART = (state: CartState, action: Actions<CartPayload>): CartState => {
-  const products: ADD_PRODUCTS_CART_PAYLOAD = action.payload
+const addProductsCart = (state: CartState, action: AddProductsCartAction): CartState => {
+  const { products } = action.payload
   const items = [...state.items, ...products]
   const { itemsQuantity, totalPrice } = getTotalPriceAndQuantity(items)
   
@@ -20,7 +28,7 @@ const ADD_PRODUCTS_CART = (state: CartState, action: Actions<CartPayload>): Cart
   })
 }
 
-const UPDATE_QUANTITY_PRODUCT_CART = (state: CartState, action: Actions<CartPayload>): CartState => {
+const updateQuantityProductCart = (state: CartState, action: UpdateQuantityProductCartAction): CartState => {
   const currentState = { ...state }
   const { sku, quantity } = action.payload
   const position: number = currentState.items.findIndex( (product) => product.sku === sku )
@@ -32,10 +40,9 @@ const UPDATE_QUANTITY_PRODUCT_CART = (state: CartState, action: Actions<CartPayl
     itemsQuantity,
     totalPrice
   })
-
 }
 
-const REMOVE_PRODUCT_CART = (state: CartState, action: Actions<CartPayload>): CartState => {
+const removeProductCart = (state: CartState, action: RemoveProductCartAction): CartState => {
   const currentState = { ...state }
   const { sku } = action.payload
   const items = currentState.items.filter( (product) => product.sku !== sku )
@@ -48,16 +55,16 @@ const REMOVE_PRODUCT_CART = (state: CartState, action: Actions<CartPayload>): Ca
   })
 }
 
-const CartReducer = (state = initialState, action: Actions<CartPayload>): CartState => {
+const CartReducer = (state = initialState, action: CartAction): CartState => {
   switch (action.type) {
-    case 'ADD_PRODUCTS_CART':
-      return ADD_PRODUCTS_CART(state, action)
+    case ADD_PRODUCTS_CART:
+      return addProductsCart(state, action)
 
-    case 'UPDATE_QUANTITY_PRODUCT_CART':
-      return UPDATE_QUANTITY_PRODUCT_CART(state, action)
+    case UPDATE_QUANTITY_PRODUCT_CART:
+      return updateQuantityProductCart(state, action)
 
-    case 'REMOVE_PRODUCT_CART':
-      return REMOVE_PRODUCT_CART(state, action)
+    case REMOVE_PRODUCT_CART:
+      return removeProductCart(state, action)
 
     default:
       return state

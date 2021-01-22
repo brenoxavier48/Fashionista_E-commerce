@@ -14,20 +14,43 @@ export type ProductCart = {
   sku: string
 }
 
-export type ADD_PRODUCTS_CART_PAYLOAD = ProductCart[]
+export const ADD_PRODUCTS_CART = 'ADD_PRODUCTS_CART'
 
-export type UPDATE_QUANTITY_PRODUCT_CART_PAYLOAD = {
+export const UPDATE_QUANTITY_PRODUCT_CART = 'UPDATE_QUANTITY_PRODUCT_CART'
+
+export const REMOVE_PRODUCT_CART = 'REMOVE_PRODUCT_CART'
+
+export type AddProductsCartPayload = {
+  products: ProductCart[]
+}
+
+export type AddProductsCartAction = {
+  type: typeof ADD_PRODUCTS_CART,
+  payload: AddProductsCartPayload
+}
+
+export type UpdateQuantityProductCartPayload = {
   sku: string,
   quantity: 1 | -1
 }
 
-export type REMOVE_PRODUCT_CART_PAYLOAD = {
+export type UpdateQuantityProductCartAction = {
+  type: typeof UPDATE_QUANTITY_PRODUCT_CART,
+  payload: UpdateQuantityProductCartPayload
+}
+
+export type RemoveProductCartPayload = {
   sku: string
 }
 
-export type CartPayload =  (
-  ADD_PRODUCTS_CART_PAYLOAD & 
-  UPDATE_QUANTITY_PRODUCT_CART_PAYLOAD &
-  REMOVE_PRODUCT_CART_PAYLOAD
+export type RemoveProductCartAction = {
+  type: typeof REMOVE_PRODUCT_CART,
+  payload: RemoveProductCartPayload
+}
+
+export type CartAction = ( 
+  AddProductsCartAction |
+  UpdateQuantityProductCartAction |
+  RemoveProductCartAction 
 )
  

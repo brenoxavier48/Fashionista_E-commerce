@@ -20,25 +20,31 @@ const initialState: ProductsState = {
   catalog: []
 }
 
+const ADD_CATALOG = (state: ProductsState, action: Actions<ProductPayload>): ProductsState => Object.assign({
+  ...state,
+  catalog: action.payload
+})
+
+const ADD_CURRENT_PRODUCT = (state: ProductsState, action: Actions<ProductPayload>): ProductsState => Object.assign({
+  ...state,
+  currentProduct: action.payload
+})
+
+const ADD_FILTER_PRODUCT  = (state: ProductsState, action: Actions<ProductPayload>): ProductsState => Object.assign({
+  ...state,
+  filter: action.payload
+})
+
 const ProductsReducer = (state = initialState, action: Actions<ProductPayload>): ProductsState => {
   switch (action.type) {
     case 'ADD_CATALOG':
-      return {
-        ...state,
-        catalog: action.payload
-      }
+      return ADD_CATALOG(state, action)
 
     case 'ADD_CURRENT_PRODUCT':
-      return {
-        ...state,
-        currentProduct: action.payload
-      }
+      return ADD_CURRENT_PRODUCT(state, action)
     
     case 'ADD_FILTER_PRODUCT':
-      return {
-        ...state,
-        filter: action.payload
-      }
+      return ADD_FILTER_PRODUCT(state, action)
       
     default:
       return state

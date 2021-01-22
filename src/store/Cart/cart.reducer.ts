@@ -1,6 +1,6 @@
 import { Actions } from '../protocols'
 import { CartState, ADD_PRODUCTS_CART_PAYLOAD, CartPayload } from './protocols'
-import { getTotalPriceAndQuantity } from './utils'
+import { getTotalPriceAndQuantity } from './helpers'
 
 const initialState: CartState = {
   itemsQuantity: 0,
@@ -35,7 +35,7 @@ const UPDATE_QUANTITY_PRODUCT_CART = (state: CartState, action: Actions<CartPayl
 
 }
 
-const REMOVE_PRODUCT_CART_PAYLOAD  = (state: CartState, action: Actions<CartPayload>): CartState => {
+const REMOVE_PRODUCT_CART  = (state: CartState, action: Actions<CartPayload>): CartState => {
   const currentState = { ...state }
   const { sku } = action.payload
   const items = currentState.items.filter( (product) => product.sku !== sku )
@@ -56,8 +56,8 @@ const CartReducer = (state = initialState, action: Actions<CartPayload>): CartSt
     case 'UPDATE_QUANTITY_PRODUCT_CART':
       return UPDATE_QUANTITY_PRODUCT_CART(state, action)
 
-    case 'REMOVE_PRODUCT_CART_PAYLOAD':
-      return REMOVE_PRODUCT_CART_PAYLOAD(state, action)
+    case 'REMOVE_PRODUCT_CART':
+      return REMOVE_PRODUCT_CART(state, action)
 
     default:
       return state

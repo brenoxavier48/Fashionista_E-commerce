@@ -17,7 +17,7 @@ export const updateQuantityProductCart = (updateObject: UPDATE_QUANTITY_PRODUCT_
 
 export const removeProductCart = (sku: string): Actions<REMOVE_PRODUCT_CART_PAYLOAD> => {
   return {
-    type: 'REMOVE_PRODUCT_CART_PAYLOAD',
+    type: 'REMOVE_PRODUCT_CART',
     payload: { sku }
   }
 }

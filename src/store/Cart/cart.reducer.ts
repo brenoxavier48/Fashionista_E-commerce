@@ -35,7 +35,7 @@ const UPDATE_QUANTITY_PRODUCT_CART = (state: CartState, action: Actions<CartPayl
 
 }
 
-const REMOVE_PRODUCT_CART  = (state: CartState, action: Actions<CartPayload>): CartState => {
+const REMOVE_PRODUCT_CART = (state: CartState, action: Actions<CartPayload>): CartState => {
   const currentState = { ...state }
   const { sku } = action.payload
   const items = currentState.items.filter( (product) => product.sku !== sku )

@@ -1,10 +1,10 @@
 import { 
   CartState, 
   ProductCart, 
-  ADD_PRODUCTS_CART_PAYLOAD, 
-  REMOVE_PRODUCT_CART_PAYLOAD, 
-  UPDATE_QUANTITY_PRODUCT_CART_PAYLOAD 
+  ADD_PRODUCTS_CART,
+  AddProductsCartAction
 } from './protocols'
+import { Actions } from '../protocols'
 import { 
   addProductsCart, 
   removeProductCart,
@@ -60,16 +60,11 @@ describe('Cart helpers test cases', () => {
     test('Should return the right quantity when each item does not have the same quantity', () => {
       const QUANTITY_OF_EACH_ITEM = 1
       const items = mockProducts(5, QUANTITY_OF_EACH_ITEM)
-
       const QUANTITY_OF_ADDITIONAL_ITEM = 7
       const addtionalItem = mockSingleProduct('test', QUANTITY_OF_ADDITIONAL_ITEM)
-
       items.push(addtionalItem)
-
       const TOTAL_QUANTITY = (5 * QUANTITY_OF_EACH_ITEM) + QUANTITY_OF_ADDITIONAL_ITEM
-      
       const { itemsQuantity } = getTotalPriceAndQuantity(items)
-      
       expect(itemsQuantity).toBe(TOTAL_QUANTITY)
     })
 
@@ -84,21 +79,58 @@ describe('Cart helpers test cases', () => {
     test('Should return the right price when each item does not have the same price and quantity', () => {
       const PRICE_OF_EACH_ITEM = 1
       const items = mockProducts(5, 2, PRICE_OF_EACH_ITEM)
-
       const PRICE_OF_ADDITIONAL_ITEM = 7
       const addtionalItem = mockSingleProduct('test', 1, PRICE_OF_ADDITIONAL_ITEM)
-
       items.push(addtionalItem)
-
       const TOTAL_PRICE = (5 * 2 * PRICE_OF_EACH_ITEM) + PRICE_OF_ADDITIONAL_ITEM
-      
       const { totalPrice } = getTotalPriceAndQuantity(items)
-      
       expect(totalPrice).toBe(TOTAL_PRICE)
     })
   })
 })
 
 describe('Cart reducer test cases', () => {
-  // test('Should')
+
+  let initialState: CartState
+
+  beforeEach(() => {
+    initialState = mockInitialState(0)
+    return initialState
+  })
+
+  test('Should return a empty items array, 0 for the itemsQuantity and 0 for the totalPrice if there are no items', () => {
+    const products = mockProducts(0)
+    const action: AddProductsCartAction = {
+      type: 'ADD_PRODUCTS_CART',
+      payload: {
+        products
+      }
+    }
+    const { itemsQuantity, totalPrice, items } = cartReducer(initialState, action)
+    expect(itemsQuantity).toBe(0)
+    expect(totalPrice).toBe(0)
+    expect(items).toEqual([])
+  })
+
+  test('Should return the right quantity', () => {
+    const action: AddProductsCartAction = {
+      type: 'ADD_PRODUCTS_CART',
+      payload: {
+        products: []
+      }
+    }
+    const { itemsQuantity: itemsQuantityBefore, items: itemsBefore } = cartReducer(initialState, action)
+    expect(itemsQuantityBefore).toBe(0)
+    expect(itemsBefore).toEqual([])
+    const products = mockProducts(5, 2)
+    const additionalItem = mockSingleProduct('test', 7)
+    action.payload.products = [...products, additionalItem]
+    const totalOfDifferentItems = action.payload.products.length
+    const totalItems = (5 * 2) + 7
+    const { itemsQuantity: itemsQuantityAfter, items: itemsAfter } = cartReducer(initialState, action)
+    expect(itemsQuantityAfter).toBe(totalItems)
+    expect(itemsAfter.length).toEqual(totalOfDifferentItems)
+  })
+
+
 })

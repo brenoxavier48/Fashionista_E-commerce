@@ -2,7 +2,8 @@ import {
   CartState, 
   ProductCart, 
   ADD_PRODUCTS_CART,
-  AddProductsCartAction
+  AddProductsCartAction,
+  RemoveProductCartAction
 } from './protocols'
 import { Actions } from '../protocols'
 import { 
@@ -102,61 +103,88 @@ describe('Cart reducer test cases', () => {
 
   test('Should return a empty items array, 0 for the itemsQuantity and 0 for the totalPrice if there are no items', () => {
     const products = mockProducts(0)
-    const action: AddProductsCartAction = {
+    const addAction: AddProductsCartAction = {
       type: 'ADD_PRODUCTS_CART',
       payload: {
         products
       }
     }
-    const { itemsQuantity, totalPrice, items } = cartReducer(initialState, action)
+    const { itemsQuantity, totalPrice, items } = cartReducer(initialState, addAction)
     expect(itemsQuantity).toBe(0)
     expect(totalPrice).toBe(0)
     expect(items).toEqual([])
   })
 
-  test('Should return the right quantity', () => {
+  test('Should return the right quantity after add products', () => {
     const QUANTITY_OF_EACH_ITEM = 2
     const QUANTITY_OF_ADDITIONAL_ITEM = 7
-    const action: AddProductsCartAction = {
+    const addAction: AddProductsCartAction = {
       type: 'ADD_PRODUCTS_CART',
       payload: {
         products: []
       }
     }
-    const { itemsQuantity: itemsQuantityBefore, items: itemsBefore } = cartReducer(initialState, action)
+    const { itemsQuantity: itemsQuantityBefore, items: itemsBefore } = cartReducer(initialState, addAction)
     expect(itemsQuantityBefore).toBe(0)
     expect(itemsBefore).toEqual([])
     const products = mockProducts(5, QUANTITY_OF_EACH_ITEM)
     const additionalItem = mockSingleProduct('test', QUANTITY_OF_ADDITIONAL_ITEM)
-    action.payload.products = [...products, additionalItem]
-    const totalOfDifferentItems = action.payload.products.length
+    addAction.payload.products = [...products, additionalItem]
+    const totalOfDifferentItems = addAction.payload.products.length
     const totalItems = (5 * QUANTITY_OF_EACH_ITEM) + QUANTITY_OF_ADDITIONAL_ITEM
-    const { itemsQuantity: itemsQuantityAfter, items: itemsAfter } = cartReducer(initialState, action)
+    const { itemsQuantity: itemsQuantityAfter, items: itemsAfter } = cartReducer(initialState, addAction)
     expect(itemsQuantityAfter).toBe(totalItems)
     expect(itemsAfter.length).toEqual(totalOfDifferentItems)
   })
 
-  test('Should return the right price', () => {
+  test('Should return the right price after add products', () => {
     const PRICE_OF_EACH_ITEM = 3
     const QUANTITY_OF_EACH_ITEM = 2
     const PRICE_OF_ADDITIONAL_ITEM = 8
     const QUANTITY_OF_ADDITIONAL_ITEM = 7
-    const action: AddProductsCartAction = {
+    const addAction: AddProductsCartAction = {
       type: 'ADD_PRODUCTS_CART',
       payload: {
         products: []
       }
     }
-    const { totalPrice: totalPriceBefore, items: itemsBefore } = cartReducer(initialState, action)
+    const { totalPrice: totalPriceBefore } = cartReducer(initialState, addAction)
     expect(totalPriceBefore).toBe(0)
     const products = mockProducts(5, QUANTITY_OF_EACH_ITEM, PRICE_OF_EACH_ITEM)
     const additionalItem = mockSingleProduct('test', QUANTITY_OF_ADDITIONAL_ITEM, PRICE_OF_ADDITIONAL_ITEM)
-    action.payload.products = [...products, additionalItem]
+    addAction.payload.products = [...products, additionalItem]
     const totalPrice = (5 * QUANTITY_OF_EACH_ITEM * PRICE_OF_EACH_ITEM) + (QUANTITY_OF_ADDITIONAL_ITEM * PRICE_OF_ADDITIONAL_ITEM)
-    const { totalPrice: totalPriceAfter, items: itemsAfter } = cartReducer(initialState, action)
+    const { totalPrice: totalPriceAfter, items: itemsAfter } = cartReducer(initialState, addAction)
     expect(totalPriceAfter).toBe(totalPrice)
-    expect(itemsAfter).toEqual(action.payload.products)
+    expect(itemsAfter).toEqual(addAction.payload.products)
   })
+
+  test('Should remove a item correctly', () => {
+    const SKU_TO_REMOVE = 'test-remove'
+    const ITEMS_QUANTITY = 5
+    const products = mockProducts(ITEMS_QUANTITY)
+    products[0].sku = SKU_TO_REMOVE
+    const addAction: AddProductsCartAction = {
+      type: 'ADD_PRODUCTS_CART',
+      payload: {
+        products
+      }
+    }
+    const removeAction: RemoveProductCartAction = {
+      type: 'REMOVE_PRODUCT_CART',
+      payload: {
+        sku: SKU_TO_REMOVE
+      }
+    }
+    const state = cartReducer(initialState, addAction)
+    const { items }  = cartReducer(state, removeAction)
+    const hasSkuRemoved = items.some(product => product.sku === SKU_TO_REMOVE)
+    expect(items.length).toBe(ITEMS_QUANTITY - 1)
+    expect(hasSkuRemoved).toBeFalsy()
+    
+  })
+
+
 
 
 })

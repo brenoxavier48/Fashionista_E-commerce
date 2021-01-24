@@ -185,5 +185,22 @@ describe('Cart reducer', () => {
       expect(itemsQuantity).toBe(itemsQuantityExpected)
     })
 
+    test('Should return the right price after remove an item', () => {
+      const QUANTITY_OF_PRODUCT_TO_REMOVE = 5
+      const PRICE_OF_PRODUCT_TO_REMOVE = 3
+      const SKU_TO_REMOVE = 'test-remove'
+      const ITEMS_QUANTITY = 5
+      const QUANTITY_OF_EACH_ITEM = 3
+      const PRICE_OF_EACH_ITEM = 3
+      const products = mockProducts(ITEMS_QUANTITY, QUANTITY_OF_EACH_ITEM, PRICE_OF_EACH_ITEM)
+      const productToRemove = mockSingleProduct(SKU_TO_REMOVE, QUANTITY_OF_PRODUCT_TO_REMOVE, PRICE_OF_PRODUCT_TO_REMOVE)
+      addAction.payload.products = [...products, productToRemove]
+      removeAction.payload.sku = SKU_TO_REMOVE
+      const state = cartReducer(initialState, addAction)
+      const { totalPrice }  = cartReducer(state, removeAction)
+      const totalPriceExpected = state.totalPrice - (QUANTITY_OF_PRODUCT_TO_REMOVE * PRICE_OF_PRODUCT_TO_REMOVE)
+      expect(totalPrice).toBe(totalPriceExpected)
+    })
+
   })
 })

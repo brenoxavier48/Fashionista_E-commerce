@@ -52,39 +52,41 @@ describe('Cart helpers test cases', () => {
     test('Should return the right quantity when each item has the same quantity', () => {
       const QUANTITY_OF_EACH_ITEM = 3
       const items = mockProducts(5, QUANTITY_OF_EACH_ITEM)
-      const TOTAL_QUANTITY = items.length * QUANTITY_OF_EACH_ITEM
+      const totalQuantity = items.length * QUANTITY_OF_EACH_ITEM
       const { itemsQuantity } = getTotalPriceAndQuantity(items)
-      expect(itemsQuantity).toBe(TOTAL_QUANTITY)
+      expect(itemsQuantity).toBe(totalQuantity)
     })
 
     test('Should return the right quantity when each item does not have the same quantity', () => {
       const QUANTITY_OF_EACH_ITEM = 1
-      const items = mockProducts(5, QUANTITY_OF_EACH_ITEM)
       const QUANTITY_OF_ADDITIONAL_ITEM = 7
+      const items = mockProducts(5, QUANTITY_OF_EACH_ITEM)
       const addtionalItem = mockSingleProduct('test', QUANTITY_OF_ADDITIONAL_ITEM)
       items.push(addtionalItem)
-      const TOTAL_QUANTITY = (5 * QUANTITY_OF_EACH_ITEM) + QUANTITY_OF_ADDITIONAL_ITEM
+      const totalQuantity = (5 * QUANTITY_OF_EACH_ITEM) + QUANTITY_OF_ADDITIONAL_ITEM
       const { itemsQuantity } = getTotalPriceAndQuantity(items)
-      expect(itemsQuantity).toBe(TOTAL_QUANTITY)
+      expect(itemsQuantity).toBe(totalQuantity)
     })
 
     test('Should return the right price when each item has the same price and quantity', () => {
       const PRICE_OF_EACH_ITEM = 3
       const items = mockProducts(5, 1, PRICE_OF_EACH_ITEM)
-      const TOTAL_PRICE = items.length * 1 * PRICE_OF_EACH_ITEM
+      const totalPriceExpected = items.length * 1 * PRICE_OF_EACH_ITEM
       const { totalPrice } = getTotalPriceAndQuantity(items)
-      expect(totalPrice).toBe(TOTAL_PRICE)
+      expect(totalPrice).toBe(totalPriceExpected)
     })
 
     test('Should return the right price when each item does not have the same price and quantity', () => {
       const PRICE_OF_EACH_ITEM = 1
-      const items = mockProducts(5, 2, PRICE_OF_EACH_ITEM)
+      const QUANTITY_OF_EACH_ITEM = 2
       const PRICE_OF_ADDITIONAL_ITEM = 7
-      const addtionalItem = mockSingleProduct('test', 1, PRICE_OF_ADDITIONAL_ITEM)
+      const QUANTITY_OF_ADDITIONAL_ITEM = 2
+      const items = mockProducts(5, QUANTITY_OF_EACH_ITEM, PRICE_OF_EACH_ITEM)
+      const addtionalItem = mockSingleProduct('test', QUANTITY_OF_ADDITIONAL_ITEM, PRICE_OF_ADDITIONAL_ITEM)
       items.push(addtionalItem)
-      const TOTAL_PRICE = (5 * 2 * PRICE_OF_EACH_ITEM) + PRICE_OF_ADDITIONAL_ITEM
+      const totalPriceExpected = (5 * QUANTITY_OF_EACH_ITEM * PRICE_OF_EACH_ITEM) + PRICE_OF_ADDITIONAL_ITEM * QUANTITY_OF_ADDITIONAL_ITEM
       const { totalPrice } = getTotalPriceAndQuantity(items)
-      expect(totalPrice).toBe(TOTAL_PRICE)
+      expect(totalPrice).toBe(totalPriceExpected)
     })
   })
 })
@@ -113,6 +115,8 @@ describe('Cart reducer test cases', () => {
   })
 
   test('Should return the right quantity', () => {
+    const QUANTITY_OF_EACH_ITEM = 2
+    const QUANTITY_OF_ADDITIONAL_ITEM = 7
     const action: AddProductsCartAction = {
       type: 'ADD_PRODUCTS_CART',
       payload: {
@@ -122,14 +126,36 @@ describe('Cart reducer test cases', () => {
     const { itemsQuantity: itemsQuantityBefore, items: itemsBefore } = cartReducer(initialState, action)
     expect(itemsQuantityBefore).toBe(0)
     expect(itemsBefore).toEqual([])
-    const products = mockProducts(5, 2)
-    const additionalItem = mockSingleProduct('test', 7)
+    const products = mockProducts(5, QUANTITY_OF_EACH_ITEM)
+    const additionalItem = mockSingleProduct('test', QUANTITY_OF_ADDITIONAL_ITEM)
     action.payload.products = [...products, additionalItem]
     const totalOfDifferentItems = action.payload.products.length
-    const totalItems = (5 * 2) + 7
+    const totalItems = (5 * QUANTITY_OF_EACH_ITEM) + QUANTITY_OF_ADDITIONAL_ITEM
     const { itemsQuantity: itemsQuantityAfter, items: itemsAfter } = cartReducer(initialState, action)
     expect(itemsQuantityAfter).toBe(totalItems)
     expect(itemsAfter.length).toEqual(totalOfDifferentItems)
+  })
+
+  test('Should return the right price', () => {
+    const PRICE_OF_EACH_ITEM = 3
+    const QUANTITY_OF_EACH_ITEM = 2
+    const PRICE_OF_ADDITIONAL_ITEM = 8
+    const QUANTITY_OF_ADDITIONAL_ITEM = 7
+    const action: AddProductsCartAction = {
+      type: 'ADD_PRODUCTS_CART',
+      payload: {
+        products: []
+      }
+    }
+    const { totalPrice: totalPriceBefore, items: itemsBefore } = cartReducer(initialState, action)
+    expect(totalPriceBefore).toBe(0)
+    const products = mockProducts(5, QUANTITY_OF_EACH_ITEM, PRICE_OF_EACH_ITEM)
+    const additionalItem = mockSingleProduct('test', QUANTITY_OF_ADDITIONAL_ITEM, PRICE_OF_ADDITIONAL_ITEM)
+    action.payload.products = [...products, additionalItem]
+    const totalPrice = (5 * QUANTITY_OF_EACH_ITEM * PRICE_OF_EACH_ITEM) + (QUANTITY_OF_ADDITIONAL_ITEM * PRICE_OF_ADDITIONAL_ITEM)
+    const { totalPrice: totalPriceAfter, items: itemsAfter } = cartReducer(initialState, action)
+    expect(totalPriceAfter).toBe(totalPrice)
+    expect(itemsAfter).toEqual(action.payload.products)
   })
 
 

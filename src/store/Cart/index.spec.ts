@@ -1,17 +1,10 @@
 import { 
   CartState, 
   ProductCart, 
-  ADD_PRODUCTS_CART,
   AddProductsCartAction,
   RemoveProductCartAction,
   UpdateQuantityProductCartAction
 } from './protocols'
-import { Actions } from '../protocols'
-import { 
-  addProductsCart, 
-  removeProductCart,
-  updateQuantityProductCart 
-} from './cart.actions'
 import { getTotalPriceAndQuantity } from './helpers'
 import cartReducer from './cart.reducer'
 

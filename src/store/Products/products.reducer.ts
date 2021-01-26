@@ -1,5 +1,10 @@
-import { ProductsState, ProductPayload } from './protocols'
-import { Actions } from '../protocols'
+import { 
+  ProductsState, 
+  ProductsAction,
+  AddCatalogAction, 
+  AddCurrentProductAction, 
+  AddFilterAction  
+} from './protocols'
 
 const initialState: ProductsState = {
   currentProduct: {
@@ -20,22 +25,22 @@ const initialState: ProductsState = {
   catalog: []
 }
 
-const ADD_CATALOG = (state: ProductsState, action: Actions<ProductPayload>): ProductsState => Object.assign({
+const ADD_CATALOG = (state: ProductsState, action: AddCatalogAction): ProductsState => Object.assign({
   ...state,
-  catalog: action.payload
+  catalog: action.payload.catalog
 })
 
-const ADD_CURRENT_PRODUCT = (state: ProductsState, action: Actions<ProductPayload>): ProductsState => Object.assign({
+const ADD_CURRENT_PRODUCT = (state: ProductsState, action: AddCurrentProductAction): ProductsState => Object.assign({
   ...state,
-  currentProduct: action.payload
+  currentProduct: action.payload.product
 })
 
-const ADD_FILTER_PRODUCT  = (state: ProductsState, action: Actions<ProductPayload>): ProductsState => Object.assign({
+const ADD_FILTER_PRODUCT  = (state: ProductsState, action: AddFilterAction): ProductsState => Object.assign({
   ...state,
-  filter: action.payload
+  filter: action.payload.filter
 })
 
-const ProductsReducer = (state = initialState, action: Actions<ProductPayload>): ProductsState => {
+const ProductsReducer = (state = initialState, action: ProductsAction): ProductsState => {
   switch (action.type) {
     case 'ADD_CATALOG':
       return ADD_CATALOG(state, action)

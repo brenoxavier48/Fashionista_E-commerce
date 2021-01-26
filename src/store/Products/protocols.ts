@@ -5,15 +5,41 @@ export type ProductsState = {
   filter: string,
   catalog: Product[]
 }
+export const ADD_CATALOG = 'ADD_CATALOG'
 
-export type ADD_CATALOG_PAYLOAD = Product[]
+export const ADD_CURRENT_PRODUCT = 'ADD_CURRENT_PRODUCT'
 
-export type ADD_CURRENT_PRODUCT_PAYLOAD = Product
+export const ADD_FILTER_PRODUCT = 'ADD_FILTER_PRODUCT'
 
-export type ADD_FILTER_PRODUCT = string
+export type AddCatalogPayload = {
+  catalog: Product[]
+}
 
-export type ProductPayload = (
-  ADD_CATALOG_PAYLOAD & 
-  ADD_CURRENT_PRODUCT_PAYLOAD &
-  ADD_FILTER_PRODUCT
+export type AddCatalogAction = {
+  type: typeof ADD_CATALOG,
+  payload: AddCatalogPayload
+}
+
+export type AddCurrentProductPayload = { 
+  product: Product
+}
+
+export type AddCurrentProductAction = {
+  type: typeof ADD_CURRENT_PRODUCT,
+  payload: AddCurrentProductPayload
+}
+
+export type AddFilterPayload = { 
+  filter: string 
+}
+
+export type AddFilterAction = {
+  type: typeof ADD_FILTER_PRODUCT,
+  payload: AddFilterPayload
+}
+
+export type ProductsAction = (
+  AddCatalogAction | 
+  AddCurrentProductAction |
+  AddFilterAction
 )

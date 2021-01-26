@@ -1,18 +1,23 @@
 import { Product } from '../../domain/ProductModel'
-import { Actions } from '../protocols'
-import { ADD_CATALOG_PAYLOAD, ADD_CURRENT_PRODUCT_PAYLOAD, ADD_FILTER_PRODUCT } from './protocols'
+import { AddCatalogAction, AddCurrentProductAction, AddFilterAction } from './protocols'
 
-export const addCatalog = (catalog: Product[]): Actions<ADD_CATALOG_PAYLOAD> => ({
+export const addCatalog = (catalog: Product[]): AddCatalogAction => ({
   type: 'ADD_CATALOG',
-  payload: catalog
+  payload: {
+    catalog
+  }
 })
 
-export const addCurrentProduct = (product: Product): Actions<ADD_CURRENT_PRODUCT_PAYLOAD> => ({
+export const addCurrentProduct = (product: Product): AddCurrentProductAction => ({
   type: 'ADD_CURRENT_PRODUCT',
-  payload: product
+  payload: {
+    product
+  }
 })
 
-export const addFilterProduct = (filter: string): Actions<ADD_FILTER_PRODUCT> => ({
+export const addFilterProduct = (filter: string): AddFilterAction => ({
   type: 'ADD_FILTER_PRODUCT',
-  payload: filter
+  payload: {
+    filter
+  }
 })

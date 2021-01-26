@@ -214,7 +214,7 @@ describe('Cart reducer', () => {
 
   describe('Update products quantity test cases', () => {
 
-    test('Should update an item quantity correctly when update quantity', () => {
+    test('Should update an item quantity correctly', () => {
       const updateTestCase = (updateQuantity: -1 | 1) => {
         const UPDATE_QUANTITY = updateQuantity
         const SKU_TO_UPDATE = 'test-update'
@@ -238,6 +238,31 @@ describe('Cart reducer', () => {
       const { productUpdated: productUpdatedMoreOne, quantityExpected: quantityExpectedMoreOne } = updateTestCase(+1)
       expect(productUpdatedLessOne?.quantity).toBe(quantityExpectedLessOne)
       expect(productUpdatedMoreOne?.quantity).toBe(quantityExpectedMoreOne)
+    })
+
+    test('Should return the right total quantity after update an item', () => {
+      const updateTestCase = (updateQuantity: -1 | 1) => {
+        const UPDATE_QUANTITY = updateQuantity
+        const SKU_TO_UPDATE = 'test-update'
+        const ITEMS_QUANTITY = 5
+        const QUANTITY_OF_EACH_ITEM = 3
+        const products = mockProducts(ITEMS_QUANTITY, QUANTITY_OF_EACH_ITEM)
+        products[0].sku = SKU_TO_UPDATE
+        addAction.payload.products = products
+        updateQuantityAction.payload.sku = SKU_TO_UPDATE
+        updateQuantityAction.payload.quantity = UPDATE_QUANTITY
+        const state = cartReducer(initialState, addAction)
+        const { itemsQuantity }  = cartReducer(state, updateQuantityAction)
+        const quantityExpected = (QUANTITY_OF_EACH_ITEM * ITEMS_QUANTITY) + UPDATE_QUANTITY
+        return {
+          itemsQuantity,
+          quantityExpected
+        }
+      }
+      const { itemsQuantity: itemsQuantityLessOne, quantityExpected: quantityExpectedLessOne } = updateTestCase(-1)
+      const { itemsQuantity: itemsQuantityMoreOne, quantityExpected: quantityExpectedMoreOne } = updateTestCase(+1)
+      expect(itemsQuantityLessOne).toBe(quantityExpectedLessOne)
+      expect(itemsQuantityMoreOne).toBe(quantityExpectedMoreOne)
     })
 
     // test('Should return the right quantity after remove an item', () => {

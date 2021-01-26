@@ -265,36 +265,31 @@ describe('Cart reducer', () => {
       expect(itemsQuantityMoreOne).toBe(quantityExpectedMoreOne)
     })
 
-    // test('Should return the right quantity after remove an item', () => {
-    //   const QUANTITY_OF_PRODUCT_TO_UPDATE = 5
-    //   const SKU_TO_UPDATE = 'test-update'
-    //   const ITEMS_QUANTITY = 5
-    //   const QUANTITY_OF_EACH_ITEM = 3
-    //   const products = mockProducts(ITEMS_QUANTITY, QUANTITY_OF_EACH_ITEM)
-    //   const productToRemove = mockSingleProduct(SKU_TO_UPDATE, QUANTITY_OF_PRODUCT_TO_UPDATE)
-    //   addAction.payload.products = [...products, productToRemove]
-    //   updateQuantityAction.payload.sku = SKU_TO_UPDATE
-    //   const state = cartReducer(initialState, addAction)
-    //   const { itemsQuantity }  = cartReducer(state, updateQuantityAction)
-    //   const itemsQuantityExpected = state.itemsQuantity - QUANTITY_OF_PRODUCT_TO_UPDATE
-    //   expect(itemsQuantity).toBe(itemsQuantityExpected)
-    // })
+    test('Should return the right total price after update an item', () => {
+      const updateTestCase = (updateQuantity: -1 | 1) => {
+        const UPDATE_QUANTITY = updateQuantity
+        const SKU_TO_UPDATE = 'test-update'
+        const ITEMS_QUANTITY = 5
+        const QUANTITY_OF_EACH_ITEM = 3
+        const PRICE_OF_EACH_ITEM = 4
+        const products = mockProducts(ITEMS_QUANTITY, QUANTITY_OF_EACH_ITEM, PRICE_OF_EACH_ITEM)
+        products[0].sku = SKU_TO_UPDATE
+        addAction.payload.products = products
+        updateQuantityAction.payload.sku = SKU_TO_UPDATE
+        updateQuantityAction.payload.quantity = UPDATE_QUANTITY
+        const state = cartReducer(initialState, addAction)
+        const { totalPrice }  = cartReducer(state, updateQuantityAction)
+        const totalPriceExpected = (QUANTITY_OF_EACH_ITEM * ITEMS_QUANTITY * PRICE_OF_EACH_ITEM) + (UPDATE_QUANTITY * PRICE_OF_EACH_ITEM)
+        return {
+          totalPrice,
+          totalPriceExpected
+        }
+      }
+      const { totalPrice: totalPriceLessOne, totalPriceExpected: totalPriceExpectedLessOne } = updateTestCase(-1)
+      const { totalPrice: totalPriceMoreOne, totalPriceExpected: totalPriceExpectedMoreOne } = updateTestCase(+1)
+      expect(totalPriceLessOne).toBe(totalPriceExpectedLessOne)
+      expect(totalPriceMoreOne).toBe(totalPriceExpectedMoreOne)
+    })
 
-    // test('Should return the right price after remove an item', () => {
-    //   const QUANTITY_OF_PRODUCT_TO_UPDATE = 5
-    //   const PRICE_OF_PRODUCT_TO_UPDATE = 3
-    //   const SKU_TO_UPDATE = 'test-update'
-    //   const ITEMS_QUANTITY = 5
-    //   const QUANTITY_OF_EACH_ITEM = 3
-    //   const PRICE_OF_EACH_ITEM = 3
-    //   const products = mockProducts(ITEMS_QUANTITY, QUANTITY_OF_EACH_ITEM, PRICE_OF_EACH_ITEM)
-    //   const productToRemove = mockSingleProduct(SKU_TO_UPDATE, QUANTITY_OF_PRODUCT_TO_UPDATE, PRICE_OF_PRODUCT_TO_UPDATE)
-    //   addAction.payload.products = [...products, productToRemove]
-    //   updateQuantityAction.payload.sku = SKU_TO_UPDATE
-    //   const state = cartReducer(initialState, addAction)
-    //   const { totalPrice }  = cartReducer(state, updateQuantityAction)
-    //   const totalPriceExpected = state.totalPrice - (QUANTITY_OF_PRODUCT_TO_UPDATE * PRICE_OF_PRODUCT_TO_UPDATE)
-    //   expect(totalPrice).toBe(totalPriceExpected)
-    // })
   })
 })

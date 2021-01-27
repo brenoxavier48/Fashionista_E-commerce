@@ -57,7 +57,7 @@ describe('Products reducer', () => {
     AddCurrentProductAction  = {
       type: 'ADD_CURRENT_PRODUCT',
       payload: {
-        product: Object.create({})
+        product: Object.create(<Product>{})
       }
     }
     addFilterAction = {
@@ -77,6 +77,39 @@ describe('Products reducer', () => {
       const { catalog } = productsReducer(state, addCatalogAction)
       expect(catalog).not.toEqual([])
       expect(catalog).toEqual(products)
+    })
+  })
+
+  describe('Add filter test cases', () => {
+    test('Should add a filter correctly', () => {
+      const FILTER = 'tEsT-FilTer'
+      const state = productsReducer(initialState, addFilterAction)
+      expect(state.filter).toEqual('')
+      addFilterAction.payload.filter = FILTER
+      const { filter } = productsReducer(state, addFilterAction)
+      expect(filter).not.toBe('')
+      expect(filter).toEqual(FILTER)
+    })
+  })
+
+  describe('Add current product test cases', () => {
+    test('Should add a current product correctly', () => {
+      const firstCurrentProduct = mockSingleProduct('current-product-01')
+      const secondCurrentProduct = mockSingleProduct('current-product-02')
+
+      const defaultState = productsReducer(initialState, AddCurrentProductAction)
+      expect(defaultState.currentProduct).not.toEqual(firstCurrentProduct)
+      expect(defaultState.currentProduct).not.toEqual(secondCurrentProduct)
+
+      AddCurrentProductAction.payload.product = firstCurrentProduct
+      const firstState = productsReducer(defaultState, AddCurrentProductAction)
+      expect(firstState.currentProduct).toEqual(firstCurrentProduct)
+      expect(firstState.currentProduct).not.toEqual(secondCurrentProduct)
+
+      AddCurrentProductAction.payload.product = secondCurrentProduct
+      const secondState = productsReducer(firstState, AddCurrentProductAction)
+      expect(secondState.currentProduct).not.toEqual(firstCurrentProduct)
+      expect(secondState.currentProduct).toEqual(secondCurrentProduct)
     })
   })
 })

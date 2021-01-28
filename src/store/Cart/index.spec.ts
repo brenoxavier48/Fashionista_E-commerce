@@ -127,17 +127,41 @@ describe('Cart reducer', () => {
     test('Should return the right quantity after add products', () => {
       const QUANTITY_OF_EACH_ITEM = 2
       const QUANTITY_OF_ADDITIONAL_ITEM = 7
-      const { itemsQuantity: itemsQuantityBefore, items: itemsBefore } = cartReducer(initialState, addAction)
-      expect(itemsQuantityBefore).toBe(0)
-      expect(itemsBefore).toEqual([])
+      const state = cartReducer(initialState, addAction)
+      expect(state.itemsQuantity).toBe(0)
+      expect(state.items).toEqual([])
       const products = mockProducts(5, QUANTITY_OF_EACH_ITEM)
       const additionalItem = mockSingleProduct('test', QUANTITY_OF_ADDITIONAL_ITEM)
-      addAction.payload.products = [...products, additionalItem]
+      addAction.payload.products = [...products, { ...additionalItem }]
       const totalOfDifferentItems = addAction.payload.products.length
       const totalItems = (5 * QUANTITY_OF_EACH_ITEM) + QUANTITY_OF_ADDITIONAL_ITEM
-      const { itemsQuantity: itemsQuantityAfter, items: itemsAfter } = cartReducer(initialState, addAction)
+      const { itemsQuantity: itemsQuantityAfter, items: itemsAfter } = cartReducer(state, addAction)
       expect(itemsQuantityAfter).toBe(totalItems)
       expect(itemsAfter.length).toEqual(totalOfDifferentItems)
+    })
+
+    test('Should return the right quantity after add products with sku wich is already in cart', () => {
+      const SKU_ALREDY_IN_CART = 'repeated-sku'
+      const QUANTITY_OF_EACH_ITEM = 2
+      const QUANTITY_OF_ADDITIONAL_ITEM = 3
+      const SECOND_QUANTITY_OF_ADDITIONAL_ITEM = 7
+      const products = mockProducts(5, QUANTITY_OF_EACH_ITEM)
+      const additionalItem = mockSingleProduct(SKU_ALREDY_IN_CART, QUANTITY_OF_ADDITIONAL_ITEM)
+      addAction.payload.products = [...products, { ...additionalItem }]
+      const totalOfDifferentItems = addAction.payload.products.length
+      const totalItems = (5 * QUANTITY_OF_EACH_ITEM) + QUANTITY_OF_ADDITIONAL_ITEM
+      
+      const state = cartReducer(initialState, addAction)
+      const { itemsQuantity: itemsQuantityBefore, items: itemsBefore } = state
+      expect(itemsQuantityBefore).toBe(totalItems)
+      expect(itemsBefore.length).toEqual(totalOfDifferentItems)
+
+      additionalItem.quantity = SECOND_QUANTITY_OF_ADDITIONAL_ITEM
+      addAction.payload.products = [{ ...additionalItem }]
+      const { itemsQuantity: itemsQuantityAfter, items: itemsAfter } = cartReducer(state, addAction)
+      const totalItemsAfter = itemsQuantityBefore + SECOND_QUANTITY_OF_ADDITIONAL_ITEM
+      expect(itemsAfter.length).toEqual(totalOfDifferentItems)
+      expect(itemsQuantityAfter).toBe(totalItemsAfter)
     })
   
     test('Should return the right price after add products', () => {
@@ -145,15 +169,38 @@ describe('Cart reducer', () => {
       const QUANTITY_OF_EACH_ITEM = 2
       const PRICE_OF_ADDITIONAL_ITEM = 8
       const QUANTITY_OF_ADDITIONAL_ITEM = 7
-      const { totalPrice: totalPriceBefore } = cartReducer(initialState, addAction)
-      expect(totalPriceBefore).toBe(0)
+      const state = cartReducer(initialState, addAction)
+      expect(state.totalPrice).toBe(0)
       const products = mockProducts(5, QUANTITY_OF_EACH_ITEM, PRICE_OF_EACH_ITEM)
       const additionalItem = mockSingleProduct('test', QUANTITY_OF_ADDITIONAL_ITEM, PRICE_OF_ADDITIONAL_ITEM)
-      addAction.payload.products = [...products, additionalItem]
+      addAction.payload.products = [...products, { ...additionalItem }]
       const totalPrice = (5 * QUANTITY_OF_EACH_ITEM * PRICE_OF_EACH_ITEM) + (QUANTITY_OF_ADDITIONAL_ITEM * PRICE_OF_ADDITIONAL_ITEM)
-      const { totalPrice: totalPriceAfter, items: itemsAfter } = cartReducer(initialState, addAction)
+      const { totalPrice: totalPriceAfter, items: itemsAfter } = cartReducer(state, addAction)
       expect(totalPriceAfter).toBe(totalPrice)
       expect(itemsAfter).toEqual(addAction.payload.products)
+    })
+
+    test('Should return the right price after add products with sku wich is already in cart', () => {
+      const SKU_ALREDY_IN_CART = 'repeated-sku'
+      const PRICE_OF_EACH_ITEM = 3
+      const QUANTITY_OF_EACH_ITEM = 2
+      const PRICE_OF_ADDITIONAL_ITEM = 8
+      const QUANTITY_OF_ADDITIONAL_ITEM = 7
+      const SECOND_QUANTITY_OF_ADDITIONAL_ITEM = 2
+      const products = mockProducts(5, QUANTITY_OF_EACH_ITEM, PRICE_OF_EACH_ITEM)
+      const additionalItem = mockSingleProduct(SKU_ALREDY_IN_CART, QUANTITY_OF_ADDITIONAL_ITEM, PRICE_OF_ADDITIONAL_ITEM)
+      addAction.payload.products = [...products, { ...additionalItem }]
+      const totalPriceExpectedBefore = (5 * QUANTITY_OF_EACH_ITEM * PRICE_OF_EACH_ITEM) + (QUANTITY_OF_ADDITIONAL_ITEM * PRICE_OF_ADDITIONAL_ITEM)
+      
+      const state = cartReducer(initialState, addAction)
+      const { totalPrice: totalPriceBefore } = state
+      expect(totalPriceBefore).toBe(totalPriceExpectedBefore)
+
+      additionalItem.quantity = SECOND_QUANTITY_OF_ADDITIONAL_ITEM
+      addAction.payload.products = [{ ...additionalItem }]
+      const { totalPrice: totalPriceAfter } = cartReducer(state, addAction)
+      const totalPriceExpectedAfter = totalPriceExpectedBefore + (SECOND_QUANTITY_OF_ADDITIONAL_ITEM * PRICE_OF_ADDITIONAL_ITEM)
+      expect(totalPriceAfter).toBe(totalPriceExpectedAfter)
     })
   })
 
@@ -206,7 +253,6 @@ describe('Cart reducer', () => {
   })
 
   describe('Update products quantity test cases', () => {
-
     test('Should update an item quantity correctly', () => {
       const updateTestCase = (updateQuantity: -1 | 1) => {
         const UPDATE_QUANTITY = updateQuantity

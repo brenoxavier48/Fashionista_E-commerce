@@ -8,6 +8,7 @@ import {
   RemoveProductCartAction,
   CartAction } from './protocols'
 import { getTotalPriceAndQuantity } from './helpers'
+import { ProductCart } from '../../domain/ProductModel'
 
 const initialState: CartState = {
   itemsQuantity: 0,
@@ -16,8 +17,24 @@ const initialState: CartState = {
 }
 
 const addProductsCart = (state: CartState, action: AddProductsCartAction): CartState => {
-  const { products } = action.payload
-  const items = [...state.items, ...products]
+  const { items: itemsAlreadyInCart } = { ...state }
+  const { products } = { ...action.payload }
+  const skusRepeated: string[] = []
+  const makeFindCallBack = (sku: string) => (product: ProductCart) => sku === product.sku
+  const makeSomeCallBack = (product: ProductCart) => (sku: string) => sku === product.sku
+  const filterCallBack = (product: ProductCart) => !skusRepeated.some(makeSomeCallBack(product))
+  const mapCallBack = (product: ProductCart): ProductCart => {
+    const { sku } = product
+    const sameProduct = products.find(makeFindCallBack(sku))
+    if (sameProduct !== undefined) {
+      product.quantity += sameProduct.quantity
+      skusRepeated.push(sku)
+    }
+    return product
+  }
+  const itemsAlreadyInCartUpdated = itemsAlreadyInCart.map(mapCallBack)
+  const itemsNotInCart = products.filter(filterCallBack)
+  const items = [ ...itemsAlreadyInCartUpdated, ...itemsNotInCart ]
   const { itemsQuantity, totalPrice } = getTotalPriceAndQuantity(items)
   
   return Object.assign({

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { updateQuantityProductCart, removeProductCart } from '../../../store/Cart/cart.actions'
-import { UPDATE_QUANTITY_PRODUCT_CART_PAYLOAD } from '../../../store/Cart/protocols'
+import { UpdateQuantityProductCartPayload } from '../../../store/Cart/protocols'
 import { ProductCart } from '../../../domain/ProductModel'
 import DrawerProductCard from '../DrawerProductCard'
 
@@ -16,7 +16,7 @@ const CartProductCard = ({ product, timeToAppear }: Props) => {
 
   const [ isRemoved, setIsRemoved ] = useState<boolean>(false)
 
-  const makeUpdateObject = (quantity: 1 | -1): UPDATE_QUANTITY_PRODUCT_CART_PAYLOAD => ({
+  const makeUpdateObject = (quantity: 1 | -1): UpdateQuantityProductCartPayload => ({
     sku: product.sku,
     quantity
   })

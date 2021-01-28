@@ -2,8 +2,7 @@
   position: relative;
   width: 90%;
   height: 500px;
-  margin: 10px 5px;
-  border: 0px solid rgba(0,0,0,0.08);
+  margin: 10px;
   transition: 0.6s;
   transform: translate(100%);
 
@@ -51,7 +50,6 @@
 
   &:hover {
     transform: scale(1.08, 1.08);
-    border: 1px solid rgba(0,0,0,0.06);
     box-shadow: 0.5px 0.5px 9px 3px rgba(0,0,0,0.03);
     cursor: pointer;
   }

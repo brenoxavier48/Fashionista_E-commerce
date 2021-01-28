@@ -1,9 +1,5 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
-import { selectQuantityProductsCart } from '../../../store/Cart/cart.selectors'
 import { IconButton } from '../ui/buttons'
-import Cart from '../Cart'
-import SearchProducts from '../SearchProducts'
 
 export type DrawerType = "" | "search" | "shoppingCart" 
 

@@ -15,8 +15,6 @@ const SingleProductView = () => {
   const dispatch = useDispatch()
 
   const product: Product = useSelector(selectCurrentProduct)
-  const productsCart: ProductCart[] = useSelector(selectAllProductsCart)
-  const alreadyInCart = (sku: string): boolean => productsCart.some(product => product.sku === sku)
 
   const [ itemsSelected, setItemsSelected ] = useState<boolean[]>(
     new Array(product.sizes.length).fill(false)
@@ -93,7 +91,7 @@ const SingleProductView = () => {
                 <SizeButton
                   key={sku}
                   size={size}
-                  available={available && !alreadyInCart(sku)}
+                  available={available}
                   selected={itemsSelected[index]}
                   onClick={() => handleClickSizeButtons(index)}
                 ></SizeButton>

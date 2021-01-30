@@ -2,6 +2,7 @@ import React, { MouseEvent } from 'react'
 import { CountButton } from '../ui/buttons'
 
 type Props = {
+  whatToCount: string,
   value: number,
   minValue?: number,
   maxValue?: number,
@@ -10,6 +11,7 @@ type Props = {
 }
 
 const Counter = ({
+  whatToCount,
   value,
   minValue,
   maxValue,
@@ -22,11 +24,18 @@ const Counter = ({
         decrease 
         onClick={decrease}
         disabled={ typeof minValue === 'number' && value <= minValue }
+        aria-label={`Decrementar ${whatToCount}`}
       />
-      <p className="counter__container__value">{value}</p>
+      <span 
+        className="counter__container__value"
+        aria-label={`Valor atual de ${whatToCount}`}
+      >
+        {value}      
+      </span>
       <CountButton 
         onClick={increase}
         disabled={ typeof maxValue === 'number' && value >= maxValue }
+        aria-label={`Incrementar ${whatToCount}`}
       />
     </div>
   )

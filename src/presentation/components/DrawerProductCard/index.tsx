@@ -73,6 +73,7 @@ const DrawerProductCard = ({
               {`Tam: ${size}`}
             </p>
             <Counter
+              whatToCount={`quantidade do produto ${name}`}
               value={ quantity || 0 }
               minValue={1}
               increase={ heandleIncrease || (() => {}) }

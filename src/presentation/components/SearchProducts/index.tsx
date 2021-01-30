@@ -10,7 +10,7 @@ type Props = {
   closeDrawer?: () => void
 }
 
-const SearchProductst = ({ closeDrawer }: Props) => {
+const SearchProducts = ({ closeDrawer }: Props) => {
 
   const dispatch = useDispatch()
   const products: Product[] = useSelector(selectFilteredProducts)
@@ -53,4 +53,4 @@ const SearchProductst = ({ closeDrawer }: Props) => {
   )
 }
 
-export default SearchProductst
+export default SearchProducts

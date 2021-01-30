@@ -17,11 +17,13 @@ const Header = ({ handleClickSearch, handleClickShoppingCart }: Props) => {
         <IconButton
           icon="search"
           onClick={handleClickSearch}
+          aria-label="Abrir seção de pesquisa por produtos"
         ></IconButton>
         <IconButton
           icon="shoppingCart"
           onClick={handleClickShoppingCart}
           itemsQuantity={itemsQuantity}
+          aria-label="Abrir sacola"
         ></IconButton>
       </div>
     </header>

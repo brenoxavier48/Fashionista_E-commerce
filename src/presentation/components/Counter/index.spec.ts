@@ -27,7 +27,16 @@ describe('<Counter/>', () => {
 
   })
 
-  test('Should call decrease function correctly', () => {})
+  test('Should call decrease function correctly', () => {
+    const VALUE = 1
+    const increase = jest.fn()
+    const decrease = jest.fn()
+    const { getByTestId } = render(Counter({whatToCount:"test" ,value: VALUE, increase, decrease}))
+    const decreaseButton = getByTestId(decreaseButtonTestId)  
+    fireEvent.click(decreaseButton)
+    expect(increase).not.toBeCalled()
+    expect(decrease).toBeCalled()
+  })
 
   test('Should disable increase button if achieve minimum value', () => {})
 

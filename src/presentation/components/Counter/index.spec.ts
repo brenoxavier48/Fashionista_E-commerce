@@ -48,7 +48,14 @@ describe('<Counter/>', () => {
   })
 
   test('Should disable decrease button if achieve minimum value', () => {
-   
+    const VALUE = 3
+    const MIN_VALUE = 3
+    const increase = jest.fn()
+    const decrease = jest.fn()
+    const { getByTestId } = render(Counter({whatToCount:"test" ,value: VALUE, increase, decrease, minValue: MIN_VALUE}))
+    const decreaseButton = getByTestId(decreaseButtonTestId)  
+    fireEvent.click(decreaseButton)
+    expect(decrease).not.toBeCalled()
   })
 
   test('Should throw if minValue provided is bigger then maxValue provided', () => {})

@@ -16,7 +16,15 @@ describe('<Counter/>', () => {
   })
 
   test('Should call increase function correctly', () => {
- 
+    const VALUE = 1
+    const increase = jest.fn()
+    const decrease = jest.fn()
+    const { getByTestId } = render(Counter({whatToCount:"test" ,value: VALUE, increase, decrease}))
+    const increaseButton = getByTestId(increaseButtonTestId)  
+    fireEvent.click(increaseButton)
+    expect(increase).toBeCalled()
+    expect(decrease).not.toBeCalled()
+
   })
 
   test('Should call decrease function correctly', () => {})

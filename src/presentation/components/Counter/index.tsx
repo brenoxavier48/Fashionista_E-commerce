@@ -30,10 +30,13 @@ const Counter = ({
         onClick={decrease}
         disabled={ typeof minValue === 'number' && value <= minValue }
         aria-label={`Decrementar ${whatToCount}`}
+        data-testid="counter-decrease-button"
       />
       <span 
         className="counter__container__value"
         aria-label={`Valor atual de ${whatToCount}`}
+        data-testid="counter-value"
+
       >
         {
           (typeof minValue === 'number' && value < minValue)
@@ -47,6 +50,7 @@ const Counter = ({
         onClick={increase}
         disabled={ typeof maxValue === 'number' && value >= maxValue }
         aria-label={`Incrementar ${whatToCount}`}
+        data-testid="counter-increase-button"
       />
     </div>
   )

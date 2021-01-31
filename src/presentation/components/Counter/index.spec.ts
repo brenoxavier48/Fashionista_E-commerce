@@ -24,7 +24,6 @@ describe('<Counter/>', () => {
     fireEvent.click(increaseButton)
     expect(increase).toBeCalled()
     expect(decrease).not.toBeCalled()
-
   })
 
   test('Should call decrease function correctly', () => {
@@ -38,9 +37,19 @@ describe('<Counter/>', () => {
     expect(decrease).toBeCalled()
   })
 
-  test('Should disable increase button if achieve minimum value', () => {})
+  test('Should disable increase button if achieve maximum value', () => {
+    const VALUE = 2
+    const MAX_VALUE = 2
+    const increase = jest.fn()
+    const { getByTestId } = render(Counter({whatToCount:"test" ,value: VALUE, increase, decrease:()=>{}, maxValue: MAX_VALUE})) 
+    const increaseButton = getByTestId(increaseButtonTestId)  
+    fireEvent.click(increaseButton)
+    expect(increase).not.toBeCalled()
+  })
 
-  test('Should disable decrease button if achieve maximum value', () => {})
+  test('Should disable decrease button if achieve minimum value', () => {
+   
+  })
 
   test('Should throw if minValue provided is bigger then maxValue provided', () => {})
 

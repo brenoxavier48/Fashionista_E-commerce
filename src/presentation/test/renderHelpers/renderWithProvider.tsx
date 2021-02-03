@@ -2,8 +2,8 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import { store } from '../../../store'
 
-export default (Component: typeof React.Component) => (
+export const renderWithProvider = (Component: React.FC<any>, props: any) => (
   <Provider store={store}>
-    <Component></Component>
+    <Component {...props}></Component>
   </Provider>
 )

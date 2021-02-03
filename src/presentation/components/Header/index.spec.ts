@@ -1,5 +1,6 @@
 import Header from './'
 import { fireEvent, render } from '@testing-library/react'
+import { renderWithProvider } from '../../test/renderHelpers'
 
 describe('<Header/>', () => {
 
@@ -10,10 +11,11 @@ describe('<Header/>', () => {
     const VALUE = 1
     const handleClickSearch = jest.fn()
     const handleClickShoppingCart = jest.fn()
-    const { getByTestId } = render(Header({ handleClickSearch, handleClickShoppingCart }))
+    const { getByTestId } = render(renderWithProvider(Header, { handleClickSearch, handleClickShoppingCart }))
     const searchButton = getByTestId(searchButtonTestId)  
     fireEvent.click(searchButton)
     expect(handleClickSearch).toBeCalled()
     expect(handleClickShoppingCart).not.toBeCalled()
   })
+
 })

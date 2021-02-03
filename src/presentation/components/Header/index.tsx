@@ -18,12 +18,14 @@ const Header = ({ handleClickSearch, handleClickShoppingCart }: Props) => {
           icon="search"
           onClick={handleClickSearch}
           aria-label="Abrir seção de pesquisa por produtos"
+          data-testid="header-search-button"
         ></IconButton>
         <IconButton
           icon="shoppingCart"
           onClick={handleClickShoppingCart}
           itemsQuantity={itemsQuantity}
           aria-label="Abrir sacola"
+          data-testid="header-cart-button"
         ></IconButton>
       </div>
     </header>

@@ -18,7 +18,6 @@ const Counter = ({
   decrease, 
   increase }: Props) => {
   
-  
   if(typeof minValue === 'number' && typeof maxValue === 'number' && maxValue < minValue) {
     throw 'maxValue need to be bigger then minValue'
   }

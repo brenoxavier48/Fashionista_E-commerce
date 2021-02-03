@@ -18,4 +18,14 @@ describe('<Header/>', () => {
     expect(handleClickShoppingCart).not.toBeCalled()
   })
 
+  test('Should call handleClickShoppingCart function correctly', () => {
+    const VALUE = 1
+    const handleClickSearch = jest.fn()
+    const handleClickShoppingCart = jest.fn()
+    const { getByTestId } = render(renderWithProvider(Header, { handleClickSearch, handleClickShoppingCart }))
+    const cartButton = getByTestId(cartButtonTestId)  
+    fireEvent.click(cartButton)
+    expect(handleClickSearch).not.toBeCalled()
+    expect(handleClickShoppingCart).toBeCalled()
+  })
 })

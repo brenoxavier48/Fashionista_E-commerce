@@ -9,27 +9,22 @@ import {
   ProductCart 
 } from './protocols'
 
-export const addProductsCart = (products: ProductCart[]): AddProductsCartAction => {
-  return {
-    type: ADD_PRODUCTS_CART,
-    payload: { 
-      products 
-    }
+export const addProductsCart = (products: ProductCart[]): AddProductsCartAction => ({
+  type: ADD_PRODUCTS_CART,
+  payload: { 
+    products 
   }
-}
+})
 
-export const updateQuantityProductCart = (updateObject: UpdateQuantityProductCartPayload): UpdateQuantityProductCartAction => {
-  return {
-    type: UPDATE_QUANTITY_PRODUCT_CART,
-    payload: updateObject
-  }
-}
+export const updateQuantityProductCart = (updateObject: UpdateQuantityProductCartPayload): UpdateQuantityProductCartAction => ({
+  type: UPDATE_QUANTITY_PRODUCT_CART,
+  payload: updateObject
+})
 
-export const removeProductCart = (sku: string): RemoveProductCartAction => {
-  return {
-    type: REMOVE_PRODUCT_CART,
-    payload: { 
-      sku 
-    }
+
+export const removeProductCart = (sku: string): RemoveProductCartAction => ({
+  type: REMOVE_PRODUCT_CART,
+  payload: { 
+    sku 
   }
-}
+})

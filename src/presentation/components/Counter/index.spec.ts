@@ -57,7 +57,4 @@ describe('<Counter/>', () => {
     fireEvent.click(decreaseButton)
     expect(decrease).not.toBeCalled()
   })
-
-  test('Should throw if minValue provided is bigger then maxValue provided', () => {})
-
 })

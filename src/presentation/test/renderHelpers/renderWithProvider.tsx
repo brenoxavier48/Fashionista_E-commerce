@@ -7,3 +7,11 @@ export const renderWithProvider = (Component: React.FC<any>, props: any) => (
     <Component {...props}></Component>
   </Provider>
 )
+
+export const renderWithProviderWithInitialState = (intialStore: typeof store) => (
+  (Component: React.FC<any>, props: any) => (
+    <Provider store={intialStore}>
+      <Component {...props}></Component>
+    </Provider>
+  )
+)

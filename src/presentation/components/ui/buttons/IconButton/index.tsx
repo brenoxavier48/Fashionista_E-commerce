@@ -27,7 +27,11 @@ export const IconButton = ({ icon, itemsQuantity, ...otherProps }: Props) => {
         ( itemsQuantity && itemsQuantity > 0 )
         ? (
           <sup className="icon-button__shoppingCart__count">
-            <span className="icon-button__shoppingCart__count__value">
+            <span 
+              className="icon-button__shoppingCart__count__value"
+              aria-label="Quantidade de itens na sacola"
+              data-testid="header-cart-items-quantity"
+            >
               {itemsQuantity}
             </span>
           </sup>

@@ -4,5 +4,5 @@ import { addProductsCart } from '../../../store/Cart/cart.actions'
 
 export const storeWithCartInitialState = (products: ProductCart[]) => {
   store.dispatch(addProductsCart(products))
-  return store.getState()
+  return store
 }

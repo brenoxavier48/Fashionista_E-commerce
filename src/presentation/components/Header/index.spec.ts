@@ -14,7 +14,12 @@ describe('<Header/>', () => {
   test('Should call handleClickSearch function correctly', () => {
     const handleClickSearch = jest.fn()
     const handleClickShoppingCart = jest.fn()
-    const { getByTestId } = render(renderWithProvider(Header, { handleClickSearch, handleClickShoppingCart }))
+    const { getByTestId } = render(
+      renderWithProvider(
+        Header, 
+        { handleClickSearch, handleClickShoppingCart }
+      )
+    )
     const searchButton = getByTestId(searchButtonTestId)  
     fireEvent.click(searchButton)
     expect(handleClickSearch).toBeCalled()
@@ -24,11 +29,33 @@ describe('<Header/>', () => {
   test('Should call handleClickShoppingCart function correctly', () => {
     const handleClickSearch = jest.fn()
     const handleClickShoppingCart = jest.fn()
-    const { getByTestId } = render(renderWithProvider(Header, { handleClickSearch, handleClickShoppingCart }))
+    const { getByTestId } = render(
+      renderWithProvider(
+        Header, 
+        { handleClickSearch, handleClickShoppingCart }
+      )
+    )
     const cartButton = getByTestId(cartButtonTestId)  
     fireEvent.click(cartButton)
     expect(handleClickSearch).not.toBeCalled()
     expect(handleClickShoppingCart).toBeCalled()
+  })
+
+  test('Shouldn\'t shows the quantity of items if quantity is 0', () => {
+    const handleClickSearch = jest.fn()
+    const handleClickShoppingCart = jest.fn()
+    const ITEMS_QUANTITY = 0
+    const products = mockProducts(ITEMS_QUANTITY)
+    const store = storeWithCartInitialState(products)
+    const { getByTestId, getAllByTestId } = render(
+      renderWithProviderWithInitialState(store)(
+        Header, 
+        { handleClickSearch, handleClickShoppingCart }
+      )
+    )
+    const cartButton = getByTestId(cartButtonTestId) 
+    const itemsQuantityCount = cartButton.getElementsByClassName('icon-button__shoppingCart__count')
+    expect(itemsQuantityCount.length).toBe(0)
   })
 
   test('Should shows the right quantity of items', () => {

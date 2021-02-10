@@ -60,16 +60,24 @@ const DrawerProductCard = ({
         { type === 'ProductCart' && (
             <span
               onClick={handleRemoveItem}
+              aria-label="Remover item"
+              data-testid="drawer-product-cart-remove-item"
             >Remover item</span>
         )}
       </div>
       <div className="drawer-product-container__info">
-        <p className="drawer-product-container__info__name">
+        <p 
+          className="drawer-product-container__info__name"
+          aria-label="Nome do produto"
+        >
           {name}
         </p>
         { type === 'ProductCart' && (
           <>
-            <p className="drawer-product-container__info__size">
+            <p 
+              className="drawer-product-container__info__size"
+              aria-label="Tamanho do produto"
+            >
               {`Tam: ${size}`}
             </p>
             <Counter
@@ -83,10 +91,16 @@ const DrawerProductCard = ({
         )}
       </div>
       <div className="drawer-product-container__price-info">
-        <p className="drawer-product-container__price-info__price">
+        <p 
+          className="drawer-product-container__price-info__price"
+          aria-label="Preço do produto"
+        >
           {actual_price}
         </p>
-        <p className="drawer-product-container__price-info__installments">
+        <p 
+          className="drawer-product-container__price-info__installments"
+          aria-label="Parcelas possíveis para o preço do produto"
+        >
           {installments}
         </p>
       </div>

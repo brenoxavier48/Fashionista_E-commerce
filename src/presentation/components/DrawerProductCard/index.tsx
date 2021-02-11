@@ -50,6 +50,7 @@ const DrawerProductCard = ({
         ${ isRemoved ? 'drawer-product-container--removed' : '' }`
       }
       onClick={ handleClick || (() => {}) }
+      data-testid="drawer-product"
     >
       <div className="drawer-product-container__image">
         <ProductImage

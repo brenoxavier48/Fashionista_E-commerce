@@ -23,7 +23,12 @@ const Cart = () => {
         }
       </section>
       <div className="cart-container__total-price">
-        <p>{`Subtotal - R$ ${totalPrice.toFixed(2).replace('.', ',')}`}</p>
+        <p
+          aria-label="Preço total da sacola"
+          data-testid="cart-total-price"
+        >
+          {`Subtotal - R$ ${totalPrice.toFixed(2).replace('.', ',')}`}
+        </p>
       </div>
     </div>
   )

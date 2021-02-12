@@ -6,6 +6,8 @@ import {
   UpdateQuantityProductCartAction, 
   REMOVE_PRODUCT_CART,
   RemoveProductCartAction,
+  CLEAN_CART,
+  CleanCartAction,
   CartAction } from './protocols'
 import { getTotalPriceAndQuantity } from './helpers'
 import { ProductCart } from '../../domain/ProductModel'
@@ -71,6 +73,10 @@ const removeProductCart = (state: CartState, action: RemoveProductCartAction): C
   })
 }
 
+const cleanCart = (state: CartState, action: CleanCartAction): CartState => {
+  return initialState
+}
+
 const CartReducer = (state = initialState, action: CartAction): CartState => {
   switch (action.type) {
     case ADD_PRODUCTS_CART:
@@ -81,6 +87,9 @@ const CartReducer = (state = initialState, action: CartAction): CartState => {
 
     case REMOVE_PRODUCT_CART:
       return removeProductCart(state, action)
+
+    case CLEAN_CART:
+      return cleanCart(state, action)
 
     default:
       return state

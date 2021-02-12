@@ -20,6 +20,8 @@ export const UPDATE_QUANTITY_PRODUCT_CART = 'UPDATE_QUANTITY_PRODUCT_CART'
 
 export const REMOVE_PRODUCT_CART = 'REMOVE_PRODUCT_CART'
 
+export const CLEAN_CART = 'CLEAN_CART'
+
 export type AddProductsCartPayload = {
   products: ProductCart[]
 }
@@ -48,9 +50,14 @@ export type RemoveProductCartAction = {
   payload: RemoveProductCartPayload
 }
 
+export type CleanCartAction = {
+  type: typeof CLEAN_CART,
+}
+
 export type CartAction = ( 
   AddProductsCartAction |
   UpdateQuantityProductCartAction |
-  RemoveProductCartAction 
+  RemoveProductCartAction |
+  CleanCartAction
 )
  

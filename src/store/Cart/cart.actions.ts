@@ -6,6 +6,8 @@ import {
   UpdateQuantityProductCartAction,
   RemoveProductCartAction,
   UpdateQuantityProductCartPayload,
+  CLEAN_CART,
+  CleanCartAction,
   ProductCart 
 } from './protocols'
 
@@ -27,4 +29,8 @@ export const removeProductCart = (sku: string): RemoveProductCartAction => ({
   payload: { 
     sku 
   }
+})
+
+export const cleanCart = (): CleanCartAction => ({
+  type: CLEAN_CART
 })

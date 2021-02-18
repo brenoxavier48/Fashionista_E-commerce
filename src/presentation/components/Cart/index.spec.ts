@@ -42,7 +42,6 @@ describe('<Cart />', () => {
     fireEvent.click(increaseButton)
     const value = getByTestId(valueTestId)
     const currentValue = String(QUANTITY + 1)
-    const currentTotalPrice = 
     expect(value.innerHTML).toBe(currentValue)
   })
 
@@ -60,19 +59,31 @@ describe('<Cart />', () => {
     expect(value.innerHTML).toBe(currentValue)
   })
 
-
   test('Ensure Cart product remove a item correctly', () => {
     const QUANTITY = 4
     const products = mockProducts(QUANTITY)
     storeTest = storeWithCartInitialState([ ...products ])
     const renderWithInitialState = renderWithProviderWithInitialState(storeTest)
-    const { getAllByTestId, getAllByText } = render(renderWithInitialState(Cart))
+    const { getAllByTestId } = render(renderWithInitialState(Cart))
     const removeItem = getAllByTestId(removeItemTestId)
-    fireEvent.click(getAllByText('Remover item')[0])
+    fireEvent.click(removeItem[0])
     setTimeout(() => {
       const drawerProducts = getAllByTestId(drawerProductTestId)
       const currentQuantityOfDistinctProducts = QUANTITY - 1
       expect(drawerProducts.length).toBe(currentQuantityOfDistinctProducts)
     }, 400)
+  })
+
+  test('Ensure Cart shows the right total price ', () => {
+    const QUANTITY = 4
+    const QUANTITY_OF_EACH_PRODUCT = 3
+    const PRICE_OF_EACH_PRODUCT = 2
+    const products = mockProducts(QUANTITY, QUANTITY_OF_EACH_PRODUCT, PRICE_OF_EACH_PRODUCT)
+    storeTest = storeWithCartInitialState([ ...products ])
+    const renderWithInitialState = renderWithProviderWithInitialState(storeTest)
+    const { getByTestId } = render(renderWithInitialState(Cart))
+    const totalPrice = QUANTITY * QUANTITY_OF_EACH_PRODUCT * PRICE_OF_EACH_PRODUCT
+    const cartTotalPrice = getByTestId(cartTotalPriceTestId)
+    expect(cartTotalPrice.innerHTML).toBe(makeTotalPriceShouldBe(totalPrice))
   })
 })

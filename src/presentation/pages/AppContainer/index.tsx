@@ -4,17 +4,18 @@ import { useSelector } from 'react-redux'
 import { selectQuantityProductsCart } from '../../../store/Cart/cart.selectors'
 import { addCatalog } from '../../../store/Products/products.actions'
 import { HttpClientInstance } from '../../../infra/HttpClient'
-import { ProductService } from '../../../services/Product'
+import { IProductService } from '../../../domain/ProductService'
 import Header from '../../components/Header'
 import Drawer, { DrawerRules, DrawerType } from '../../components/Drawer'
 import Cart from '../../components/Cart'
 import SearchProducts from '../../components/SearchProducts'
 
 type Props = {
-  children: ReactChild
+  children: ReactChild,
+  productService: IProductService
 }
 
-const AppContainer = ({ children }: Props) => {
+const AppContainer = ({ children, productService }: Props) => {
 
   const dispatch = useDispatch()
 
@@ -26,13 +27,10 @@ const AppContainer = ({ children }: Props) => {
   })
 
   useEffect( () => {
-    const productService = new ProductService(
-      new HttpClientInstance(), 
-      'https://5f074b869c5c250016306cbf.mockapi.io/api/v1'
-    )
-    productService.getCatolog().then((products) => {
-      dispatch(addCatalog(products))
-    })
+    productService.getCatolog()
+      .then((products) => {
+        dispatch(addCatalog(products))
+      })
   }, [dispatch])
 
   const MakeSacolaLabel = () => {

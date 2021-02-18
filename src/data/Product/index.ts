@@ -1,7 +1,8 @@
 import { HttpClient } from '../../infra/HttpClient/protocols'
 import { Product } from '../../domain/ProductModel'
+import { IProductService } from '../../domain/ProductService'
 
-export class ProductService {
+export class ProductService implements IProductService {
   private baseURL: string
   private HttpClientInstance: HttpClient
 

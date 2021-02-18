@@ -1,5 +1,3 @@
-
-
 export interface Product {
   name: string
   style: string

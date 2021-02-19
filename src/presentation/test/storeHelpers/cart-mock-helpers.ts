@@ -23,7 +23,7 @@ export const mockProducts = (quantity: number, quantityOfEachProduct = 1, priceO
   return items
 }
 
-export const mockInitialState = (initialQuantity: number): CartState => {
+export const mockCartInitialState = (initialQuantity: number): CartState => {
   let items = mockProducts(initialQuantity)
   const { itemsQuantity, totalPrice } = getTotalPriceAndQuantity(items)
   return ({

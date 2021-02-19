@@ -1,7 +1,7 @@
 import CartProductCard from './'
-import { fireEvent, render } from '@testing-library/react'
-import { renderWithProvider, renderWithProviderWithInitialState } from '../../test/renderHelpers'
-import { storeWithCartInitialState, mockProducts, mockSingleProduct } from '../../test/storeHelpers'
+import { render } from '@testing-library/react'
+import { renderWithProviderWithInitialState } from '../../test/renderHelpers'
+import { storeWithCartInitialState, mockSingleProduct } from '../../test/storeHelpers'
 
 describe('<CartProductCard />', () => {
 
@@ -15,7 +15,12 @@ describe('<CartProductCard />', () => {
     const products = [ mockSingleProduct(SKU, QUANTITY) ]
     const store = storeWithCartInitialState([ ...products ])
     const renderWithInitialState = renderWithProviderWithInitialState(store)
-    const { getByTestId } = render(renderWithInitialState(CartProductCard, { product: products[0] }))
+    const { getByTestId } = render(
+      renderWithInitialState(
+        CartProductCard, 
+        { product: products[0] }
+      )
+    )
     const value = getByTestId(valueTestId)
     expect(value.innerHTML).toBe(String(QUANTITY))
   })

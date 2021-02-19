@@ -10,7 +10,7 @@ import cartReducer from './cart.reducer'
 import { 
   mockProducts, 
   mockSingleProduct, 
-  mockInitialState 
+  mockCartInitialState 
 } from '../../presentation/test/storeHelpers'
 
 
@@ -72,7 +72,7 @@ describe('Cart reducer', () => {
   let updateQuantityAction: UpdateQuantityProductCartAction 
 
   beforeEach(() => {
-    initialState = mockInitialState(0)
+    initialState = mockCartInitialState(0)
     addAction = {
       type: 'ADD_PRODUCTS_CART',
       payload: {

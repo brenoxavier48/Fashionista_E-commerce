@@ -4,7 +4,7 @@ import {
  AddCurrentProductAction,
  AddFilterAction
 } from './protocols'
-import { Product, OptionSize } from '../../domain/ProductModel'
+import { Product } from '../../domain/ProductModel'
 import productsReducer from './products.reducer'
 
 const mockSingleProduct = (code_color: string): Product => ({

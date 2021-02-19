@@ -1,5 +1,5 @@
 import Cart from './'
-import { fireEvent, render, cleanup, screen } from '@testing-library/react'
+import { fireEvent, render } from '@testing-library/react'
 import { renderWithProviderWithInitialState } from '../../test/renderHelpers'
 import { storeWithCartInitialState, mockProducts, mockSingleProduct } from '../../test/storeHelpers'
 import { store } from '../../../store'
@@ -26,7 +26,9 @@ describe('<Cart />', () => {
     const products = mockProducts(QUANTITY)
     storeTest = storeWithCartInitialState([ ...products ])
     const renderWithInitialState = renderWithProviderWithInitialState(storeTest)
-    const { getAllByTestId } = render(renderWithInitialState(Cart))
+    const { getAllByTestId } = render(
+      renderWithInitialState(Cart)
+    )
     const drawerProducts = getAllByTestId(drawerProductTestId)
     expect(drawerProducts.length).toBe(QUANTITY)
   })
@@ -37,7 +39,9 @@ describe('<Cart />', () => {
     const product = mockSingleProduct(SKU, QUANTITY)
     storeTest= storeWithCartInitialState([product])
     const renderWithInitialState = renderWithProviderWithInitialState(storeTest)
-    const { getByTestId } = render(renderWithInitialState(Cart))
+    const { getByTestId } = render(
+      renderWithInitialState(Cart)
+    )
     const increaseButton = getByTestId(increaseButtonTestId)
     fireEvent.click(increaseButton)
     const value = getByTestId(valueTestId)
@@ -51,7 +55,9 @@ describe('<Cart />', () => {
     const product = mockSingleProduct(SKU, QUANTITY)
     storeTest= storeWithCartInitialState([product])
     const renderWithInitialState = renderWithProviderWithInitialState(storeTest)
-    const { getByTestId } = render(renderWithInitialState(Cart))
+    const { getByTestId } = render(
+      renderWithInitialState(Cart)
+    )
     const increaseButton = getByTestId(decreaseButtonTestId)
     fireEvent.click(increaseButton)
     const value = getByTestId(valueTestId)
@@ -64,7 +70,9 @@ describe('<Cart />', () => {
     const products = mockProducts(QUANTITY)
     storeTest = storeWithCartInitialState([ ...products ])
     const renderWithInitialState = renderWithProviderWithInitialState(storeTest)
-    const { getAllByTestId } = render(renderWithInitialState(Cart))
+    const { getAllByTestId } = render(
+      renderWithInitialState(Cart)
+    )
     const removeItem = getAllByTestId(removeItemTestId)
     fireEvent.click(removeItem[0])
     setTimeout(() => {
@@ -81,7 +89,9 @@ describe('<Cart />', () => {
     const products = mockProducts(QUANTITY, QUANTITY_OF_EACH_PRODUCT, PRICE_OF_EACH_PRODUCT)
     storeTest = storeWithCartInitialState([ ...products ])
     const renderWithInitialState = renderWithProviderWithInitialState(storeTest)
-    const { getByTestId } = render(renderWithInitialState(Cart))
+    const { getByTestId } = render(
+      renderWithInitialState(Cart)
+    )
     const totalPrice = QUANTITY * QUANTITY_OF_EACH_PRODUCT * PRICE_OF_EACH_PRODUCT
     const cartTotalPrice = getByTestId(cartTotalPriceTestId)
     expect(cartTotalPrice.innerHTML).toBe(makeTotalPriceShouldBe(totalPrice))

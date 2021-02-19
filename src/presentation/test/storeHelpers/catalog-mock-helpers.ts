@@ -24,7 +24,7 @@ export const mockCatalog = (quantity: number): Product[] => {
   return items
 }
 
-export const mockInitialStateProducts = (initialQuantity: number): ProductsState => {
+export const mockProductsInitialState = (initialQuantity: number): ProductsState => {
   let items = mockCatalog(initialQuantity)
   return ({
     currentProduct: <Product>{},

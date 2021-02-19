@@ -1,5 +1,4 @@
 import { store } from '../../../store'
-import { Product } from '../../../domain/ProductModel'
 import { ProductsState } from '../../../store/Products/protocols'
 import { addCatalog, addCurrentProduct, addFilterProduct } from '../../../store/Products/products.actions'
 

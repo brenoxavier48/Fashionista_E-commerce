@@ -9,8 +9,14 @@ describe('<Counter/>', () => {
 
   test('Should show the right value', () => {
     const VALUE = 1
-    const { getByTestId } = render(Counter({whatToCount:"test" ,value: VALUE, increase:()=>{}, decrease:()=>{}})) 
-
+    const { getByTestId } = render(
+      Counter({ 
+        whatToCount:"test", 
+        value: VALUE, 
+        increase:()=>{}, 
+        decrease:()=>{}
+      })
+    ) 
     const { innerHTML } = getByTestId(valueTestId)
     expect(innerHTML).toBe(String(VALUE))
   })
@@ -19,7 +25,14 @@ describe('<Counter/>', () => {
     const VALUE = 1
     const increase = jest.fn()
     const decrease = jest.fn()
-    const { getByTestId } = render(Counter({whatToCount:"test" ,value: VALUE, increase, decrease}))
+    const { getByTestId } = render(
+      Counter({
+        whatToCount:"test", 
+        value: VALUE, 
+        increase, 
+        decrease
+      })
+    )
     const increaseButton = getByTestId(increaseButtonTestId)  
     fireEvent.click(increaseButton)
     expect(increase).toBeCalled()
@@ -30,7 +43,14 @@ describe('<Counter/>', () => {
     const VALUE = 1
     const increase = jest.fn()
     const decrease = jest.fn()
-    const { getByTestId } = render(Counter({whatToCount:"test" ,value: VALUE, increase, decrease}))
+    const { getByTestId } = render(
+      Counter({
+        whatToCount:"test",
+        value: VALUE, 
+        increase, 
+        decrease
+      })
+    )
     const decreaseButton = getByTestId(decreaseButtonTestId)  
     fireEvent.click(decreaseButton)
     expect(increase).not.toBeCalled()
@@ -41,7 +61,15 @@ describe('<Counter/>', () => {
     const VALUE = 2
     const MAX_VALUE = 2
     const increase = jest.fn()
-    const { getByTestId } = render(Counter({whatToCount:"test" ,value: VALUE, increase, decrease:()=>{}, maxValue: MAX_VALUE})) 
+    const { getByTestId } = render(
+      Counter({
+        whatToCount:"test",
+        value: VALUE, 
+        increase, 
+        decrease:()=>{}, 
+        maxValue: MAX_VALUE
+      })
+    ) 
     const increaseButton = getByTestId(increaseButtonTestId)  
     fireEvent.click(increaseButton)
     expect(increase).not.toBeCalled()
@@ -52,7 +80,15 @@ describe('<Counter/>', () => {
     const MIN_VALUE = 3
     const increase = jest.fn()
     const decrease = jest.fn()
-    const { getByTestId } = render(Counter({whatToCount:"test" ,value: VALUE, increase, decrease, minValue: MIN_VALUE}))
+    const { getByTestId } = render(
+      Counter({
+        whatToCount:"test",
+        value: VALUE, 
+        increase, 
+        decrease, 
+        minValue: MIN_VALUE
+      })
+    )
     const decreaseButton = getByTestId(decreaseButtonTestId)  
     fireEvent.click(decreaseButton)
     expect(decrease).not.toBeCalled()

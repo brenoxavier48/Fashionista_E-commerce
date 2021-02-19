@@ -11,6 +11,8 @@ export const ADD_CURRENT_PRODUCT = 'ADD_CURRENT_PRODUCT'
 
 export const ADD_FILTER_PRODUCT = 'ADD_FILTER_PRODUCT'
 
+export const CLEAN_STATE_PRODUCTS = 'CLEAN_STATE_PRODUCTS'
+
 export type AddCatalogPayload = {
   catalog: Product[]
 }
@@ -38,8 +40,13 @@ export type AddFilterAction = {
   payload: AddFilterPayload
 }
 
+export type CleanStateProductsAction = {
+  type: typeof CLEAN_STATE_PRODUCTS
+}
+
 export type ProductsAction = (
   AddCatalogAction | 
   AddCurrentProductAction |
-  AddFilterAction
+  AddFilterAction |
+  CleanStateProductsAction
 )

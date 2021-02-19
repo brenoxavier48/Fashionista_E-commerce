@@ -26,13 +26,27 @@ const SearchProducts = ({ closeDrawer }: Props) => {
   }
 
   return (
-    <div className='search-container'>
+    <div 
+      className='search-container'
+    >
       <InputSearch
         onChange={handleChange}
         value={inputValue}
+        aria-label="Pesquisar item"
+        data-testid="search-product-input"
       ></InputSearch>
-      <section className="search-container__products">
-        <p className="search-container__products__quantity">{`${products.length} items`}</p>
+      <section 
+        className="search-container__products"
+        aria-label="Items"
+        data-testid="search-product-items-section"
+      >
+        <p 
+          className="search-container__products__quantity"
+          aria-label="Quantidade de itens"
+          data-testid="search-product-items-quantity"
+        >
+          {`${products.length} items`}
+        </p>
         {
           products.length > 0 &&
           products.map((product, index) => (

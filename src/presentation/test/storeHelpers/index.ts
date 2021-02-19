@@ -1,3 +1,3 @@
-export * from './storeWithInitialStateForCart'
-export * from './storeWithInitialStateForProducts'
-export * from './cartMockHelpers'
+export * from './store-with-initial-state-for-cart'
+export * from './store-with-initial-state-for-products'
+export * from './cart-mock-helpers'

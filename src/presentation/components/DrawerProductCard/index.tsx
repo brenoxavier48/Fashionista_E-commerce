@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ProductImage from '../ProductImage'
 import Counter from '../Counter'
 
@@ -35,13 +35,17 @@ const DrawerProductCard = ({
 
   const [ isRendered, setIsRendered ] = useState<boolean>(false)
 
-  if (typeof timeToAppear === 'number') {
-    const result = (200 + ((50 + (15 * timeToAppear)) * timeToAppear))
-    const timeOut = result  < 1200 ? result :  1200
-    setTimeout(() => {
-      setIsRendered(true)
-    }, timeOut)
-  }
+  useEffect(() => {
+    if (typeof timeToAppear === 'number') {
+      const result = (200 + ((50 + (15 * timeToAppear)) * timeToAppear))
+      const timeOut = result  < 1200 ? result :  1200
+      const setTimeoutId = setTimeout(() => {
+        setIsRendered(true)
+      }, timeOut)
+
+      return () => clearTimeout(setTimeoutId)
+    }
+  })
 
   return (
     <article 

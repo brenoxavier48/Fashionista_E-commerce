@@ -1,5 +1,5 @@
 import Cart from './'
-import { fireEvent, render } from '@testing-library/react'
+import { fireEvent, render, act } from '@testing-library/react'
 import { renderWithProviderWithInitialState } from '../../test/renderHelpers'
 import { storeWithCartInitialState, mockProducts, mockSingleProduct } from '../../test/storeHelpers'
 import { store } from '../../../store'
@@ -16,6 +16,10 @@ describe('<Cart />', () => {
   const drawerProductTestId = 'drawer-product'
   const cartTotalPriceTestId = 'cart-total-price'
   let storeTest: typeof store
+
+  beforeEach(() => {
+    jest.useFakeTimers()
+  })
 
   afterEach(() => {
     storeTest.dispatch(cleanCart())
@@ -75,11 +79,12 @@ describe('<Cart />', () => {
     )
     const removeItem = getAllByTestId(removeItemTestId)
     fireEvent.click(removeItem[0])
-    setTimeout(() => {
-      const drawerProducts = getAllByTestId(drawerProductTestId)
-      const currentQuantityOfDistinctProducts = QUANTITY - 1
-      expect(drawerProducts.length).toBe(currentQuantityOfDistinctProducts)
-    }, 400)
+    act(() => {
+      jest.advanceTimersByTime(400)
+    })
+    const drawerProducts = getAllByTestId(drawerProductTestId)
+    const currentQuantityOfDistinctProducts = QUANTITY - 1
+    expect(drawerProducts.length).toBe(currentQuantityOfDistinctProducts)
   })
 
   test('Ensure Cart shows the right total price ', () => {

@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { selectQuantityProductsCart } from '../../../store/Cart/cart.selectors'
 import { addCatalog } from '../../../store/Products/products.actions'
-import { HttpClientInstance } from '../../../infra/HttpClient'
 import { IProductService } from '../../../domain/ProductService'
 import Header from '../../components/Header'
 import Drawer, { DrawerRules, DrawerType } from '../../components/Drawer'
@@ -31,7 +30,7 @@ const AppContainer = ({ children, productService }: Props) => {
       .then((products) => {
         dispatch(addCatalog(products))
       })
-  }, [dispatch])
+  }, [dispatch, productService])
 
   const MakeSacolaLabel = () => {
     const itemsQuantity: number = useSelector(selectQuantityProductsCart)

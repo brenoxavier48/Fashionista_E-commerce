@@ -5,6 +5,7 @@ import { Product } from '../../../domain/ProductModel'
 import { ProductCart } from '../../../domain/ProductModel'
 import { selectCurrentProduct } from '../../../store/Products/products.selectors'
 import { addProductsCart } from '../../../store/Cart/cart.actions'
+import ModalSuccess from '../ModalSuccess'
 import ProductImage from '../ProductImage'
 import { SizeButton, MainButton } from '../ui/buttons'
 
@@ -15,6 +16,7 @@ const SingleProductView = () => {
 
   const product: Product = useSelector(selectCurrentProduct)
 
+  const [ isSuccess, setIsSuccess ] = useState(false)
   const [ itemsSelected, setItemsSelected ] = useState<boolean[]>(
     new Array(product.sizes.length).fill(false)
   )
@@ -57,14 +59,24 @@ const SingleProductView = () => {
   const handleClickSizeButtons = (index: number) => {
     setAlertUser(false)
     setItemsSelected(current => {
-      const newState = [...current]
-      newState[index] = !current[index]
+      const mapCallback = (element: boolean, indexItemsSelected: number) => {
+        return indexItemsSelected === index
+      }
+      const newState = current.map(mapCallback)
       return newState
     })
   }
 
   return (
     <div className="product-page__container">
+      {
+        isSuccess
+        && (
+          <ModalSuccess 
+            message="Item adicionado com sucesso"
+          /> 
+        )
+      }
       <ProductImage
         className="product-page__container__img"
         src={product.image}

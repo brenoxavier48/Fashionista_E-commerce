@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Product } from '../../../domain/ProductModel'
 import ProductImage from '../ProductImage'
 
@@ -12,14 +12,18 @@ const ProductCard = ({ product, handleClick, timeToAppear }: Props) => {
 
   const [ isRendered, setIsRendered ] = useState<boolean>(false)
 
-  if (typeof timeToAppear === 'number') {
-    const result = ((5 * timeToAppear) * timeToAppear)
-    const timeOut = result  < 1200 ? result :  1200
+  useEffect(() => {
+    if (typeof timeToAppear === 'number') {
+      const result = ((5 * timeToAppear) * timeToAppear)
+      const timeOut = result  < 1200 ? result :  1200
+  
+      const setTimeOutId = setTimeout(() => {
+        setIsRendered(true)
+      }, timeOut)
 
-    setTimeout(() => {
-      setIsRendered(true)
-    }, timeOut)
-  }
+      return () => clearTimeout(setTimeOutId)
+    }
+  }, [timeToAppear])
 
   return (
     <article 

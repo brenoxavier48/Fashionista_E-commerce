@@ -1,23 +1,37 @@
 import React, { ButtonHTMLAttributes } from "react";
-import { FaSearch, FaShoppingCart, FaArrowLeft } from 'react-icons/fa'
+import { 
+  FaSearch, 
+  FaShoppingCart, 
+  FaArrowLeft,
+  FaTimes,
+  FaHome
+} from 'react-icons/fa'
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
-  icon: "search" | "shoppingCart" | "back",
+  icon: IconType,
   itemsQuantity?: number
 };
 
+type IconType = "search" | "shoppingCart" | "back" | "close" | "home"
+
 export const IconButton = ({ icon, itemsQuantity, ...otherProps }: Props) => {
 
-  const getIcon = (icon: string) => {
+  const getIcon = (icon: IconType) => {
     switch (icon) {
       case 'search':
-        return <FaSearch/>
+        return <FaSearch />
 
       case 'shoppingCart':
-        return <FaShoppingCart/>
+        return <FaShoppingCart />
 
       case 'back':
-        return <FaArrowLeft/>
+        return <FaArrowLeft />
+      
+      case 'close':
+        return <FaTimes />
+      
+      case 'home':
+        return <FaHome />
     }
   }
 

@@ -1,20 +1,20 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useHistory } from 'react-router-dom'
 import { Product } from '../../../domain/ProductModel'
 import { ProductCart } from '../../../domain/ProductModel'
 import { selectCurrentProduct } from '../../../store/Products/products.selectors'
 import { addProductsCart } from '../../../store/Cart/cart.actions'
+import ModalSuccess from '../ModalSuccess'
 import ProductImage from '../ProductImage'
 import { SizeButton, MainButton } from '../ui/buttons'
 
 const SingleProductView = () => {
   
-  const history = useHistory()
   const dispatch = useDispatch()
 
   const product: Product = useSelector(selectCurrentProduct)
 
+  const [ isSuccess, setIsSuccess ] = useState(false)
   const [ itemsSelected, setItemsSelected ] = useState<boolean[]>(
     new Array(product.sizes.length).fill(false)
   )
@@ -44,11 +44,23 @@ const SingleProductView = () => {
     dispatch(addProductsCart(products))
   }
 
+  const showSuccessMessage = () => {
+    setIsSuccess(true)
+    setTimeout(() => {
+      setIsSuccess(false)
+    }, 2200)
+  }
+
+  const refreshItemsSelected = () => {
+    setItemsSelected(current => current.map(() => false))
+  }
+
   const handleClickMainButton = () => {
     const isSomeOptionSelected = itemsSelected.some(element => element === true)
     if (isSomeOptionSelected) {
       dispatchProductsToCart()
-      history.push('/')
+      refreshItemsSelected()
+      showSuccessMessage()
     } else {
       setAlertUser(true)
     }
@@ -57,14 +69,28 @@ const SingleProductView = () => {
   const handleClickSizeButtons = (index: number) => {
     setAlertUser(false)
     setItemsSelected(current => {
-      const newState = [...current]
-      newState[index] = !current[index]
+      const mapCallback = (element: boolean, indexItemsSelected: number) => {
+        return indexItemsSelected === index && element === false
+      }
+      const newState = current.map(mapCallback)
       return newState
     })
   }
 
+  const handleClickCloseButton = () => setIsSuccess(false)
+
   return (
     <div className="product-page__container">
+      {
+        isSuccess
+        && (
+          <ModalSuccess 
+            message="Item adicionado com sucesso"
+            handleClickCloseButton={handleClickCloseButton}
+            timeToRemove={1800}
+          /> 
+        )
+      }
       <ProductImage
         className="product-page__container__img"
         src={product.image}

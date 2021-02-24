@@ -1,6 +1,6 @@
 import React, { useState, useEffect, ReactChild } from 'react'
-import { useDispatch } from 'react-redux'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import { selectQuantityProductsCart } from '../../../store/Cart/cart.selectors'
 import { addCatalog } from '../../../store/Products/products.actions'
 import { IProductService } from '../../../domain/ProductService'
@@ -16,6 +16,7 @@ type Props = {
 
 const AppContainer = ({ children, productService }: Props) => {
 
+  const history = useHistory()
   const dispatch = useDispatch()
 
   const [ drawer, setDrawer ] = useState<DrawerRules>({
@@ -64,6 +65,8 @@ const AppContainer = ({ children, productService }: Props) => {
     return Object.assign({ isOpen, type }, componentInfo)
   }
 
+  const handleClickHome = () => history.push('/')
+
   const handleClickSearch = () => setDrawer( current => makeDrawerObject(!current.isOpen, 'search') )
 
   const handleClickShoppingCart = () => setDrawer( current => makeDrawerObject(!current.isOpen, 'shoppingCart') )
@@ -73,6 +76,7 @@ const AppContainer = ({ children, productService }: Props) => {
   return (
     <div className="app-container">
       <Header
+        handleClickHome={handleClickHome}
         handleClickSearch={handleClickSearch}
         handleClickShoppingCart={handleClickShoppingCart}
       ></Header>

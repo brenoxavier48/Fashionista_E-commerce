@@ -22,10 +22,10 @@ const Header = ({ handleClickSearch, handleClickShoppingCart, handleClickHome }:
       </div>
       <div className="header-container__buttons">
         <IconButton
-          icon="search"
-          onClick={handleClickSearch}
-          aria-label="Abrir seção de pesquisa por produtos"
-          data-testid="header-search-button"
+          icon="home"
+          onClick={handleClickHome}
+          aria-label="Ir para a página home"
+          data-testid="header-home-button"
         ></IconButton>
         <IconButton
           icon="shoppingCart"
@@ -33,6 +33,12 @@ const Header = ({ handleClickSearch, handleClickShoppingCart, handleClickHome }:
           itemsQuantity={itemsQuantity}
           aria-label="Abrir sacola"
           data-testid="header-cart-button"
+        ></IconButton>
+        <IconButton
+          icon="search"
+          onClick={handleClickSearch}
+          aria-label="Abrir seção de pesquisa por produtos"
+          data-testid="header-search-button"
         ></IconButton>
       </div>
     </header>

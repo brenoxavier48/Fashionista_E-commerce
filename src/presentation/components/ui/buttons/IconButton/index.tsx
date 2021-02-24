@@ -3,7 +3,8 @@ import {
   FaSearch, 
   FaShoppingCart, 
   FaArrowLeft,
-  FaTimes
+  FaTimes,
+  FaHome
 } from 'react-icons/fa'
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -11,7 +12,7 @@ type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
   itemsQuantity?: number
 };
 
-type IconType = "search" | "shoppingCart" | "back" | "close"
+type IconType = "search" | "shoppingCart" | "back" | "close" | "home"
 
 export const IconButton = ({ icon, itemsQuantity, ...otherProps }: Props) => {
 
@@ -28,6 +29,9 @@ export const IconButton = ({ icon, itemsQuantity, ...otherProps }: Props) => {
       
       case 'close':
         return <FaTimes />
+      
+      case 'home':
+        return <FaHome />
     }
   }
 

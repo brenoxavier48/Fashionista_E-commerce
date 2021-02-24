@@ -21,6 +21,7 @@
   }
   &__buttons {
     @include flex-centred;
+    min-width: 100px;
     height: 100%;
     margin: 0 35px;
     position: absolute;

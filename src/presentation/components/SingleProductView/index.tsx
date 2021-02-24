@@ -46,11 +46,23 @@ const SingleProductView = () => {
     dispatch(addProductsCart(products))
   }
 
+  const showSuccessMessage = () => {
+    setIsSuccess(true)
+    setTimeout(() => {
+      setIsSuccess(false)
+    }, 2200)
+  }
+
+  const refreshItemsSelected = () => {
+    setItemsSelected(current => current.map(() => false))
+  }
+
   const handleClickMainButton = () => {
     const isSomeOptionSelected = itemsSelected.some(element => element === true)
     if (isSomeOptionSelected) {
       dispatchProductsToCart()
-      history.push('/')
+      refreshItemsSelected()
+      showSuccessMessage()
     } else {
       setAlertUser(true)
     }
@@ -60,12 +72,14 @@ const SingleProductView = () => {
     setAlertUser(false)
     setItemsSelected(current => {
       const mapCallback = (element: boolean, indexItemsSelected: number) => {
-        return indexItemsSelected === index
+        return indexItemsSelected === index && element === false
       }
       const newState = current.map(mapCallback)
       return newState
     })
   }
+
+  const handleClickCloseButton = () => setIsSuccess(false)
 
   return (
     <div className="product-page__container">
@@ -74,6 +88,8 @@ const SingleProductView = () => {
         && (
           <ModalSuccess 
             message="Item adicionado com sucesso"
+            handleClickCloseButton={handleClickCloseButton}
+            timeToRemove={1800}
           /> 
         )
       }

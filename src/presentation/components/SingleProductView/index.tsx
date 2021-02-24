@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useHistory } from 'react-router-dom'
 import { Product } from '../../../domain/ProductModel'
 import { ProductCart } from '../../../domain/ProductModel'
 import { selectCurrentProduct } from '../../../store/Products/products.selectors'
@@ -11,7 +10,6 @@ import { SizeButton, MainButton } from '../ui/buttons'
 
 const SingleProductView = () => {
   
-  const history = useHistory()
   const dispatch = useDispatch()
 
   const product: Product = useSelector(selectCurrentProduct)

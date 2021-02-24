@@ -6,7 +6,19 @@
   position: fixed;
   top: 0;
   z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  
+  &__logo {
+    width: 40%;
+    max-width: 260px;
+    margin: 0 20px;
 
+    &:hover {
+      cursor: pointer;
+    }
+  }
   &__buttons {
     @include flex-centred;
     height: 100%;

@@ -1,5 +1,5 @@
 import { RootState } from '../index'
-import { removeAccents } from '../../infra/utils'
+import { removeAccents } from '../../utils'
 
 export const selectAllProducts = (store: RootState) => store.Products.catalog
 

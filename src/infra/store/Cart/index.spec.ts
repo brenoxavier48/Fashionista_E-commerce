@@ -11,7 +11,7 @@ import {
   mockProducts, 
   mockSingleProduct, 
   mockCartInitialState 
-} from '../../presentation/test/storeHelpers'
+} from '../../../presentation/test/storeHelpers'
 
 
 describe('Cart helpers', () => {

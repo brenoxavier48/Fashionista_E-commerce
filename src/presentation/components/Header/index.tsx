@@ -2,7 +2,7 @@ import React from 'react'
 import { IconButton } from '../ui/buttons'
 import { ReactComponent as Logo } from '../../assets/img/logo.svg'
 import { useSelector } from 'react-redux'
-import { selectQuantityProductsCart } from '../../../store/Cart/cart.selectors'
+import { selectQuantityProductsCart } from '../../../infra/store/Cart/cart.selectors'
 
 type Props = {
   handleClickSearch: () => void,

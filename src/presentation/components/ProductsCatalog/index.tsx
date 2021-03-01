@@ -2,8 +2,8 @@ import React from 'react'
 import { Product } from '../../../domain/ProductModel'
 import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { selectAllProducts } from '../../../store/Products/products.selectors'
-import { addCurrentProduct } from '../../../store/Products/products.actions'
+import { selectAllProducts } from '../../../infra/store/Products/products.selectors'
+import { addCurrentProduct } from '../../../infra/store/Products/products.actions'
 import ProductCard from '../ProductCard'
 
 

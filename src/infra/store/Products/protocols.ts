@@ -1,4 +1,4 @@
-import { Product } from '../../domain/ProductModel'
+import { Product } from '../../../domain/ProductModel'
 
 export type ProductsState = {
   currentProduct: Product,

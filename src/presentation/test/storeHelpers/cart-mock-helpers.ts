@@ -1,8 +1,8 @@
 import { 
   CartState, 
   ProductCart,
-} from '../../../store/Cart/protocols'
-import { getTotalPriceAndQuantity } from '../../../store/Cart/helpers'
+} from '../../../infra/store/Cart/protocols'
+import { getTotalPriceAndQuantity } from '../../../infra/store/Cart/helpers'
 
 
 export const mockSingleProduct = (sku: string, quantity = 1, price = 1): ProductCart => ({

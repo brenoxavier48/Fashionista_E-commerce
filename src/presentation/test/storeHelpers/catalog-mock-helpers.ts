@@ -1,5 +1,5 @@
 import { Product } from '../../../domain/ProductModel'
-import { ProductsState } from '../../../store/Products/protocols'
+import { ProductsState } from '../../../infra/store/Products/protocols'
 
 export const mockSingleProductCatalog = (code_color: string): Product => ({
   name: `test-${code_color}`,

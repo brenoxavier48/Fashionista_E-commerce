@@ -1,5 +1,5 @@
-import { ProductCart } from '../../../domain/ProductModel'
-import { moneyNotationToNumber } from '../../../infra/utils'
+import { ProductCart } from '../../../../domain/ProductModel'
+import { moneyNotationToNumber } from '../../../utils'
 
 type TotalPriceAndQuantity = { 
   itemsQuantity: number,

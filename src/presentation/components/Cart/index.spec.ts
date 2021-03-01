@@ -2,8 +2,8 @@ import Cart from './'
 import { fireEvent, render, act } from '@testing-library/react'
 import { renderWithProviderWithInitialState } from '../../test/renderHelpers'
 import { storeWithCartInitialState, mockProducts, mockSingleProduct } from '../../test/storeHelpers'
-import { store } from '../../../store'
-import { cleanCart } from '../../../store/Cart/cart.actions'
+import { store } from '../../../infra/store'
+import { cleanCart } from '../../../infra/store/Cart/cart.actions'
 
 const makeTotalPriceShouldBe = (totalPrice: number) => `Subtotal - R$ ${totalPrice.toFixed(2).replace('.', ',')}`
 

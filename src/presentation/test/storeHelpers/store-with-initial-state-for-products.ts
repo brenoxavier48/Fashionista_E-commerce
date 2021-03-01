@@ -1,6 +1,6 @@
-import { store } from '../../../store'
-import { ProductsState } from '../../../store/Products/protocols'
-import { addCatalog, addCurrentProduct, addFilterProduct } from '../../../store/Products/products.actions'
+import { store } from '../../../infra/store'
+import { ProductsState } from '../../../infra/store/Products/protocols'
+import { addCatalog, addCurrentProduct, addFilterProduct } from '../../../infra/store/Products/products.actions'
 
 export const storeWithProductsInitialState = (productsState: ProductsState) => {
   store.dispatch(addCatalog(productsState.catalog))

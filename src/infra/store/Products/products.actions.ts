@@ -1,4 +1,4 @@
-import { Product } from '../../domain/ProductModel'
+import { Product } from '../../../domain/ProductModel'
 import {
   ADD_CATALOG,
   ADD_CURRENT_PRODUCT,

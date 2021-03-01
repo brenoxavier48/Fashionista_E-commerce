@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { Product } from '../../../domain/ProductModel'
-import { addCurrentProduct } from '../../../store/Products/products.actions'
+import { addCurrentProduct } from '../../../infra/store/Products/products.actions'
 import DrawerProductCard from '../DrawerProductCard'
 
 type Props = {

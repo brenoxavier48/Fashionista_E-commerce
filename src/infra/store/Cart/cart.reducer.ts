@@ -10,7 +10,7 @@ import {
   CleanCartAction,
   CartAction } from './protocols'
 import { getTotalPriceAndQuantity } from './helpers'
-import { ProductCart } from '../../domain/ProductModel'
+import { ProductCart } from '../../../domain/ProductModel'
 
 const initialState: CartState = {
   itemsQuantity: 0,

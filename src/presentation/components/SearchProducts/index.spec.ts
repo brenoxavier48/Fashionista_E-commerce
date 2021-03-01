@@ -1,9 +1,9 @@
 import SearchProducts from './'
-import { fireEvent, render, cleanup, screen, act } from '@testing-library/react'
+import { fireEvent, render } from '@testing-library/react'
 import { renderWithProviderWithInitialState } from '../../test/renderHelpers'
 import { storeWithProductsInitialState, mockSingleProductCatalog, mockProductsInitialState } from '../../test/storeHelpers'
-import { store } from '../../../store'
-import { cleanStateProducts, addCatalog } from '../../../store/Products/products.actions'
+import { store } from '../../../infra/store'
+import { cleanStateProducts, addCatalog } from '../../../infra/store/Products/products.actions'
 
 const makeTotalItemsShouldBe = (quantity: number) => `${quantity} items`
 
